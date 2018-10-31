@@ -26,12 +26,14 @@ class TestREPL < Test::Unit::TestCase
     # Test Wrapper Input
     javascript = File.read(WebConsole::Tests::FIRSTCODE_JAVASCRIPT_FILE)
     result = window.do_javascript(javascript)
+    assert_not_nil(result)
     result.strip!
     assert_equal(test_text, result, "The test text should equal the result.")
 
     # Test Wrapper Output
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = window.do_javascript(javascript)
+    assert_not_nil(result)
     result.strip!
     result.sub!("=&gt; ", "") # Remove the prompt that irb adds    
     assert_equal(result, test_result, "The test result should equal the result.")

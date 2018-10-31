@@ -26,6 +26,7 @@ class TestOutputController < Test::Unit::TestCase
     
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = @output_controller.view.do_javascript(javascript)
+    assert_not_nil(result)
     result.strip!
 
     assert_equal(test_text, result, "The test text should equal the result.")
@@ -37,6 +38,7 @@ class TestOutputController < Test::Unit::TestCase
     
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = @output_controller.view.do_javascript(javascript)
+    assert_not_nil(result)
     result.strip!
 
     assert_equal(test_text, result, "The test text should equal the result.")

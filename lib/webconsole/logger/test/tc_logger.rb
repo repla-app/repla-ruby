@@ -1,4 +1,4 @@
-#!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby
+#!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
 require "test/unit"
 

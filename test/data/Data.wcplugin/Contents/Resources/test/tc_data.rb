@@ -20,7 +20,7 @@ class TestClass < Test::Unit::TestCase
     window_id = WebConsole::window_id_for_plugin(DATA_PLUGIN_NAME)
     window = WebConsole::Window.new(window_id)
 
-    sleep WebConsole::Tests::TEST_PAUSE_TIME * 2 # Give time for script to run
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give time for script to run
     
     path_result = window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_PATH_KEY}');])
     arguments_result = window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');])

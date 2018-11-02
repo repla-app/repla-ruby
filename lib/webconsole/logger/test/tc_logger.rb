@@ -1,4 +1,4 @@
-#!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby
+#!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
 require "test/unit"
 
@@ -159,7 +159,7 @@ Line 2
 Line 3
 )
     @logger.info(message)
-    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    sleep WebConsole::Tests::TEST_PAUSE_TIME * 2 # Pause for output to be processed
     result_count = @test_view_helper.number_of_log_messages
     assert_equal(result_count, 3, "The number of log messages should match")    
 

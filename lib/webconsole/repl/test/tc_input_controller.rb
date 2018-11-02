@@ -1,4 +1,4 @@
-#!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby
+#!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
 require "test/unit"
 
@@ -20,6 +20,7 @@ class TestInputController < Test::Unit::TestCase
     
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = input_controller.view.do_javascript(javascript)
+    assert_not_nil(result)
     result.strip!
 
     assert_equal(test_text, result, "The test text should equal the result.")

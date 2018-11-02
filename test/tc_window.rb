@@ -1,4 +1,4 @@
-#!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby
+#!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
 require "test/unit"
 
@@ -138,6 +138,7 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
 
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
+    assert_not_nil(result)
     result.strip!
 
     assert_equal(test_text, result, "The test text should equal the result.")
@@ -191,10 +192,12 @@ class TestTwoWindows < Test::Unit::TestCase
 
     # Window Manager One
     result_one = @window_one.do_javascript(javascript)
+    assert_not_nil(result_one)
     result_one.strip!
 
     # Window Manager Two
     result_two = @window_two.do_javascript(javascript)
+    assert_not_nil(result_two)
     result_two.strip!
 
     assert_equal(test_text_one, result_one, "The first test text should equal the first result.")

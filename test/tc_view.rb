@@ -1,4 +1,4 @@
-#!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby
+#!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
 require "test/unit"
 
@@ -112,10 +112,12 @@ class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
 
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = @view_one.do_javascript(javascript)
+    assert_not_nil(result)
     result.strip!
     assert_equal(test_text_one, result, "The test text should equal the result.")
 
     result = @view_two.do_javascript(javascript)
+    assert_not_nil(result)
     result.strip!
     assert_equal(test_text_two, result, "The test text should equal the result.")
   end

@@ -2,7 +2,7 @@ module Repla
   class Window
     require_relative "constants"
 
-    attr_writer :base_url
+    attr_writer :root_access_directory_url
 
     def initialize(window_id = nil)
       @window_id = window_id
@@ -10,8 +10,8 @@ module Repla
 
     # Properties
 
-    def base_url_path=(value)
-      @base_url = "file://" + value
+    def root_access_directory_path=(value)
+      @root_access_directory_url = "file://" + value
     end
     
     def window_id
@@ -22,14 +22,14 @@ module Repla
 
     LOAD_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load.scpt")
     LOADWITHROOTACCESSDIRECTORY_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load_with_root_access_directory.scpt")
-    def load_html(html)
-      arguments = [html]
+    def load_file(file)
+      arguments = [file]
 
       script = LOAD_SCRIPT
 
-      if @base_url
+      if @root_access_directory_url
         script = LOADWITHROOTACCESSDIRECTORY_SCRIPT
-        arguments.push(@base_url)
+        arguments.push(@root_access_directory_url)
       end
 
       run_script(script, arguments)

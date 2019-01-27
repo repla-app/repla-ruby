@@ -20,15 +20,15 @@ module Repla
     
     # Web
 
-    LOADHTML_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load_html.scpt")
-    LOADHTMLWITHBASEURL_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load_html_with_base_url.scpt")
+    LOAD_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load.scpt")
+    LOADWITHROOTACCESSDIRECTORY_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load_with_root_access_directory.scpt")
     def load_html(html)
       arguments = [html]
 
-      script = LOADHTML_SCRIPT
+      script = LOAD_SCRIPT
 
       if @base_url
-        script = LOADHTMLWITHBASEURL_SCRIPT
+        script = LOADWITHROOTACCESSDIRECTORY_SCRIPT
         arguments.push(@base_url)
       end
 

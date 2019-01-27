@@ -17,7 +17,7 @@ namespace :data do
   end
 
   task :clean_up => [:test_data] do
-    WebConsole::Tests::Helper::quit
+    Repla::Tests::Helper::quit
   end
 
 end

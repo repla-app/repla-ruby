@@ -1,7 +1,7 @@
 require_relative "view"
 
-module WebConsole::Data
-  class Controller < WebConsole::Controller
+module Repla::Data
+  class Controller < Repla::Controller
 
     def initialize
       @view = View.new

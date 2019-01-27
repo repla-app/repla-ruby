@@ -3,10 +3,10 @@
 require "test/unit"
 
 require_relative "lib/test_constants"
-require WEBCONSOLE_FILE
+require REPLA_FILE
 
-require WebConsole::shared_test_resource("ruby/test_constants")
-require WebConsole::Tests::TEST_HELPER_FILE
+require Repla::shared_test_resource("ruby/test_constants")
+require Repla::Tests::TEST_HELPER_FILE
 
 class TestClass < Test::Unit::TestCase
 
@@ -14,13 +14,13 @@ class TestClass < Test::Unit::TestCase
     arguments = "1 2 3"    
     path = File.expand_path(TEST_DATA_DIRECTORY)
 
-    WebConsole::load_plugin(DATA_PLUGIN_FILE)
-    WebConsole::run_plugin(DATA_PLUGIN_NAME, path, arguments.split(" "))    
+    Repla::load_plugin(DATA_PLUGIN_FILE)
+    Repla::run_plugin(DATA_PLUGIN_NAME, path, arguments.split(" "))    
 
-    window_id = WebConsole::window_id_for_plugin(DATA_PLUGIN_NAME)
-    window = WebConsole::Window.new(window_id)
+    window_id = Repla::window_id_for_plugin(DATA_PLUGIN_NAME)
+    window = Repla::Window.new(window_id)
 
-    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give time for script to run
+    sleep Repla::Tests::TEST_PAUSE_TIME # Give time for script to run
     
     path_result = window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_PATH_KEY}');])
     arguments_result = window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');])

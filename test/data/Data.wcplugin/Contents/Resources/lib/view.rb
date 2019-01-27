@@ -1,5 +1,5 @@
-module WebConsole::Data
-  class View < WebConsole::View
+module Repla::Data
+  class View < Repla::View
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
     VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
     VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')

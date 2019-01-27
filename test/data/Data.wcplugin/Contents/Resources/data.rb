@@ -1,12 +1,12 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
 require_relative "lib/constants"
-require WEBCONSOLE_FILE
+require REPLA_FILE
 
 require_relative "lib/controller"
 
 # Controller
-controller = WebConsole::Data::Controller.new
+controller = Repla::Data::Controller.new
 
 PATH_KEY = "Path"
 path = Dir.pwd.to_s

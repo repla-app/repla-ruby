@@ -1,14 +1,15 @@
 require 'shellwords'
-require 'webconsole'
-require WebConsole::shared_test_resource("ruby/test_constants")
-require WebConsole::Tests::TEST_HELPER_FILE
 
-task :default => [:webconsole, :other]
+require_relative '../lib/repla'
+require Repla::shared_test_resource("ruby/test_constants")
+require Repla::Tests::TEST_HELPER_FILE
 
-task :webconsole => ['webconsole:tests']
+task :default => [:repla, :other]
+
+task :repla => ['repla:tests']
 task :other => ['other:tests']
 
-namespace :webconsole do
+namespace :repla do
 
   task :tests => [:clean_up]
 
@@ -38,7 +39,7 @@ namespace :webconsole do
   end
 
   task :clean_up => [:test_module] do
-    WebConsole::Tests::Helper::quit
+    Repla::Tests::Helper::quit
   end
 
 end
@@ -48,13 +49,13 @@ namespace :other do
   data_test_rakefile = File.join(File.dirname(__FILE__), "data/Data.wcplugin/Contents/Resources/test/Rakefile")
   load data_test_rakefile
 
-  dependencies_test_rakefile = File.join(File.dirname(__FILE__), "../lib/webconsole/dependencies/test/Rakefile")
+  dependencies_test_rakefile = File.join(File.dirname(__FILE__), "../lib/repla/dependencies/test/Rakefile")
   load dependencies_test_rakefile
 
-  logger_test_rakefile = File.join(File.dirname(__FILE__), "../lib/webconsole/logger/test/Rakefile")
+  logger_test_rakefile = File.join(File.dirname(__FILE__), "../lib/repla/logger/test/Rakefile")
   load logger_test_rakefile
 
-  repl_test_rakefile = File.join(File.dirname(__FILE__), "../lib/webconsole/repl/test/Rakefile")
+  repl_test_rakefile = File.join(File.dirname(__FILE__), "../lib/repla/repl/test/Rakefile")
   load repl_test_rakefile
 
   task :tests => [:test_data, :test_dependencies, :test_logger, :test_repl]

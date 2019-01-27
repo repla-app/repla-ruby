@@ -3,18 +3,18 @@
 require "test/unit"
 
 require_relative "lib/test_constants"
-require_relative "../lib/webconsole"
-require WebConsole::shared_test_resource("ruby/test_constants")
-require WebConsole::Tests::TEST_HELPER_FILE
+require_relative "../lib/repla"
+require Repla::shared_test_resource("ruby/test_constants")
+require Repla::Tests::TEST_HELPER_FILE
 
 class TestWindowAttributes < Test::Unit::TestCase
 
   def test_window_id
-    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
-    window_id = WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    Repla::load_plugin(Repla::Tests::HELLOWORLD_PLUGIN_FILE)
+    window_id = Repla::run_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
     assert(window_id != nil, "The window_id should not be nil")
-    assert(WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME) == window_id, "The window_id's should be equal")
-    window = WebConsole::Window.new(window_id)
+    assert(Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME) == window_id, "The window_id's should be equal")
+    window = Repla::Window.new(window_id)
     assert(window_id == window.window_id, "The window id's should be equal.")
     window.close
   end
@@ -25,11 +25,11 @@ end
 class TestWindowClose < Test::Unit::TestCase
 
   def test_close
-    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
-    window_id = WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
-    window = WebConsole::Window.new(window_id)
+    Repla::load_plugin(Repla::Tests::HELLOWORLD_PLUGIN_FILE)
+    window_id = Repla::run_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    window = Repla::Window.new(window_id)
     window.close
-    assert(WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME) == nil, "The plugin should not have a window.")
+    assert(Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME) == nil, "The plugin should not have a window.")
   end
 
 end
@@ -37,8 +37,8 @@ end
 class TestWindowDoJavaScript < Test::Unit::TestCase
 
   def setup
-    html = File.read(WebConsole::Tests::INDEX_HTML_FILE)
-    @window = WebConsole::Window.new
+    html = File.read(Repla::Tests::INDEX_HTML_FILE)
+    @window = Repla::Window.new
     @window.load_html(html)
   end
 
@@ -47,17 +47,17 @@ class TestWindowDoJavaScript < Test::Unit::TestCase
   end
 
   def test_do_javascript
-    javascript = File.read(WebConsole::Tests::NODOM_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Tests::NODOM_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
-    expected = WebConsole::Tests::Helper::run_javascript(javascript)
+    expected = Repla::Tests::Helper::run_javascript(javascript)
     assert_equal(expected.to_i, result.to_i, "The result should match expected result.")
   end
 end
 
 class TestWindowLoadHTML < Test::Unit::TestCase
   def setup
-    window_id = WebConsole::create_window
-    @window = WebConsole::Window.new(window_id)
+    window_id = Repla::create_window
+    @window = Repla::Window.new(window_id)
     assert(window_id == @window.window_id)
   end
 
@@ -70,7 +70,7 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     html = "<html><body>" + test_text + "</body></html>"
     @window.load_html(html)
 
-    javascript = File.read(WebConsole::Tests::BODY_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Tests::BODY_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
 
     assert_equal(test_text, result, "The result should match the test string.")
@@ -85,7 +85,7 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     html = "<html><body>" + test_text + "</body></html>"
     @window.load_html(html)
 
-    javascript = File.read(WebConsole::Tests::BODY_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Tests::BODY_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
 
     assert_equal(test_text, result, "The result should match the test string.")
@@ -95,9 +95,9 @@ end
 
 class TestWindowLoadHTMLWithBaseURL < Test::Unit::TestCase
   def setup
-    html = File.read(WebConsole::Tests::INDEXJQUERY_HTML_FILE)
-    @window = WebConsole::Window.new
-    @window.base_url_path = File.join(WebConsole::shared_resources_path)
+    html = File.read(Repla::Tests::INDEXJQUERY_HTML_FILE)
+    @window = Repla::Window.new
+    @window.base_url_path = File.join(Repla::shared_resources_path)
     @window.load_html(html)
   end
 
@@ -106,10 +106,10 @@ class TestWindowLoadHTMLWithBaseURL < Test::Unit::TestCase
   end
 
   def test_load_with_base_url
-    javascript = File.read(WebConsole::Tests::TEXTJQUERY_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Tests::TEXTJQUERY_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
 
-    test_javascript = File.read(WebConsole::Tests::TEXT_JAVASCRIPT_FILE)
+    test_javascript = File.read(Repla::Tests::TEXT_JAVASCRIPT_FILE)
     expected = @window.do_javascript(test_javascript)
 
     assert_equal(expected, result, "The result should equal expected result.")
@@ -117,26 +117,26 @@ class TestWindowLoadHTMLWithBaseURL < Test::Unit::TestCase
 
 end
 
-class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
+class TestReplaPluginReadFromStandardInput < Test::Unit::TestCase
 
   def setup
-    WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
-    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
-    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
-    @window = WebConsole::Window.new(window_id)
+    Repla::load_plugin(Repla::Tests::PRINT_PLUGIN_FILE)
+    Repla::run_plugin(Repla::Tests::PRINT_PLUGIN_NAME)
+    window_id = Repla::window_id_for_plugin(Repla::Tests::PRINT_PLUGIN_NAME)
+    @window = Repla::Window.new(window_id)
   end
 
   def teardown
     @window.close
-    WebConsole::Tests::Helper::confirm_dialog
+    Repla::Tests::Helper::confirm_dialog
   end
 
   def test_read_from_standard_input
     test_text = "This is a test string"
     @window.read_from_standard_input(test_text + "\n")
-    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+    sleep Repla::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
 
-    javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
     assert_not_nil(result)
     result.strip!
@@ -147,25 +147,25 @@ end
 
 class TestTwoWindows < Test::Unit::TestCase
   def setup
-    WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
+    Repla::load_plugin(Repla::Tests::PRINT_PLUGIN_FILE)
 
     # Window One
-    window_id_one = WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
-    @window_one = WebConsole::Window.new(window_id_one)
+    window_id_one = Repla::run_plugin(Repla::Tests::PRINT_PLUGIN_NAME)
+    @window_one = Repla::Window.new(window_id_one)
 
     # Window Manager Two
-    window_id_two = WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
-    @window_two = WebConsole::Window.new(window_id_two)
+    window_id_two = Repla::run_plugin(Repla::Tests::PRINT_PLUGIN_NAME)
+    @window_two = Repla::Window.new(window_id_two)
 
     assert_not_equal(window_id_one, window_id_two, "Window managers one and two should have different window ids.")
   end
 
   def teardown
     @window_one.close
-    WebConsole::Tests::Helper::confirm_dialog
+    Repla::Tests::Helper::confirm_dialog
 
     @window_two.close
-    WebConsole::Tests::Helper::confirm_dialog
+    Repla::Tests::Helper::confirm_dialog
   end
 
   def test_two_windows
@@ -173,22 +173,22 @@ class TestTwoWindows < Test::Unit::TestCase
     test_text_two = "The second test string"
 
     @window_one.read_from_standard_input(test_text_one + "\n")
-    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+    sleep Repla::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
 
     @window_two.read_from_standard_input(test_text_two + "\n")
-    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+    sleep Repla::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
 
     # Swap the two windows to test that the window numbers persist even
     # after the window changes.
-    window_id_before = WebConsole::Tests::Helper::window_id
+    window_id_before = Repla::Tests::Helper::window_id
     assert_equal(window_id_before, @window_two.window_id, "The second window should be in front.")
-    WebConsole::Tests::Helper::switch_windows
-    window_id_after = WebConsole::Tests::Helper::window_id
+    Repla::Tests::Helper::switch_windows
+    window_id_after = Repla::Tests::Helper::window_id
     assert_equal(window_id_after, @window_one.window_id, "The first window should be in front.")
     assert_not_equal(window_id_before, window_id_after, "The front window should have changed.")
 
     # Read the window contents
-    javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Tests::LASTCODE_JAVASCRIPT_FILE)
 
     # Window Manager One
     result_one = @window_one.do_javascript(javascript)

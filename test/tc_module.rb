@@ -3,33 +3,33 @@
 require "test/unit"
 
 require_relative "lib/test_constants"
-require_relative "../lib/webconsole"
-require WebConsole::shared_test_resource("ruby/test_constants")
-require WebConsole::Tests::TEST_HELPER_FILE
+require_relative "../lib/repla"
+require Repla::shared_test_resource("ruby/test_constants")
+require Repla::Tests::TEST_HELPER_FILE
 
-class TestWebConsoleProperties < Test::Unit::TestCase
+class TestReplaProperties < Test::Unit::TestCase
 
   def test_window_id
-    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
+    Repla::load_plugin(Repla::Tests::HELLOWORLD_PLUGIN_FILE)
     
     # Test the window_id is nil before running the plugin
-    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
     assert(!window_id, "The window_id should be nil")
 
-    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
-    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    Repla::run_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
     assert(window_id, "The window_id should not be nil")
 
-    window = WebConsole::Window.new(window_id)
+    window = Repla::Window.new(window_id)
     window.close
 
     # Test the window_id is nil after closing the window
-    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
     assert(!window_id, "The window_id should be nil")
   end
 
   def test_exists
-    exists = WebConsole::application_exists
+    exists = Repla::application_exists
     assert(exists, "The Web Console application should exist.")
   end
 
@@ -37,36 +37,36 @@ class TestWebConsoleProperties < Test::Unit::TestCase
 
   SHAREDRESOURCESPLUGIN_NAME = "Shared Resources"
   def test_resource_path_for_plugin
-    resource_path = WebConsole::resource_path_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
-    test_file = File.join(resource_path, WebConsole::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
+    resource_path = Repla::resource_path_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
+    test_file = File.join(resource_path, Repla::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
     assert(File.file?(test_file), "The test file should exist.")
   end
 
   def test_shared_resources_path
-    resource_path = WebConsole::shared_resources_path
-    test_file = File.join(resource_path, WebConsole::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
+    resource_path = Repla::shared_resources_path
+    test_file = File.join(resource_path, Repla::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
     assert(File.file?(test_file), "The test file should exist.")
   end
   SHARED_TEST_RESOURCE_PATH_COMPONENT = "ruby/test_constants.rb"
   def test_shared_test_resources_path
-    resource_path = WebConsole::shared_test_resources_path
+    resource_path = Repla::shared_test_resources_path
     test_file = File.join(resource_path, SHARED_TEST_RESOURCE_PATH_COMPONENT)
     assert(File.file?(test_file), "The test file should exist.")
   end
 
   def test_shared_resource
-    resource_path = WebConsole::shared_resource(WebConsole::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
+    resource_path = Repla::shared_resource(Repla::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
     assert(File.file?(resource_path), "The test file should exist.")
   end
   def test_shared_test_resource
-    resource_path = WebConsole::shared_test_resource(SHARED_TEST_RESOURCE_PATH_COMPONENT)
+    resource_path = Repla::shared_test_resource(SHARED_TEST_RESOURCE_PATH_COMPONENT)
     assert(File.file?(resource_path), "The test file should exist.")
   end
   
   require 'open-uri'
   def test_resource_url
-    resource_url = WebConsole::resource_url_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
-    test_url = URI.join(resource_url, WebConsole::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
+    resource_url = Repla::resource_url_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
+    test_url = URI.join(resource_url, Repla::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
 
     # Ruby doesn't handle file URLs so convert the file URL to a path
     # File URLs aren't supported by 'open-uri' but file paths are
@@ -78,8 +78,8 @@ class TestWebConsoleProperties < Test::Unit::TestCase
     assert(File.file?(test_file), "The test file should exist.")
   end
   def test_shared_resources_url
-    resource_url = WebConsole::shared_resources_url
-    test_url = URI.join(resource_url, WebConsole::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
+    resource_url = Repla::shared_resources_url
+    test_url = URI.join(resource_url, Repla::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
 
     # Ruby doesn't handle file URLs so convert the file URL to a path
     # File URLs aren't supported by 'open-uri' but file paths are
@@ -92,34 +92,34 @@ class TestWebConsoleProperties < Test::Unit::TestCase
   end
 end
 
-class TestWebConsoleRunPlugin < Test::Unit::TestCase
+class TestReplaRunPlugin < Test::Unit::TestCase
 
   def teardown
     @window.close
   end
 
   def test_run_plugin
-    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
-    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    Repla::load_plugin(Repla::Tests::HELLOWORLD_PLUGIN_FILE)
+    Repla::run_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
 
-    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
     assert(window_id != nil, "The plugin should have a window.")
 
     # Clean up
-    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
-    @window = WebConsole::Window.new(window_id)
+    window_id = Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    @window = Repla::Window.new(window_id)
   end
 
   def test_run_plugin_in_directory_with_arguments
     arguments = "1 2 3"    
     path = File.expand_path(TEST_DATA_DIRECTORY)
 
-    WebConsole::load_plugin(DATA_PLUGIN_FILE)
-    WebConsole::run_plugin(DATA_PLUGIN_NAME, path, arguments.split(" "))    
-    window_id = WebConsole::window_id_for_plugin(DATA_PLUGIN_NAME)
-    @window = WebConsole::Window.new(window_id)
+    Repla::load_plugin(DATA_PLUGIN_FILE)
+    Repla::run_plugin(DATA_PLUGIN_NAME, path, arguments.split(" "))    
+    window_id = Repla::window_id_for_plugin(DATA_PLUGIN_NAME)
+    @window = Repla::Window.new(window_id)
 
-    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give time for script to run
+    sleep Repla::Tests::TEST_PAUSE_TIME # Give time for script to run
 
     path_result = @window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_PATH_KEY}');])
     arguments_result = @window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');])

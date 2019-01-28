@@ -1,13 +1,12 @@
 module Repla::REPL
   class View < Repla::View
 
-    BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
-    VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
-    VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
+    ROOT_ACCESS_PATH = File.join(File.dirname(__FILE__), "../html")
+    VIEW_TEMPLATE = File.join(ROOT_ACCESS_PATH, 'index.html')
     def initialize
       super
-      self.base_url_path = File.expand_path(BASE_DIRECTORY)
-      load_erb_from_path(VIEW_TEMPLATE)
+      self.root_access_directory_path = File.expand_path(ROOT_ACCESS_PATH)
+      load_file(VIEW_TEMPLATE)
     end
 
     ADD_INPUT_JAVASCRIPT_FUNCTION = "WcREPL.addInput"

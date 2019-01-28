@@ -25,7 +25,7 @@ class TestViewEnvironmentVariables < Test::Unit::TestCase
     shared_resource_url = Repla.shared_resources_url.to_s
     ENV[Repla::SHARED_RESOURCES_URL_KEY] = shared_resource_url
     view = Repla::View.new
-    view.load_erb_from_path(TEST_TEMPLATE_FILE)
+    view.load_file(TEST_TEMPLATE_FILE)
     Repla::Tests::Helper.quit
 
     sleep Repla::Tests::TEST_PAUSE_TIME # Give time for application to quit

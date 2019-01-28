@@ -13,8 +13,8 @@ require Repla::Tests::TEST_HELPER_FILE
 class TestViewBaseURL < Test::Unit::TestCase
   def test_base_url
     view = Repla::View.new
-    view.base_url = TEST_BASE_URL
-    view.load_erb_from_path(TEST_TEMPLATE_FILE)
+    view.root_access_directory_url = TEST_ROOT_ACCESS_URL
+    view.load_file(TEST_TEMPLATE_FILE)
     result = view.do_javascript_function(TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_NAME)
     assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_RESULT, "The result should equal the expected result.")
     view.close
@@ -45,8 +45,8 @@ class TestViewTitle < Test::Unit::TestCase
 
   def test_no_title
     view = Repla::View.new
-    view.base_url = TEST_BASE_URL
-    view.load_erb_from_path(TEST_TEMPLATE_FILE)
+    view.root_access_directory_url = TEST_ROOT_ACCESS_URL
+    view.load_file(TEST_TEMPLATE_FILE)
     
     assert_nil(view.title, "The views title should be nil.")
     
@@ -57,9 +57,9 @@ class TestViewTitle < Test::Unit::TestCase
 
   def test_set_title
     view = Repla::View.new
-    view.base_url = TEST_BASE_URL
+    view.root_access_directory_url = TEST_ROOT_ACCESS_URL
     view.title = TEST_TITLE
-    view.load_erb_from_path(TEST_TEMPLATE_FILE)
+    view.load_file(TEST_TEMPLATE_FILE)
     
     assert_equal(view.title, TEST_TITLE, "The view's title should equal the test title.")
   
@@ -71,9 +71,9 @@ class TestViewTitle < Test::Unit::TestCase
 
   def test_title_environment_variable
     view = Repla::View.new
-    view.base_url = TEST_BASE_URL
+    view.root_access_directory_url = TEST_ROOT_ACCESS_URL
     ENV[Repla::PLUGIN_NAME_KEY] = TEST_TITLE
-    view.load_erb_from_path(TEST_TEMPLATE_FILE)
+    view.load_file(TEST_TEMPLATE_FILE)
     
     assert_equal(view.title, TEST_TITLE, "The view's title should equal the test title.")
   

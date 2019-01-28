@@ -1,7 +1,7 @@
 TEST_LIB_DIRECTORY = File.dirname(__FILE__)
 
 # Template
-TEST_TEMPLATE_FILE = File.join(TEST_LIB_DIRECTORY, "../view/view.html.erb")
+TEST_TEMPLATE_FILE = File.join(TEST_LIB_DIRECTORY, "../html/index.html")
 
 require "uri"
 TEST_ROOT_ACCESS_PATH = File.expand_path(File.join(TEST_LIB_DIRECTORY, ".."))

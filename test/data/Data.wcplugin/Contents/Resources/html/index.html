@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title><%= title %></title>
-    <%= shared_stylesheet_link_tag "raster" %>
+	<title>Data</title>
+
+  <link rel="stylesheet" href="../../../../../../lib/repla/resources/css/raster.css">
 	<link rel="stylesheet" href="css/style.css" />
 	<script id="output-template" type="text/x-handlebars-template">
 		<dt>{{key}}</dt>
 		<dd id="{{key}}">{{value}}</dd>
 	</script>
-    <%= shared_javascript_include_tag "handlebars" %>
-    <%= shared_javascript_include_tag "zepto" %>
+  <script type="text/javascript" src=
+  "../../../../../../lib/repla/resources/js/zepto.js"></script>
+  <script type="text/javascript" src=
+  "../../../../../../lib/repla/resources/js/handlebars.js"></script>
 	<script type="text/javascript" src="js/wcdata.js"></script>
 </head>
 <body>

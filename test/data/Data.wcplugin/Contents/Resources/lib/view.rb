@@ -1,13 +1,12 @@
 module Repla::Data
   class View < Repla::View
-    BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
-    VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
-    VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
+    ROOT_ACCESS_DIRECTORY = File.join(File.dirname(__FILE__), "../html")
+    VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'index.html')
 
     def initialize
       super
       self.base_url_path = File.expand_path(BASE_DIRECTORY)
-      load_erb_from_path(VIEW_TEMPLATE)
+      load_file(VIEW_TEMPLATE)
     end
 
     ADD_KEY_VALUE_JAVASCRIPT_FUNCTION = "addKeyValue"

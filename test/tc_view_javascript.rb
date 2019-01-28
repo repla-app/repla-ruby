@@ -14,8 +14,8 @@ class TestViewJavaScript < Test::Unit::TestCase
 
   def setup
     @view = Repla::View.new
-    @view.base_url_path = TEST_BASE_URL_PATH
-    @view.load_erb_from_path(TEST_TEMPLATE_FILE)
+    @view.root_access_directory_path = TEST_ROOT_ACCESS_PATH
+    @view.load_file(TEST_TEMPLATE_FILE)
   end
 
   def teardown

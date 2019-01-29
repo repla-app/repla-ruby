@@ -1,6 +1,5 @@
 require_relative "window"
 require_relative "view/javascript"
-require_relative "view/erb"
 require_relative "view/resources"
 
 module Repla

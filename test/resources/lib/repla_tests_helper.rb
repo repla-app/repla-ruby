@@ -86,21 +86,21 @@ module Repla
 
         return nil if result.empty?
 
-        return result.to_i if result.is_integer?
+        return result.to_i if result.integer?
 
-        return result.to_f if result.is_float?
+        return result.to_f if result.float?
 
         result
       end
 
       class ::String
-        def is_float?
+        def float?
           !!Float(self)
         rescue StandardError
           false
         end
 
-        def is_integer?
+        def integer?
           to_i.to_s == self
         end
       end

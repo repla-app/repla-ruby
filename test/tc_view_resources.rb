@@ -33,7 +33,7 @@ class TestViewEnvironmentVariables < Test::Unit::TestCase
     result_shared_resource_url = view.send(:shared_resources_url)
 
     assert_equal(result_shared_resource_url, shared_resource_url, 'The result shared resource URL should equal the shared resource URL.')
-    assert(!Repla::Tests::Helper.is_running, 'Web Console should not be running.')
+    assert(!Repla::Tests::Helper.running?, 'Web Console should not be running.')
   end
 end
 

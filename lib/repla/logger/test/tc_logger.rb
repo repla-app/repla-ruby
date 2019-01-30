@@ -27,7 +27,7 @@ class TestUnintializedLogger < Test::Unit::TestCase
 
   def teardown
     Repla::Tests::Helper::quit
-    assert(!Repla::Tests::Helper::is_running, "The application should not be running.")
+    assert(!Repla::Tests::Helper::running?, "The application should not be running.")
   end
 
   def test_uninitialized_logger
@@ -63,7 +63,7 @@ class TestLogger < Test::Unit::TestCase
 
   def teardown
     Repla::Tests::Helper::quit
-    assert(!Repla::Tests::Helper::is_running, "The application should not be running.")
+    assert(!Repla::Tests::Helper::running?, "The application should not be running.")
   end
 
   def test_logger

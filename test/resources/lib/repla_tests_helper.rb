@@ -41,13 +41,9 @@ module Repla
 
       ISRUNNINGAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
                                             'is_running.applescript')
-      def self.is_running
+      def running
         result = run_applescript(ISRUNNINGAPPLESCRIPT_FILE)
-        if result == 'true'
-          return true
-        else
-          return false
-        end
+        result == 'true'
       end
 
       SWITCHWINDOWSAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
@@ -63,7 +59,8 @@ module Repla
       end
 
       SETWINDOWBOUNDSAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
-                                                  'set_window_bounds.applescript')
+                                                  'set_window_bounds'\
+                                                  '.applescript')
       def self.set_window_bounds(bounds, window_id = nil)
         arguments = [bounds]
         arguments = arguments.push(window_id) if window_id

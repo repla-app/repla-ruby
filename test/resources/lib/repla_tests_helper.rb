@@ -69,7 +69,7 @@ module Repla
 
       private
 
-      def self.run_applescript(script, arguments = nil)
+      private_class_method def self.run_applescript(script, arguments = nil)
         command = "osascript #{Shellwords.escape(script)}"
         if arguments
           arguments.each do |argument|

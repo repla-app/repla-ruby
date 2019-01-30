@@ -1,7 +1,5 @@
 require 'Shellwords'
 
-require File.join(File.dirname(__FILE__), "test_constants")
-
 module Repla
   module Tests
     module Helper

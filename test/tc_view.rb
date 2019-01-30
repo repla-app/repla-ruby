@@ -4,8 +4,8 @@ require "test/unit"
 
 require_relative "lib/test_constants"
 require_relative "../lib/repla"
-require Repla::shared_test_resource("ruby/test_constants")
-require Repla::Tests::TEST_HELPER_FILE
+require_relative "resources/lib/repla_tests.rb"
+require_relative "resources/lib/repla_tests_helper.rb"
 
 class TestViewAttributes < Test::Unit::TestCase
 

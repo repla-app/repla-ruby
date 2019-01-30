@@ -8,7 +8,7 @@ module Repla
     TEST_HELPER_FILE = File.join(LIB_DIRECTORY, 'test_helper')
 
     # Plugins
-    TEST_PLUGIN_DIRECTORY = File.join(LIB_DIRECTORY, '../TestBundles/')
+    TEST_PLUGIN_DIRECTORY = File.join(LIB_DIRECTORY, '../TestAssets/Bundles/')
     HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                        'HelloWorld.wcplugin')
     HELLOWORLD_PLUGIN_NAME = 'HelloWorld'.freeze

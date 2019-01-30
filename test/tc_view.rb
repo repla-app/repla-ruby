@@ -14,7 +14,9 @@ class TestViewAttributes < Test::Unit::TestCase
     assert(!window_id.nil?)
     split_id = Repla.split_id_in_window(window_id)
     assert(!split_id.nil?)
-    split_id_two = Repla.split_id_in_window(window_id, Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    split_id_two = Repla.split_id_in_window(window_id,
+                                            Repla::Tests::
+                                            HELLOWORLD_PLUGIN_NAME)
     assert(!split_id_two.nil?)
     assert(split_id == split_id_two)
     split_id_three = Repla.split_id_in_window_last(window_id)
@@ -43,7 +45,8 @@ class TestViewDoJavaScript < Test::Unit::TestCase
     javascript = File.read(Repla::Tests::NODOM_JAVASCRIPT_FILE)
     result = @view.do_javascript(javascript)
     expected = Repla::Tests::Helper.run_javascript(javascript)
-    assert_equal(expected.to_i, result.to_i, 'The result should match expected result.')
+    assert_equal(expected.to_i, result.to_i,
+                 'The result should match expected result.')
   end
 end
 
@@ -83,7 +86,8 @@ class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
     window_id = Repla.run_plugin(Repla::Tests::PRINT_PLUGIN_NAME)
     window = Repla::Window.new(window_id)
 
-    split_id = Repla.run_plugin_in_split(Repla::Tests::PRINT_PLUGIN_NAME, window_id, window.split_id_last)
+    split_id = Repla.run_plugin_in_split(Repla::Tests::PRINT_PLUGIN_NAME,
+                                         window_id, window.split_id_last)
     assert(window.split_id_last, split_id)
 
     @view_one = Repla::View.new(window.window_id, window.split_id)
@@ -98,21 +102,25 @@ class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
   def test_read_from_standard_input
     test_text_one = 'This is a test string'
     @view_one.read_from_standard_input(test_text_one + "\n")
-    sleep Repla::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+    # Give read from standard input time to run
+    sleep Repla::Tests::TEST_PAUSE_TIME
 
     test_text_two = 'This is a test string two'
     @view_two.read_from_standard_input(test_text_two + "\n")
-    sleep Repla::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+    # Give read from standard input time to run
+    sleep Repla::Tests::TEST_PAUSE_TIME
 
     javascript = File.read(Repla::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = @view_one.do_javascript(javascript)
     assert_not_nil(result)
     result.strip!
-    assert_equal(test_text_one, result, 'The test text should equal the result.')
+    assert_equal(test_text_one, result,
+                 'The test text should equal the result.')
 
     result = @view_two.do_javascript(javascript)
     assert_not_nil(result)
     result.strip!
-    assert_equal(test_text_two, result, 'The test text should equal the result.')
+    assert_equal(test_text_two, result,
+                 'The test text should equal the result.')
   end
 end

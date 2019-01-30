@@ -1,0 +1,3 @@
+[submodule "test/resources/TestBundles"]
+	path = test/resources/TestBundles
+	url = git@github.com:repla-app/TestBundles.git

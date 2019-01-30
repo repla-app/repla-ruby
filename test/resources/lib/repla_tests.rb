@@ -4,11 +4,11 @@ module Repla
     TEST_PAUSE_TIME = 2.00
 
     # Ruby
-    TEST_RUBY_DIRECTORY = File.dirname(__FILE__)
-    TEST_HELPER_FILE = File.join(File.dirname(__FILE__), 'test_helper')
+    LIB_DIRECTORY = File.dirname(__FILE__)
+    TEST_HELPER_FILE = File.join(LIB_DIRECTORY, 'test_helper')
 
     # Plugins
-    TEST_PLUGIN_DIRECTORY = File.join(File.dirname(__FILE__), '..', 'plugin')
+    TEST_PLUGIN_DIRECTORY = File.join(LIB_DIRECTORY, '../TestBundles/')
     HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                        'HelloWorld.wcplugin')
     HELLOWORLD_PLUGIN_NAME = 'HelloWorld'.freeze
@@ -20,12 +20,12 @@ module Repla
     INVALID_PLUGIN_NAME = 'Invalid'.freeze
 
     # HTML
-    TEST_HTML_DIRECTORY = File.join(File.dirname(__FILE__), '..', 'html')
+    TEST_HTML_DIRECTORY = File.join(LIB_DIRECTORY, '..', 'html')
     INDEX_HTML_FILE = File.join(TEST_HTML_DIRECTORY, 'index.html')
     INDEXJQUERY_HTML_FILE = File.join(TEST_HTML_DIRECTORY, 'indexjquery.html')
 
     # JavaScript
-    TEST_JAVASCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), '..', 'js')
+    TEST_JAVASCRIPT_DIRECTORY = File.join(LIB_DIRECTORY, '..', 'js')
     BODY_JAVASCRIPT_FILE = File.join(TEST_JAVASCRIPT_DIRECTORY, 'body.js')
     BODYJQUERY_JAVASCRIPT_FILE = File.join(TEST_JAVASCRIPT_DIRECTORY,
                                            'bodyjquery.js')
@@ -37,8 +37,5 @@ module Repla
     TEXT_JAVASCRIPT_FILE = File.join(TEST_JAVASCRIPT_DIRECTORY, 'text.js')
     TEXTJQUERY_JAVASCRIPT_FILE = File.join(TEST_JAVASCRIPT_DIRECTORY,
                                            'textjquery.js')
-
-    # Shared Resources
-    TEST_SHARED_RESOURCE_PATH_COMPONENT = 'js/zepto.js'.freeze
   end
 end

@@ -17,3 +17,5 @@ DATA_PLUGIN_ARGUMENTS_KEY = "Arguments"
 # Test Data
 TEST_TITLE = "Test"
 TEST_TITLE_JAVASCRIPT = "document.title"
+
+TEST_SHARED_RESOURCE_PATH_COMPONENT = 'js/zepto.js'.freeze

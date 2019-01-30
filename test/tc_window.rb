@@ -37,9 +37,8 @@ end
 class TestWindowDoJavaScript < Test::Unit::TestCase
 
   def setup
-    html = File.read(Repla::Tests::INDEX_HTML_FILE)
     @window = Repla::Window.new
-    @window.load_html(html)
+    @window.load_file(Repla::Tests::INDEX_HTML_FILE)
   end
 
   def teardown
@@ -65,7 +64,7 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     @window.close
   end
 
-  def test_load_html
+  def test_load_file
     test_text = "This is a test string"
     html = "<html><body>" + test_text + "</body></html>"
     @window.load_html(html)
@@ -76,7 +75,7 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     assert_equal(test_text, result, "The result should match the test string.")
   end
 
-  def test_load_html_twice
+  def test_load_file_twice
     test_text = "This is a test string"
     html = "<html><body>" + test_text + "</body></html>"
     @window.load_html(html)
@@ -95,10 +94,9 @@ end
 
 class TestWindowLoadHTMLWithBaseURL < Test::Unit::TestCase
   def setup
-    html = File.read(Repla::Tests::INDEXJQUERY_HTML_FILE)
     @window = Repla::Window.new
-    @window.base_url_path = File.join(Repla::shared_resources_path)
-    @window.load_html(html)
+    @window.root_access_directory_url = Repla::Tests::TEST_HTML_DIRECTORY
+    @window.load_file(Repla::Tests::INDEXJQUERY_HTML_FILE)
   end
 
   def teardown

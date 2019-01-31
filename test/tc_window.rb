@@ -87,7 +87,7 @@ class TestWindowLoadHTMLWithBaseURL < Test::Unit::TestCase
     @window.close
   end
 
-  def test_load_with_base_url
+  def test_root_access_directory
     javascript = File.read(Repla::Tests::TEXTJQUERY_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
 

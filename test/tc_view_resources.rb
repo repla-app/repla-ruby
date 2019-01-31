@@ -10,7 +10,7 @@ require Repla.shared_test_resource('ruby/test_constants')
 require Repla::Tests::TEST_HELPER_FILE
 
 class TestViewBaseURL < Test::Unit::TestCase
-  def test_base_url
+  def test_root_access_directory
     view = Repla::View.new
     view.root_access_directory_url = TEST_ROOT_ACCESS_URL
     view.load_file(TEST_TEMPLATE_FILE)

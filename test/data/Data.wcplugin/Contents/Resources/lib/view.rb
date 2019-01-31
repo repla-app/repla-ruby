@@ -5,7 +5,7 @@ module Repla::Data
 
     def initialize
       super
-      self.base_url_path = File.expand_path(BASE_DIRECTORY)
+      self.root_access_directory_path = File.expand_path(ROOT_ACCESS_DIRECTORY)
       load_file(VIEW_TEMPLATE)
     end
 

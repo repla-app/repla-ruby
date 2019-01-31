@@ -32,9 +32,8 @@ end
 
 class TestViewDoJavaScript < Test::Unit::TestCase
   def setup
-    html = File.read(Repla::Tests::INDEX_HTML_FILE)
     @view = Repla::Window.new
-    @view.load_html(html)
+    @view.load_html(Repla::Tests::INDEX_HTML_FILE)
   end
 
   def teardown
@@ -62,21 +61,15 @@ class TestTwoViews < Test::Unit::TestCase
   end
 
   def test_load_html
-    test_text_one = 'This is a test string'
-    html = '<html><body>' + test_text_one + '</body></html>'
-    @view_one.load_html(html)
+    @view_one.load_html(Repla::Tests::INDEX_HTML_FILE)
+    @view_two.load_html(Repla::Tests::INDEXJQUERY_HTML_FILE)
 
-    test_text_two = 'This is a test string two'
-    html = '<html><body>' + test_text_two + '</body></html>'
-    @view_two.load_html(html)
-
-    javascript = File.read(Repla::Tests::BODY_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Tests::TITLE_JAVASCRIPT_FILE)
     result = @view_one.do_javascript(javascript)
-    assert_equal(result, test_text_one)
+    assert_equal(result, Repla::Tests::INDEX_HTML_TITLE)
 
-    javascript = File.read(Repla::Tests::BODY_JAVASCRIPT_FILE)
     result = @view_two.do_javascript(javascript)
-    assert_equal(result, test_text_two)
+    assert_equal(result, Repla::Tests::INDEXJQUERY_HTML_TITLE)
   end
 end
 

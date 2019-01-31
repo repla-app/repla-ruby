@@ -59,25 +59,20 @@ class TestWindowLoadHTML < Test::Unit::TestCase
   end
 
   def test_load_file
-    @window.load_html(Repla::Tests::INDEX_HTML_FILE)
+    @window.load_file(Repla::Tests::INDEX_HTML_FILE)
     javascript = File.read(Repla::Tests::TITLE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
-    assert_equal(Repla::Tests::INDEX_HTML_TITLE, result)
+    assert_equal(result, Repla::Tests::INDEX_HTML_TITLE)
   end
 
   def test_load_file_twice
-    test_text = 'This is a test string'
-    html = '<html><body>' + test_text + '</body></html>'
-    @window.load_html(html)
+    @window.load_file(Repla::Tests::INDEX_HTML_FILE)
+    @window.load_file(Repla::Tests::INDEXJQUERY_HTML_FILE)
 
-    test_text = 'This is a test string 2'
-    html = '<html><body>' + test_text + '</body></html>'
-    @window.load_html(html)
-
-    javascript = File.read(Repla::Tests::BODY_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Tests::TITLE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
 
-    assert_equal(test_text, result, 'The result should match the test string.')
+    assert_equal(result, Repla::Tests::INDEXJQUERY_HTML_FILE)
   end
 end
 

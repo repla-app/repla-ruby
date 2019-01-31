@@ -33,7 +33,7 @@ end
 class TestViewDoJavaScript < Test::Unit::TestCase
   def setup
     @view = Repla::Window.new
-    @view.load_html(Repla::Tests::INDEX_HTML_FILE)
+    @view.load_file(Repla::Tests::INDEX_HTML_FILE)
   end
 
   def teardown
@@ -61,8 +61,8 @@ class TestTwoViews < Test::Unit::TestCase
   end
 
   def test_load_file
-    @view_one.load_html(Repla::Tests::INDEX_HTML_FILE)
-    @view_two.load_html(Repla::Tests::INDEXJQUERY_HTML_FILE)
+    @view_one.load_file(Repla::Tests::INDEX_HTML_FILE)
+    @view_two.load_file(Repla::Tests::INDEXJQUERY_HTML_FILE)
 
     javascript = File.read(Repla::Tests::TITLE_JAVASCRIPT_FILE)
     result = @view_one.do_javascript(javascript)

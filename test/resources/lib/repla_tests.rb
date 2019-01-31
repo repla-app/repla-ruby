@@ -24,8 +24,8 @@ module Repla
 
     # HTML
     TEST_ASSETS_HTML_DIRECTORY = File.join(TEST_ASSETS_DIRECTORY, 'html')
-    INDEX_HTML_FILE = File.join(TEST_HTML_DIRECTORY, 'index.html')
-    INDEXJQUERY_HTML_FILE = File.join(TEST_HTML_DIRECTORY, 'indexjquery.html')
+    INDEX_HTML_FILE = File.join(TEST_ASSETS_HTML_DIRECTORY, 'index.html')
+    INDEXJQUERY_HTML_FILE = File.join(TEST_ASSETS_HTML_DIRECTORY, 'indexjquery.html')
     INDEX_HTML_TITLE = 'Index'
     INDEXJQUERY_HTML_TITLE = 'Index JQuery'
 

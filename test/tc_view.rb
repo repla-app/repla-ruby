@@ -60,7 +60,7 @@ class TestTwoViews < Test::Unit::TestCase
     @view_one.close
   end
 
-  def test_load_html
+  def test_load_file
     @view_one.load_html(Repla::Tests::INDEX_HTML_FILE)
     @view_two.load_html(Repla::Tests::INDEXJQUERY_HTML_FILE)
 

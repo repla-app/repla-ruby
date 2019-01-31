@@ -59,14 +59,10 @@ class TestWindowLoadHTML < Test::Unit::TestCase
   end
 
   def test_load_file
-    test_text = 'This is a test string'
-    html = '<html><body>' + test_text + '</body></html>'
-    @window.load_html(html)
-
-    javascript = File.read(Repla::Tests::BODY_JAVASCRIPT_FILE)
+    @window.load_html(Repla::Tests::INDEX_HTML_FILE)
+    javascript = File.read(Repla::Tests::TITLE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
-
-    assert_equal(test_text, result, 'The result should match the test string.')
+    assert_equal(Repla::Tests::INDEX_HTML_TITLE, result)
   end
 
   def test_load_file_twice

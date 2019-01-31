@@ -1,0 +1,2 @@
+TEST_PLUGIN_NAME = "TestEnvironment"
+TEST_SHARED_RESOURCE_PATH_COMPONENT = "js/zepto.js"

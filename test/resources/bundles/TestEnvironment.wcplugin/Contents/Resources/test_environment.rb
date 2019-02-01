@@ -2,9 +2,7 @@
 
 require "test/unit"
 
-require_relative 'bundle/bundler/setup'
-require 'repla'
-
+require_relative '../../../../../../lib/repla'
 require_relative "constants"
 
 class ::String

@@ -1,8 +1,7 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require_relative 'bundle/bundler/setup'
-require 'repla'
-require 'repla/logger'
+require_relative '../../../../../../lib/repla'
+require_relative '../../../../../../lib/repla/logger'
 
 logger = Repla::Logger.new
 logger.info("Testing log message")

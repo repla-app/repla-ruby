@@ -76,7 +76,7 @@ class TestWindowLoadHTML < Test::Unit::TestCase
   end
 end
 
-class TestWindowLoadHTMLWithBaseURL < Test::Unit::TestCase
+class TestWindowLoadHTMLWithRootAccessDirectory < Test::Unit::TestCase
   def setup
     @window = Repla::Window.new
     @window.root_access_directory_url = Repla::Tests::TEST_HTML_DIRECTORY

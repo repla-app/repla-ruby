@@ -4,7 +4,7 @@ require 'test/unit'
 
 require_relative 'lib/test_constants'
 require_relative '../lib/repla'
-require Repla.shared_test_resource('ruby/test_constants')
+require_relative "../test/resources/lib/repla_tests.rb"
 require Repla::Tests::TEST_HELPER_FILE
 
 class TestWindowAttributes < Test::Unit::TestCase

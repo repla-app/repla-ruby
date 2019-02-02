@@ -34,65 +34,6 @@ class TestReplaProperties < Test::Unit::TestCase
     assert(exists, "The Web Console application should exist.")
   end
 
-  # Shared Resources
-
-  SHAREDRESOURCESPLUGIN_NAME = "Shared Resources"
-  def test_resource_path_for_plugin
-    resource_path = Repla::resource_path_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
-    test_file = File.join(resource_path, Repla::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
-    assert(File.file?(test_file), "The test file should exist.")
-  end
-
-  def test_shared_resources_path
-    resource_path = Repla::shared_resources_path
-    test_file = File.join(resource_path, Repla::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
-    assert(File.file?(test_file), "The test file should exist.")
-  end
-  SHARED_TEST_RESOURCE_PATH_COMPONENT = "ruby/test_constants.rb"
-  def test_shared_test_resources_path
-    resource_path = Repla::shared_test_resources_path
-    test_file = File.join(resource_path, SHARED_TEST_RESOURCE_PATH_COMPONENT)
-    assert(File.file?(test_file), "The test file should exist.")
-  end
-
-  def test_shared_resource
-    resource_path = Repla::shared_resource(Repla::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
-    assert(File.file?(resource_path), "The test file should exist.")
-  end
-  def test_shared_test_resource
-    resource_path = Repla::shared_test_resource(SHARED_TEST_RESOURCE_PATH_COMPONENT)
-    assert(File.file?(resource_path), "The test file should exist.")
-  end
-  
-  require 'open-uri'
-  def test_resource_url
-    resource_url = Repla::resource_url_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
-    test_url = URI.join(resource_url, Repla::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
-
-    # Ruby doesn't handle file URLs so convert the file URL to a path
-    # File URLs aren't supported by 'open-uri' but file paths are
-    test_url_string = test_url.to_s
-    test_url_string.sub!(%r{^file:}, '')
-    test_url_string.sub!(%r{^//localhost}, '') # For 10.8
-    test_file = URI.unescape(test_url_string)
-
-    assert(File.file?(test_file), "The test file should exist.")
-  end
-  def test_shared_resources_url
-    resource_url = Repla::shared_resources_url
-    test_url = URI.join(resource_url, Repla::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
-
-    # Ruby doesn't handle file URLs so convert the file URL to a path
-    # File URLs aren't supported by 'open-uri' but file paths are
-    test_url_string = test_url.to_s
-    test_url_string.sub!(%r{^file:}, '')
-    test_url_string.sub!(%r{^//localhost}, '') # For 10.8
-    test_file = URI.unescape(test_url_string)
-
-    assert(File.file?(test_file), "The test file should exist.")
-  end
-end
-
 class TestReplaRunPlugin < Test::Unit::TestCase
 
   def teardown

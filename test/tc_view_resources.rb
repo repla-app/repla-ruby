@@ -20,23 +20,6 @@ class TestViewRootAccessDirectory < Test::Unit::TestCase
   end
 end
 
-class TestViewEnvironmentVariables < Test::Unit::TestCase
-  def test_shared_resource_url_from_environment_variable
-    shared_resource_url = Repla.shared_resources_url.to_s
-    ENV[Repla::SHARED_RESOURCES_URL_KEY] = shared_resource_url
-    view = Repla::View.new
-    view.load_file(TEST_TEMPLATE_FILE)
-    Repla::Tests::Helper.quit
-
-    sleep Repla::Tests::TEST_PAUSE_TIME # Give time for application to quit
-
-    result_shared_resource_url = view.send(:shared_resources_url)
-
-    assert_equal(result_shared_resource_url, shared_resource_url, 'The result shared resource URL should equal the shared resource URL.')
-    assert(!Repla::Tests::Helper.running?, 'Web Console should not be running.')
-  end
-end
-
 class TestViewTitle < Test::Unit::TestCase
   def test_no_title
     view = Repla::View.new

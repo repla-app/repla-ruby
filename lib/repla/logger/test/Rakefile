@@ -1,7 +1,6 @@
 require 'shellwords'
-require_relative '../../../repla'
-require Repla::shared_test_resource("ruby/test_constants")
-require Repla::Tests::TEST_HELPER_FILE
+
+require_relative 'lib/test_requires.rb'
 
 task :default => ['logger:tests']
 

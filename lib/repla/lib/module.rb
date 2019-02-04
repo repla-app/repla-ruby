@@ -55,8 +55,6 @@ module Repla
     self.run_applescript(RESOURCE_PATH_FOR_PLUGIN_SCRIPT, [name])
   end
 
-  # Shared Resource URL
-
   RESOURCE_URL_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "resource_url_for_plugin.scpt")
   def self.resource_url_for_plugin(name)
     self.run_applescript(RESOURCE_URL_FOR_PLUGIN_SCRIPT, [name])

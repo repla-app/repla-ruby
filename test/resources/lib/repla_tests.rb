@@ -7,6 +7,7 @@ module Repla
     LIB_DIRECTORY = File.dirname(__FILE__)
     TEST_HELPER_FILE = File.join(LIB_DIRECTORY, 'test_helper')
     TEST_ASSETS_DIRECTORY = File.join(LIB_DIRECTORY, '../TestAssets/')
+    REPLA_FILE File.join(LIB_DIRECTORY, '../../../lib/repla')
 
     # Test Assets
 

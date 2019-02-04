@@ -3,13 +3,10 @@
 require "test/unit"
 
 require_relative "lib/test_constants"
-require REPLA_FILE
-require Repla::shared_test_resource("ruby/test_constants")
-require Repla::Tests::TEST_HELPER_FILE
+require_relative "lib/test_requires"
 
 require_relative "lib/test_view_helper"
 require_relative "../../logger"
-
 
 class TestConstants < Test::Unit::TestCase
 

@@ -2,8 +2,8 @@
 
 require "test/unit"
 
-require_relative "lib/test_constants"
-require REPLA_FILE
+require_relative 'lib/test_setup'
+
 require_relative "lib/test_javascript_helper"
 
 require_relative "../lib/controller"

@@ -1,7 +1,6 @@
 require 'shellwords'
 
-require_relative '../../../repla'
-require Repla::shared_test_resource("ruby/test_constants")
+require_relative 'lib/test_setup'
 require Repla::Test::TEST_HELPER_FILE
 
 task :default => ['dependencies:tests']

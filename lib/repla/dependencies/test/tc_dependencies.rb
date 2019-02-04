@@ -6,8 +6,6 @@ require_relative "../../dependencies"
 
 require_relative "lib/test_javascript_helper"
 
-
-
 module Repla::Dependencies
   class Checker
 

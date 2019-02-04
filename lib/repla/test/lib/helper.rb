@@ -1,7 +1,7 @@
 require 'Shellwords'
 
 module Repla
-  module Tests
+  module Test
     module Helper
       APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), '..',
                                         'applescript')

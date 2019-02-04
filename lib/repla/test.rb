@@ -1,18 +1,17 @@
 module Repla
-  module Tests
+  module Test
     # General
     TEST_PAUSE_TIME = 2.00
 
     # Ruby
     LIB_DIRECTORY = File.dirname(__FILE__)
-    TEST_HELPER_FILE = File.join(LIB_DIRECTORY, 'test_helper')
-    TEST_ASSETS_DIRECTORY = File.join(LIB_DIRECTORY, '../TestAssets/')
-    REPLA_FILE File.join(LIB_DIRECTORY, '../../../lib/repla')
+    HELPER_FILE = File.join(LIB_DIRECTORY, 'helper')
+    TEST_ASSETS_DIRECTORY = File.join(LIB_DIRECTORY, 'test')
 
     # Test Assets
 
     # Plugins
-    TEST_PLUGIN_DIRECTORY = File.join(TEST_ASSETS_DIRECTORY, 'Bundles')
+    TEST_PLUGIN_DIRECTORY = File.join(TEST_ASSETS_DIRECTORY, 'bundles')
     HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                        'HelloWorld.wcplugin')
     HELLOWORLD_PLUGIN_NAME = 'HelloWorld'.freeze

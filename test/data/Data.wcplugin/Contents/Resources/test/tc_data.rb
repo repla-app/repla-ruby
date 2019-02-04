@@ -4,8 +4,8 @@ require "test/unit"
 
 require_relative "lib/test_constants"
 require REPLA_FILE
-
 require Repla::shared_test_resource("ruby/test_constants")
+
 require Repla::Test::TEST_HELPER_FILE
 
 class TestClass < Test::Unit::TestCase

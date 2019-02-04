@@ -1,3 +1,7 @@
+require_relative "../../../../../test/resources/lib/repla_tests"
+require Repla::Test::TEST_HELPER_FILE
+require Repla::Test::REPLA_FILE
+
 TEST_CLASS_JAVASCRIPT = 'document.body.lastChild.classList[0]'.freeze
 TEST_MESSAGE_JAVASCRIPT = 'document.body.lastChild.innerText'.freeze
 TEST_MESSAGE_COUNT_JAVASCRIPT = 'document.body.children.length'.freeze

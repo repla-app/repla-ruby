@@ -1,7 +1,6 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require_relative "lib/constants"
-require REPLA_FILE
+require_relative '../../../../../lib/repla'
 
 require_relative "lib/controller"
 

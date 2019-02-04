@@ -2,8 +2,7 @@
 
 require "test/unit"
 
-require_relative "lib/test_constants"
-require_relative "lib/test_requires"
+require_relative 'lib/test_setup.rb'
 
 require_relative "lib/test_view_helper"
 require_relative "../../logger"

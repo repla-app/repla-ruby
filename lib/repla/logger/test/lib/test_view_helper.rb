@@ -1,4 +1,4 @@
-require_relative 'test_constants'
+require_relative 'test_setup'
 
 class TestViewHelper
 

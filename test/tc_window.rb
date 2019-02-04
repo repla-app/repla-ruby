@@ -3,15 +3,15 @@
 require 'test/unit'
 
 require_relative 'lib/test_setup'
-require Repla::Tests::TEST_HELPER_FILE
+require Repla::Test::TEST_HELPER_FILE
 require_relative "lib/test_javascript_constants"
 
 class TestWindowAttributes < Test::Unit::TestCase
   def test_window_id
-    Repla.load_plugin(Repla::Tests::HELLOWORLD_PLUGIN_FILE)
-    window_id = Repla.run_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    Repla.load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
     assert(!window_id.nil?, 'The window_id should not be nil')
-    assert(Repla.window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME) == window_id, "The window_id's should be equal")
+    assert(Repla.window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME) == window_id, "The window_id's should be equal")
     window = Repla::Window.new(window_id)
     assert(window_id == window.window_id, "The window id's should be equal.")
     window.close
@@ -20,18 +20,18 @@ end
 
 class TestWindowClose < Test::Unit::TestCase
   def test_close
-    Repla.load_plugin(Repla::Tests::HELLOWORLD_PLUGIN_FILE)
-    window_id = Repla.run_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    Repla.load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
     window = Repla::Window.new(window_id)
     window.close
-    assert(Repla.window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME).nil?, 'The plugin should not have a window.')
+    assert(Repla.window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME).nil?, 'The plugin should not have a window.')
   end
 end
 
 class TestWindowDoJavaScript < Test::Unit::TestCase
   def setup
     @window = Repla::Window.new
-    @window.load_file(Repla::Tests::INDEX_HTML_FILE)
+    @window.load_file(Repla::Test::INDEX_HTML_FILE)
   end
 
   def teardown
@@ -39,9 +39,9 @@ class TestWindowDoJavaScript < Test::Unit::TestCase
   end
 
   def test_do_javascript
-    javascript = File.read(Repla::Tests::NODOM_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
-    expected = Repla::Tests::Helper.run_javascript(javascript)
+    expected = Repla::Test::Helper.run_javascript(javascript)
     assert_equal(expected.to_i, result.to_i, 'The result should match expected result.')
   end
 end
@@ -58,28 +58,28 @@ class TestWindowLoadHTML < Test::Unit::TestCase
   end
 
   def test_load_file
-    @window.load_file(Repla::Tests::INDEX_HTML_FILE)
-    javascript = File.read(Repla::Tests::TITLE_JAVASCRIPT_FILE)
+    @window.load_file(Repla::Test::INDEX_HTML_FILE)
+    javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
-    assert_equal(result, Repla::Tests::INDEX_HTML_TITLE)
+    assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
   end
 
   def test_load_file_twice
-    @window.load_file(Repla::Tests::INDEX_HTML_FILE)
-    @window.load_file(Repla::Tests::INDEXJQUERY_HTML_FILE)
+    @window.load_file(Repla::Test::INDEX_HTML_FILE)
+    @window.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
 
-    javascript = File.read(Repla::Tests::TITLE_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
 
-    assert_equal(result, Repla::Tests::INDEXJQUERY_HTML_FILE)
+    assert_equal(result, Repla::Test::INDEXJQUERY_HTML_FILE)
   end
 end
 
 class TestWindowLoadHTMLWithRootAccessDirectory < Test::Unit::TestCase
   def setup
     @window = Repla::Window.new
-    @window.root_access_directory_url = Repla::Tests::TEST_HTML_DIRECTORY
-    @window.load_file(Repla::Tests::INDEXJQUERY_HTML_FILE)
+    @window.root_access_directory_url = Repla::Test::TEST_HTML_DIRECTORY
+    @window.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
   end
 
   def teardown
@@ -87,10 +87,10 @@ class TestWindowLoadHTMLWithRootAccessDirectory < Test::Unit::TestCase
   end
 
   def test_root_access_directory
-    javascript = File.read(Repla::Tests::TEXTJQUERY_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::TEXTJQUERY_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
 
-    test_javascript = File.read(Repla::Tests::TEXT_JAVASCRIPT_FILE)
+    test_javascript = File.read(Repla::Test::TEXT_JAVASCRIPT_FILE)
     expected = @window.do_javascript(test_javascript)
 
     assert_equal(expected, result, 'The result should equal expected result.')
@@ -99,23 +99,23 @@ end
 
 class TestReplaPluginReadFromStandardInput < Test::Unit::TestCase
   def setup
-    Repla.load_plugin(Repla::Tests::PRINT_PLUGIN_FILE)
-    Repla.run_plugin(Repla::Tests::PRINT_PLUGIN_NAME)
-    window_id = Repla.window_id_for_plugin(Repla::Tests::PRINT_PLUGIN_NAME)
+    Repla.load_plugin(Repla::Test::PRINT_PLUGIN_FILE)
+    Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
+    window_id = Repla.window_id_for_plugin(Repla::Test::PRINT_PLUGIN_NAME)
     @window = Repla::Window.new(window_id)
   end
 
   def teardown
     @window.close
-    Repla::Tests::Helper.confirm_dialog
+    Repla::Test::Helper.confirm_dialog
   end
 
   def test_read_from_standard_input
     test_text = 'This is a test string'
     @window.read_from_standard_input(test_text + "\n")
-    sleep Repla::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+    sleep Repla::Test::TEST_PAUSE_TIME # Give read from standard input time to run
 
-    javascript = File.read(Repla::Tests::LASTCODE_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
     assert_not_nil(result)
     result.strip!
@@ -126,14 +126,14 @@ end
 
 class TestTwoWindows < Test::Unit::TestCase
   def setup
-    Repla.load_plugin(Repla::Tests::PRINT_PLUGIN_FILE)
+    Repla.load_plugin(Repla::Test::PRINT_PLUGIN_FILE)
 
     # Window One
-    window_id_one = Repla.run_plugin(Repla::Tests::PRINT_PLUGIN_NAME)
+    window_id_one = Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
     @window_one = Repla::Window.new(window_id_one)
 
     # Window Manager Two
-    window_id_two = Repla.run_plugin(Repla::Tests::PRINT_PLUGIN_NAME)
+    window_id_two = Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
     @window_two = Repla::Window.new(window_id_two)
 
     assert_not_equal(window_id_one, window_id_two, 'Window managers one and two should have different window ids.')
@@ -141,10 +141,10 @@ class TestTwoWindows < Test::Unit::TestCase
 
   def teardown
     @window_one.close
-    Repla::Tests::Helper.confirm_dialog
+    Repla::Test::Helper.confirm_dialog
 
     @window_two.close
-    Repla::Tests::Helper.confirm_dialog
+    Repla::Test::Helper.confirm_dialog
   end
 
   def test_two_windows
@@ -152,22 +152,22 @@ class TestTwoWindows < Test::Unit::TestCase
     test_text_two = 'The second test string'
 
     @window_one.read_from_standard_input(test_text_one + "\n")
-    sleep Repla::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+    sleep Repla::Test::TEST_PAUSE_TIME # Give read from standard input time to run
 
     @window_two.read_from_standard_input(test_text_two + "\n")
-    sleep Repla::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+    sleep Repla::Test::TEST_PAUSE_TIME # Give read from standard input time to run
 
     # Swap the two windows to test that the window numbers persist even
     # after the window changes.
-    window_id_before = Repla::Tests::Helper.window_id
+    window_id_before = Repla::Test::Helper.window_id
     assert_equal(window_id_before, @window_two.window_id, 'The second window should be in front.')
-    Repla::Tests::Helper.switch_windows
-    window_id_after = Repla::Tests::Helper.window_id
+    Repla::Test::Helper.switch_windows
+    window_id_after = Repla::Test::Helper.window_id
     assert_equal(window_id_after, @window_one.window_id, 'The first window should be in front.')
     assert_not_equal(window_id_before, window_id_after, 'The front window should have changed.')
 
     # Read the window contents
-    javascript = File.read(Repla::Tests::LASTCODE_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
 
     # Window Manager One
     result_one = @window_one.do_javascript(javascript)

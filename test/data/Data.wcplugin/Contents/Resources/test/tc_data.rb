@@ -6,7 +6,7 @@ require_relative "lib/test_constants"
 require REPLA_FILE
 
 require Repla::shared_test_resource("ruby/test_constants")
-require Repla::Tests::TEST_HELPER_FILE
+require Repla::Test::TEST_HELPER_FILE
 
 class TestClass < Test::Unit::TestCase
 
@@ -20,7 +20,7 @@ class TestClass < Test::Unit::TestCase
     window_id = Repla::window_id_for_plugin(DATA_PLUGIN_NAME)
     window = Repla::Window.new(window_id)
 
-    sleep Repla::Tests::TEST_PAUSE_TIME # Give time for script to run
+    sleep Repla::Test::TEST_PAUSE_TIME # Give time for script to run
     
     path_result = window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_PATH_KEY}');])
     arguments_result = window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');])

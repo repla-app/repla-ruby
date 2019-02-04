@@ -37,7 +37,7 @@ namespace :repla do
   end
 
   task :clean_up => [:test_module] do
-    Repla::Tests::Helper::quit
+    Repla::Test::Helper::quit
   end
 
 end

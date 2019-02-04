@@ -2,7 +2,7 @@ require 'shellwords'
 
 require_relative '../../../repla'
 require Repla::shared_test_resource("ruby/test_constants")
-require Repla::Tests::TEST_HELPER_FILE
+require Repla::Test::TEST_HELPER_FILE
 
 task :default => ['dependencies:tests']
 
@@ -26,6 +26,6 @@ namespace :dependencies do
   end
 
   task :clean_up => [:test_dependencies] do
-    Repla::Tests::Helper::quit
+    Repla::Test::Helper::quit
   end
 end

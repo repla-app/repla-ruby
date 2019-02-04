@@ -16,7 +16,7 @@ class TestInputController < Test::Unit::TestCase
     test_text = "Some test text"
     input_controller.parse_input(test_text)
     
-    javascript = File.read(Repla::Tests::LASTCODE_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
     result = input_controller.view.do_javascript(javascript)
     assert_not_nil(result)
     result.strip!

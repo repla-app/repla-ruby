@@ -23,8 +23,8 @@ end
 class TestUnintializedLogger < Test::Unit::TestCase
 
   def teardown
-    Repla::Tests::Helper::quit
-    assert(!Repla::Tests::Helper::running?, "The application should not be running.")
+    Repla::Test::Helper::quit
+    assert(!Repla::Test::Helper::running?, "The application should not be running.")
   end
 
   def test_uninitialized_logger
@@ -33,7 +33,7 @@ class TestUnintializedLogger < Test::Unit::TestCase
     # Test Message
     message = "Testing log message"
     logger.info(message)
-    sleep Repla::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
 
     # Make sure the log messages before accessing the logger's `view_id` and `window_id` because those run the logger.
     # This test should test logging a message and running the logger itself simultaneously.
@@ -59,8 +59,8 @@ class TestLogger < Test::Unit::TestCase
   end
 
   def teardown
-    Repla::Tests::Helper::quit
-    assert(!Repla::Tests::Helper::running?, "The application should not be running.")
+    Repla::Test::Helper::quit
+    assert(!Repla::Test::Helper::running?, "The application should not be running.")
   end
 
   def test_logger
@@ -69,7 +69,7 @@ class TestLogger < Test::Unit::TestCase
     # Test Error
     message = "Testing log error"
     @logger.error(message)
-    sleep Repla::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
     test_message = @test_view_helper.last_log_message
     assert_equal(message, test_message, "The messages should match")
     test_class = @test_view_helper.last_log_class
@@ -81,7 +81,7 @@ class TestLogger < Test::Unit::TestCase
     # Test Message
     message = "Testing log message"
     @logger.info(message)
-    sleep Repla::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
     test_message = @test_view_helper.last_log_message
     assert_equal(message, test_message, "The messages should match")
     test_class = @test_view_helper.last_log_class
@@ -93,7 +93,7 @@ class TestLogger < Test::Unit::TestCase
     # Test Only Error Prefix
     message = Repla::Logger::ERROR_PREFIX.rstrip # Note the trailing whitespace is trimmed
     @logger.info(message)
-    sleep Repla::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
     test_message = @test_view_helper.last_log_message
     assert_equal(message, test_message, "The messages should match")
     test_class = @test_view_helper.last_log_class
@@ -105,7 +105,7 @@ class TestLogger < Test::Unit::TestCase
     # Test Only Message Prefix
     message = Repla::Logger::MESSAGE_PREFIX.rstrip # Note the trailing whitespace is trimmed
     @logger.info(message)
-    sleep Repla::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
     test_message = @test_view_helper.last_log_message
     assert_equal(message, test_message, "The messages should match")
     test_class = @test_view_helper.last_log_class
@@ -116,7 +116,7 @@ class TestLogger < Test::Unit::TestCase
 
     # Test Blank Spaces
     @logger.info("  \t")
-    sleep Repla::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
     test_message = @test_view_helper.last_log_message()
     assert_equal(message, test_message, "The messages should match")
     test_class = @test_view_helper.last_log_class()
@@ -124,7 +124,7 @@ class TestLogger < Test::Unit::TestCase
 
     # Test Empty String
     @logger.info("")
-    sleep Repla::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
     test_message = @test_view_helper.last_log_message()
     assert_equal(message, test_message, "The messages should match")
     test_class = @test_view_helper.last_log_class()
@@ -138,7 +138,7 @@ class TestLogger < Test::Unit::TestCase
 
     # message = "\t Testing log message"
     # @logger.info(message + "\t ")
-    # sleep Repla::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    # sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
     # test_message = @test_view_helper.last_log_message
     # assert_equal(message, test_message, "The messages should match")
     # test_class = @test_view_helper.last_log_class
@@ -156,7 +156,7 @@ Line 2
 Line 3
 )
     @logger.info(message)
-    sleep Repla::Tests::TEST_PAUSE_TIME * 2 # Pause for output to be processed
+    sleep Repla::Test::TEST_PAUSE_TIME * 2 # Pause for output to be processed
     result_count = @test_view_helper.number_of_log_messages
     assert_equal(result_count, 3, "The number of log messages should match")    
 

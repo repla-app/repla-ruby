@@ -3,7 +3,7 @@
 require "test/unit"
 
 require_relative 'lib/test_setup'
-require Repla::Tests::TEST_HELPER_FILE
+require Repla::Test::TEST_HELPER_FILE
 require_relative "lib/test_javascript_constants"
 
 class TestViewJavaScript < Test::Unit::TestCase
@@ -20,10 +20,10 @@ class TestViewJavaScript < Test::Unit::TestCase
 
   def test_resources
     # Testing jquery assures that `zepto.js` has been loaded correctly
-    javascript = File.read(Repla::Tests::TEXTJQUERY_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::TEXTJQUERY_JAVASCRIPT_FILE)
     result = @view.do_javascript(javascript)
 
-    test_javascript = File.read(Repla::Tests::TEXT_JAVASCRIPT_FILE)
+    test_javascript = File.read(Repla::Test::TEXT_JAVASCRIPT_FILE)
     expected = @view.do_javascript(test_javascript)
 
     assert_equal(expected, result, "The result should equal expected result.")

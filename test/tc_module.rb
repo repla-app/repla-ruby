@@ -7,21 +7,21 @@ require_relative 'lib/test_setup'
 class TestReplaProperties < Test::Unit::TestCase
 
   def test_window_id
-    Repla::load_plugin(Repla::Tests::HELLOWORLD_PLUGIN_FILE)
+    Repla::load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
     
     # Test the window_id is nil before running the plugin
-    window_id = Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla::window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
     assert(!window_id, "The window_id should be nil")
 
-    Repla::run_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
-    window_id = Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    Repla::run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla::window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
     assert(window_id, "The window_id should not be nil")
 
     window = Repla::Window.new(window_id)
     window.close
 
     # Test the window_id is nil after closing the window
-    window_id = Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla::window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
     assert(!window_id, "The window_id should be nil")
   end
 
@@ -37,14 +37,14 @@ class TestReplaRunPlugin < Test::Unit::TestCase
   end
 
   def test_run_plugin
-    Repla::load_plugin(Repla::Tests::HELLOWORLD_PLUGIN_FILE)
-    Repla::run_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    Repla::load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
+    Repla::run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
 
-    window_id = Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla::window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
     assert(window_id != nil, "The plugin should have a window.")
 
     # Clean up
-    window_id = Repla::window_id_for_plugin(Repla::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla::window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
     @window = Repla::Window.new(window_id)
   end
 
@@ -57,7 +57,7 @@ class TestReplaRunPlugin < Test::Unit::TestCase
     window_id = Repla::window_id_for_plugin(DATA_PLUGIN_NAME)
     @window = Repla::Window.new(window_id)
 
-    sleep Repla::Tests::TEST_PAUSE_TIME # Give time for script to run
+    sleep Repla::Test::TEST_PAUSE_TIME # Give time for script to run
 
     path_result = @window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_PATH_KEY}');])
     arguments_result = @window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');])

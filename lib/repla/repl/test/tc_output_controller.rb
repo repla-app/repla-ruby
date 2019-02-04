@@ -22,7 +22,7 @@ class TestOutputController < Test::Unit::TestCase
     test_text = "Some test text"
     @output_controller.parse_output(test_text)
     
-    javascript = File.read(Repla::Tests::LASTCODE_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
     result = @output_controller.view.do_javascript(javascript)
     assert_not_nil(result)
     result.strip!
@@ -34,7 +34,7 @@ class TestOutputController < Test::Unit::TestCase
     test_text = "Some test text"
     @output_controller.parse_output("\x1b0000m" + test_text)
     
-    javascript = File.read(Repla::Tests::LASTCODE_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
     result = @output_controller.view.do_javascript(javascript)
     assert_not_nil(result)
     result.strip!

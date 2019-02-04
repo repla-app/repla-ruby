@@ -4,7 +4,7 @@ require "test/unit"
 
 require_relative "lib/test_setup"
 
-require Repla::Tests::TEST_HELPER_FILE
+require Repla::Test::TEST_HELPER_FILE
 
 require_relative "../../repl"
 
@@ -17,20 +17,20 @@ class TestREPL < Test::Unit::TestCase
 
     wrapper.parse_input(test_text + "\n")
 
-    sleep Repla::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
 
-    window_id = Repla::Tests::Helper::window_id
+    window_id = Repla::Test::Helper::window_id
     window = Repla::Window.new(window_id)
 
     # Test Wrapper Input
-    javascript = File.read(Repla::Tests::FIRSTCODE_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::FIRSTCODE_JAVASCRIPT_FILE)
     result = window.do_javascript(javascript)
     assert_not_nil(result)
     result.strip!
     assert_equal(test_text, result, "The test text should equal the result.")
 
     # Test Wrapper Output
-    javascript = File.read(Repla::Tests::LASTCODE_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
     result = window.do_javascript(javascript)
     assert_not_nil(result)
     result.strip!

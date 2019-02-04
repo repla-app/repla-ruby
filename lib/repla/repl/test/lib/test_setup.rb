@@ -1,2 +1,2 @@
-require_relative '../../../../../test/resources/lib/repla_tests.rb'
+require_relative '../../../../repla/test'
 require Repla::Test::REPLA_FILE

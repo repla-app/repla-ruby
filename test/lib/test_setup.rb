@@ -1,6 +1,6 @@
-require_relative '../../test/resources/lib/repla_tests.rb'
+require_relative '../../lib/repla/test'
 require Repla::Test::TEST_HELPER_FILE
-require REpla::Tests::REPLA_FILE
+require Repla::Tests::REPLA_FILE
 
 TEST_LIB_DIRECTORY = File.dirname(__FILE__)
 

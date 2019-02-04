@@ -2,9 +2,8 @@
 
 require "test/unit"
 
-require_relative "lib/test_constants"
-require REPLA_FILE
-require Repla::shared_test_resource("ruby/test_constants")
+require_relative "lib/test_setup"
+
 require Repla::Tests::TEST_HELPER_FILE
 
 require_relative "../../repl"

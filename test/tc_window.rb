@@ -2,10 +2,9 @@
 
 require 'test/unit'
 
-require_relative 'lib/test_constants'
-require_relative '../lib/repla'
-require_relative "../test/resources/lib/repla_tests.rb"
+require_relative 'lib/test_setup'
 require Repla::Tests::TEST_HELPER_FILE
+require_relative "lib/test_javascript_constants"
 
 class TestWindowAttributes < Test::Unit::TestCase
   def test_window_id

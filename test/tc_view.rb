@@ -2,10 +2,8 @@
 
 require 'test/unit'
 
-require_relative 'lib/test_constants'
-require_relative '../lib/repla'
-require_relative 'resources/lib/repla_tests.rb'
-require_relative 'resources/lib/repla_tests_helper.rb'
+require_relative 'lib/test_setup'
+require Repla::Tests::TEST_HELPER_FILE
 
 class TestViewAttributes < Test::Unit::TestCase
   def test_view_id

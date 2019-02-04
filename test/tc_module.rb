@@ -2,11 +2,7 @@
 
 require "test/unit"
 
-require_relative "lib/test_constants"
-require_relative "../lib/repla"
-
-require_relative "../test/resources/lib/repla_tests.rb"
-require Repla::Tests::TEST_HELPER_FILE
+require_relative 'lib/test_setup'
 
 class TestReplaProperties < Test::Unit::TestCase
 

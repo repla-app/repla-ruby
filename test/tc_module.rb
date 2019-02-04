@@ -27,7 +27,7 @@ class TestReplaProperties < Test::Unit::TestCase
 
   def test_exists
     exists = Repla::application_exists
-    assert(exists, "The Web Console application should exist.")
+    assert(exists, "The Repla application should exist.")
   end
 
 class TestReplaRunPlugin < Test::Unit::TestCase

@@ -2,8 +2,6 @@ module Repla
   class Window
     require_relative "constants"
 
-    attr_writer :root_access_directory_url
-
     def initialize(window_id = nil)
       @window_id = window_id
     end

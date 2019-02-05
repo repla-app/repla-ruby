@@ -78,7 +78,7 @@ end
 class TestWindowLoadHTMLWithRootAccessDirectory < Test::Unit::TestCase
   def setup
     @window = Repla::Window.new
-    @window.root_access_directory_url = Repla::Test::TEST_HTML_DIRECTORY
+    @window.root_access_directory_path = Repla::Test::TEST_HTML_DIRECTORY
     @window.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
   end
 

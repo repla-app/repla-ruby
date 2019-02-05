@@ -6,13 +6,13 @@ module Repla
     # Ruby
     LIB_DIRECTORY = File.dirname(__FILE__)
     HELPER_FILE = File.join(LIB_DIRECTORY, 'helper')
-    TEST_ASSETS_DIRECTORY = File.join(LIB_DIRECTORY, 'test')
+    TEST_DIRECTORY = File.join(LIB_DIRECTORY, 'test')
     REPLA_FILE = File.join(LIB_DIRECTORY, '../repla')
 
     # Test Assets
 
     # Plugins
-    TEST_PLUGIN_DIRECTORY = File.join(TEST_ASSETS_DIRECTORY, 'bundles')
+    TEST_PLUGIN_DIRECTORY = File.join(TEST_DIRECTORY, 'bundles')
     HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                        'HelloWorld.wcplugin')
     HELLOWORLD_PLUGIN_NAME = 'HelloWorld'.freeze
@@ -24,14 +24,14 @@ module Repla
     INVALID_PLUGIN_NAME = 'Invalid'.freeze
 
     # HTML
-    TEST_ASSETS_HTML_DIRECTORY = File.join(TEST_ASSETS_DIRECTORY, 'html')
-    INDEX_HTML_FILE = File.join(TEST_ASSETS_HTML_DIRECTORY, 'index.html')
-    INDEXJQUERY_HTML_FILE = File.join(TEST_ASSETS_HTML_DIRECTORY, 'indexjquery.html')
+    TEST_HTML_DIRECTORY = File.join(TEST_DIRECTORY, 'html')
+    INDEX_HTML_FILE = File.join(TEST_HTML_DIRECTORY, 'index.html')
+    INDEXJQUERY_HTML_FILE = File.join(TEST_HTML_DIRECTORY, 'indexjquery.html')
     INDEX_HTML_TITLE = 'Index'
     INDEXJQUERY_HTML_TITLE = 'Index JQuery'
 
     # JavaScript
-    TEST_ASSETS_JAVASCRIPT_DIRECTORY = File.join(TEST_ASSETS_DIRECTORY, 'js')
+    TEST_ASSETS_JAVASCRIPT_DIRECTORY = File.join(TEST_DIRECTORY, 'js')
     TITLE_JAVASCRIPT_FILE = File.join(TEST_ASSETS_JAVASCRIPT_DIRECTORY,
                                       'title.js')
 

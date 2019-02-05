@@ -11,6 +11,7 @@ module Repla
     # Properties
 
     def root_access_directory_path=(value)
+      # FIXME: This probably breaks with spaces?
       @root_access_directory_url = "file://" + value
     end
     

@@ -3,10 +3,10 @@
 require 'test/unit'
 
 require_relative 'lib/test_setup'
-require Repla::Test::TEST_HELPER_FILE
+require Repla::Test::HELPER_FILE
 require_relative "lib/test_javascript_constants"
 
-require Repla::Test::TEST_HELPER_FILE
+require Repla::Test::HELPER_FILE
 
 class TestViewRootAccessDirectory < Test::Unit::TestCase
   def test_root_access_directory

@@ -1,5 +1,5 @@
 require_relative "../../../test"
-require Repla::Test::TEST_HELPER_FILE
+require Repla::Test::HELPER_FILE
 require Repla::Test::REPLA_FILE
 
 TEST_CLASS_JAVASCRIPT = 'document.body.lastChild.classList[0]'.freeze

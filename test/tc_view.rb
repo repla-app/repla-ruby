@@ -3,7 +3,7 @@
 require 'test/unit'
 
 require_relative 'lib/test_setup'
-require Repla::Test::TEST_HELPER_FILE
+require Repla::Test::HELPER_FILE
 
 class TestViewAttributes < Test::Unit::TestCase
   def test_view_id

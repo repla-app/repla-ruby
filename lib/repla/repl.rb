@@ -1,5 +1,4 @@
-require_relative 'extension_constants'
-require REPLA_FILE
+require_relative '../repla'
 
 module Repla::REPL
   require_relative "repl/lib/input_controller"

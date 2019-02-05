@@ -2,21 +2,17 @@ module Repla
   class Window
     require_relative "constants"
 
+    attr_accessor :root_access_directory_path
     def initialize(window_id = nil)
       @window_id = window_id
     end
 
     # Properties
 
-    def root_access_directory_path=(value)
-      # FIXME: This probably breaks with spaces?
-      @root_access_directory_url = "file://" + value
-    end
-    
     def window_id
       @window_id ||= ENV.has_key?(WINDOW_ID_KEY) ? ENV[WINDOW_ID_KEY] : Repla::create_window
     end
-    
+
     # Web
 
     LOAD_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load.scpt")
@@ -26,9 +22,9 @@ module Repla
 
       script = LOAD_SCRIPT
 
-      if @root_access_directory_url
+      if @root_access_directory_path
         script = LOADWITHROOTACCESSDIRECTORY_SCRIPT
-        arguments.push(@root_access_directory_url)
+        arguments.push(@root_access_directory_path)
       end
 
       run_script(script, arguments)

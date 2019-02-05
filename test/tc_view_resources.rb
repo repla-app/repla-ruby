@@ -24,37 +24,8 @@ class TestViewTitle < Test::Unit::TestCase
     view = Repla::View.new
     view.root_access_directory_path = TEST_ROOT_ACCESS_PATH
     view.load_file(TEST_TEMPLATE_FILE)
-
-    assert_nil(view.title, 'The views title should be nil.')
-
     title_result = view.do_javascript(TEST_TITLE_JAVASCRIPT)
-    assert(title_result.nil?, 'The title result should be nil.')
-    view.close
-  end
-
-  def test_set_title
-    view = Repla::View.new
-    view.root_access_directory_path = TEST_ROOT_ACCESS_PATH
-    view.title = TEST_TITLE
-    view.load_file(TEST_TEMPLATE_FILE)
-
-    assert_equal(view.title, TEST_TITLE, "The view's title should equal the test title.")
-
-    title_result = view.do_javascript(TEST_TITLE_JAVASCRIPT)
-    assert_equal(title_result, TEST_TITLE, 'The title result should equal the test title.')
-    view.close
-  end
-
-  def test_title_environment_variable
-    view = Repla::View.new
-    view.root_access_directory_path = TEST_ROOT_ACCESS_PATH
-    ENV[Repla::PLUGIN_NAME_KEY] = TEST_TITLE
-    view.load_file(TEST_TEMPLATE_FILE)
-
-    assert_equal(view.title, TEST_TITLE, "The view's title should equal the test title.")
-
-    title_result = view.do_javascript(TEST_TITLE_JAVASCRIPT)
-    assert_equal(title_result, TEST_TITLE, 'The title result should equal the test title.')
+    assert(TEST_TEMPLATE_TITLE, title_result)
     view.close
   end
 end

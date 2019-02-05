@@ -4,10 +4,10 @@ module Repla
     TEST_PAUSE_TIME = 2.00
 
     # Ruby
-    LIB_DIRECTORY = File.dirname(__FILE__)
+    REPLA_FILE = File.join(File.dirname(__FILE__), '../repla')
+    TEST_DIRECTORY = File.join(File.dirname(__FILE__), 'test')
+    LIB_DIRECTORY = File.join(TEST_DIRECTORY, 'lib')
     HELPER_FILE = File.join(LIB_DIRECTORY, 'helper')
-    TEST_DIRECTORY = File.join(LIB_DIRECTORY, 'test')
-    REPLA_FILE = File.join(LIB_DIRECTORY, '../repla')
 
     # Test Assets
 

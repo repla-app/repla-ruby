@@ -13,7 +13,7 @@ module Repla
       if arguments
         arguments.each { |argument|
           if argument
-            function << argument.javascript_argument          
+            function << argument.javascript_argument
           else
             function << "null"
           end
@@ -26,6 +26,12 @@ module Repla
     end
 
     private
+
+    class ::Fixnum
+      def javascript_argument
+        "#{self}"
+      end
+    end
 
     class ::String
       def javascript_argument

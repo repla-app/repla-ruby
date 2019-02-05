@@ -6,7 +6,7 @@ module Repla::Print
 
     def initialize
       super
-      self.root_access_directory_path = File.expand_path(BASE_DIRECTORY)
+      self.root_access_directory_path = File.expand_path(ROOT_ACCESS_DIRECTORY)
       load_file(VIEW_TEMPLATE)
     end
   end

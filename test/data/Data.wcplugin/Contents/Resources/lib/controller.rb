@@ -8,7 +8,7 @@ module Repla::Data
     end
     
     def add_key_value(key, value)
-      value.chomp!
+      value.chomp! if value
       @view.add_key_value(key, value)
     end
 

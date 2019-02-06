@@ -1,7 +1,7 @@
 module Repla::Data
   class View < Repla::View
     ROOT_ACCESS_DIRECTORY = File.join(File.dirname(__FILE__), '../html')
-    VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'index.html')
+    VIEW_TEMPLATE = File.join(ROOT_ACCESS_DIRECTORY, 'index.html')
 
     def initialize
       super
@@ -17,7 +17,7 @@ module Repla::Data
     VALUE_FOR_KEY_JAVASCRIPT_FUNCTION = 'valueForKey'.freeze
     def value_for_key(key)
       value = do_javascript_function(VALUE_FOR_KEY_JAVASCRIPT_FUNCTION, [key])
-      value.chomp!
+      value.chomp! if value
       value
     end
   end

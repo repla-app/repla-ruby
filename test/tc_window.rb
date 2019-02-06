@@ -66,12 +66,19 @@ class TestWindowLoadHTML < Test::Unit::TestCase
 
   def test_load_file_twice
     @window.load_file(Repla::Test::INDEX_HTML_FILE)
+    @window.root_access_directory_path = Repla::Test::TEST_HTML_DIRECTORY
     @window.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
-
     javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
 
-    assert_equal(result, Repla::Test::INDEXJQUERY_HTML_FILE)
+    # Also confirm that the jQuery resource loaded properly
+    javascript = File.read(Repla::Test::TEXTJQUERY_JAVASCRIPT_FILE)
+    result = @window.do_javascript(javascript)
+    test_javascript = File.read(Repla::Test::TEXT_JAVASCRIPT_FILE)
+    expected = @window.do_javascript(test_javascript)
+
+    assert_equal(expected, result, "The result should equal expected result.")
   end
 end
 

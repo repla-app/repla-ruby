@@ -29,6 +29,7 @@ class TestReplaProperties < Test::Unit::TestCase
     exists = Repla::application_exists
     assert(exists, "The Repla application should exist.")
   end
+end
 
 class TestReplaRunPlugin < Test::Unit::TestCase
 

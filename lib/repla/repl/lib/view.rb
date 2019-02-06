@@ -1,11 +1,11 @@
 module Repla::REPL
   class View < Repla::View
-
-    ROOT_ACCESS_PATH = File.join(File.dirname(__FILE__), "../html")
-    VIEW_TEMPLATE = File.join(ROOT_ACCESS_PATH, 'index.html')
+    ROOT_ACCESS_DIRECTORY = File.join(File.dirname(__FILE__), '../../')
+    HTML_DIRECTORY = File.join(File.dirname(__FILE__), '../html/')
+    VIEW_TEMPLATE = File.join(HTML_DIRECTORY, 'index.html')
     def initialize
       super
-      self.root_access_directory_path = File.expand_path(ROOT_ACCESS_PATH)
+      self.root_access_directory_path = ROOT_ACCESS_DIRECTORY
       load_file(VIEW_TEMPLATE)
     end
 

@@ -2,18 +2,17 @@ require 'shellwords'
 
 require_relative 'lib/test_requires.rb'
 
-task :default => ['logger:tests']
+task default: ['logger:tests']
 
 namespace :logger do
-  
-  task :tests => [:clean_up]
+  task tests: [:clean_up]
 
   task :test_logger do
-    logger_tests_file = File.join(File.dirname(__FILE__), "tc_logger.rb")
+    logger_tests_file = File.join(File.dirname(__FILE__), 'tc_logger.rb')
     ruby Shellwords.escape(logger_tests_file)
   end
 
-  task :clean_up => [:test_logger] do
-    Repla::Test::Helper::quit
+  task clean_up: [:test_logger] do
+    Repla::Test::Helper.quit
   end
 end

@@ -3,28 +3,29 @@ require 'shellwords'
 require_relative 'lib/test_setup'
 require Repla::Test::HELPER_FILE
 
-task :default => ['dependencies:tests']
+task default: ['dependencies:tests']
 
 namespace :dependencies do
-  
-  task :tests => [:clean_up]
+  task tests: [:clean_up]
 
   task :test_tester do
-    tester_tests_file = File.join(File.dirname(__FILE__), "tc_tester.rb")
+    tester_tests_file = File.join(File.dirname(__FILE__), 'tc_tester.rb')
     ruby Shellwords.escape(tester_tests_file)
   end
 
-  task :test_controller => [:test_tester] do
-    controller_tests_file = File.join(File.dirname(__FILE__), "tc_controller.rb")
+  task test_controller: [:test_tester] do
+    controller_tests_file = File.join(File.dirname(__FILE__),
+                                      'tc_controller.rb')
     ruby Shellwords.escape(controller_tests_file)
   end
 
-  task :test_dependencies => [:test_controller] do
-    dependencies_tests_file = File.join(File.dirname(__FILE__), "tc_dependencies.rb")
+  task test_dependencies: [:test_controller] do
+    dependencies_tests_file = File.join(File.dirname(__FILE__),
+                                        'tc_dependencies.rb')
     ruby Shellwords.escape(dependencies_tests_file)
   end
 
-  task :clean_up => [:test_dependencies] do
-    Repla::Test::Helper::quit
+  task clean_up: [:test_dependencies] do
+    Repla::Test::Helper.quit
   end
 end

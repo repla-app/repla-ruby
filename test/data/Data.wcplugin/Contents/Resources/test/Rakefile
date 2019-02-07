@@ -1,23 +1,22 @@
 require 'shellwords'
 
-task :default => ['data:tests']
+task default: ['data:tests']
 
 namespace :data do
-
-  task :tests => [:clean_up]
+  task tests: [:clean_up]
 
   task :test_controller do
-    controller_tests_file = File.join(File.dirname(__FILE__), "tc_controller.rb")
+    controller_tests_file = File.join(File.dirname(__FILE__),
+                                      'tc_controller.rb')
     ruby Shellwords.escape(controller_tests_file)
   end
 
-  task :test_data => [:test_controller] do
-    data_tests_file = File.join(File.dirname(__FILE__), "tc_data.rb")
+  task test_data: [:test_controller] do
+    data_tests_file = File.join(File.dirname(__FILE__), 'tc_data.rb')
     ruby Shellwords.escape(data_tests_file)
   end
 
-  task :clean_up => [:test_data] do
-    Repla::Test::Helper::quit
+  task clean_up: [:test_data] do
+    Repla::Test::Helper.quit
   end
-
 end

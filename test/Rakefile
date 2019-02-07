@@ -2,65 +2,67 @@ require 'shellwords'
 
 require_relative 'lib/test_setup'
 
-task :default => [:repla, :other]
+task default: %i[repla other]
 
-task :repla => ['repla:tests']
-task :other => ['other:tests']
+task repla: ['repla:tests']
+task other: ['other:tests']
 
 namespace :repla do
-
-  task :tests => [:clean_up]
+  task tests: [:clean_up]
 
   task :test_window do
-    window_tests_file = File.join(File.dirname(__FILE__), "tc_window.rb")
+    window_tests_file = File.join(File.dirname(__FILE__), 'tc_window.rb')
     ruby Shellwords.escape(window_tests_file)
   end
 
-  task :test_view => [:test_window] do
-    view_tests_file = File.join(File.dirname(__FILE__), "tc_view.rb")
+  task test_view: [:test_window] do
+    view_tests_file = File.join(File.dirname(__FILE__), 'tc_view.rb')
     ruby Shellwords.escape(view_tests_file)
   end
 
-  task :test_view_resources => [:test_view] do
-    view_resources_tests_file = File.join(File.dirname(__FILE__), "tc_view_resources.rb")
+  task test_view_resources: [:test_view] do
+    view_resources_tests_file = File.join(File.dirname(__FILE__), 'tc_view_resources.rb')
     ruby Shellwords.escape(view_resources_tests_file)
   end
 
-  task :test_view_javascript => [:test_view_resources] do
-    view_javascript_tests_file = File.join(File.dirname(__FILE__), "tc_view_javascript.rb")
+  task test_view_javascript: [:test_view_resources] do
+    view_javascript_tests_file = File.join(File.dirname(__FILE__), 'tc_view_javascript.rb')
     ruby Shellwords.escape(view_javascript_tests_file)
   end
 
-  task :test_module => [:test_view_javascript] do
-    module_tests_file = File.join(File.dirname(__FILE__), "tc_module.rb")
+  task test_module: [:test_view_javascript] do
+    module_tests_file = File.join(File.dirname(__FILE__), 'tc_module.rb')
     ruby Shellwords.escape(module_tests_file)
   end
 
-  task :clean_up => [:test_module] do
-    Repla::Test::Helper::quit
+  task clean_up: [:test_module] do
+    Repla::Test::Helper.quit
   end
-
 end
 
 namespace :other do
-
-  data_test_rakefile = File.join(File.dirname(__FILE__), "data/Data.wcplugin/Contents/Resources/test/Rakefile")
+  data_test_rakefile = File.join(File.dirname(__FILE__), 
+                                 'data/Data.wcplugin/Contents/Resources/test/'\
+                                 'Rakefile')
   load data_test_rakefile
 
-  dependencies_test_rakefile = File.join(File.dirname(__FILE__), "../lib/repla/dependencies/test/Rakefile")
+  dependencies_test_rakefile = File.join(File.dirname(__FILE__),
+                                         '../lib/repla/dependencies/test/'\
+                                         'Rakefile')
   load dependencies_test_rakefile
 
-  logger_test_rakefile = File.join(File.dirname(__FILE__), "../lib/repla/logger/test/Rakefile")
+  logger_test_rakefile = File.join(File.dirname(__FILE__),
+                                   '../lib/repla/logger/test/Rakefile')
   load logger_test_rakefile
 
-  repl_test_rakefile = File.join(File.dirname(__FILE__), "../lib/repla/repl/test/Rakefile")
+  repl_test_rakefile = File.join(File.dirname(__FILE__),
+                                 '../lib/repla/repl/test/Rakefile')
   load repl_test_rakefile
 
-  task :tests => [:test_data, :test_dependencies, :test_logger, :test_repl]
+  task tests: %i[test_data test_dependencies test_logger test_repl]
 
-  task :test_data => ['data:tests']
-  task :test_dependencies => ['dependencies:tests']
-  task :test_repl => ['repl:tests']
-  task :test_logger => ['logger:tests']
-
+  task test_data: ['data:tests']
+  task test_dependencies: ['dependencies:tests']
+  task test_repl: ['repl:tests']
+  task test_logger: ['logger:tests']
 end

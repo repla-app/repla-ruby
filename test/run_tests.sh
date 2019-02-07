@@ -1,5 +1,5 @@
 #!/bin/sh
 
-dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-cd "$dir"
+cd "$(dirname "$0")"
+
 rake

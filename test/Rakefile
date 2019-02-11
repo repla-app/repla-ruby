@@ -53,15 +53,16 @@ namespace :other do
                                          'Rakefile')
   load dependencies_test_rakefile
 
-  logger_test_rakefile = File.join(File.dirname(__FILE__),
-                                   '../lib/repla/logger/test/Rakefile')
-  load logger_test_rakefile
+  # logger_test_rakefile = File.join(File.dirname(__FILE__),
+  #                                  '../lib/repla/logger/test/Rakefile')
+  # load logger_test_rakefile
 
   repl_test_rakefile = File.join(File.dirname(__FILE__),
                                  '../lib/repla/repl/test/Rakefile')
   load repl_test_rakefile
 
-  task tests: %i[test_data test_dependencies test_logger test_repl]
+  # task tests: %i[test_data test_dependencies test_logger test_repl]
+  task tests: %i[test_data test_dependencies test_repl]
 
   task test_data: ['data:tests']
   task test_dependencies: ['dependencies:tests']

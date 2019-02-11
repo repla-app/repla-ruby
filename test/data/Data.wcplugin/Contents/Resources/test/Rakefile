@@ -1,4 +1,7 @@
 require 'shellwords'
+require_relative '../../../../../../lib/repla/test'
+require Repla::Test::HELPER_FILE
+require Repla::Test::REPLA_FILE
 
 task default: ['data:tests']
 

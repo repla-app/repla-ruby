@@ -21,12 +21,14 @@ namespace :repla do
   end
 
   task test_view_resources: [:test_view] do
-    view_resources_tests_file = File.join(File.dirname(__FILE__), 'tc_view_resources.rb')
+    view_resources_tests_file = File.join(File.dirname(__FILE__),
+                                          'tc_view_resources.rb')
     ruby Shellwords.escape(view_resources_tests_file)
   end
 
   task test_view_javascript: [:test_view_resources] do
-    view_javascript_tests_file = File.join(File.dirname(__FILE__), 'tc_view_javascript.rb')
+    view_javascript_tests_file = File.join(File.dirname(__FILE__),
+                                           'tc_view_javascript.rb')
     ruby Shellwords.escape(view_javascript_tests_file)
   end
 
@@ -41,7 +43,7 @@ namespace :repla do
 end
 
 namespace :other do
-  data_test_rakefile = File.join(File.dirname(__FILE__), 
+  data_test_rakefile = File.join(File.dirname(__FILE__),
                                  'data/Data.wcplugin/Contents/Resources/test/'\
                                  'Rakefile')
   load data_test_rakefile
@@ -64,5 +66,5 @@ namespace :other do
   task test_data: ['data:tests']
   task test_dependencies: ['dependencies:tests']
   task test_repl: ['repl:tests']
-  task test_logger: ['logger:tests']
+  # task test_logger: ['logger:tests']
 end

@@ -34,9 +34,10 @@ class TestUnintializedLogger < Test::Unit::TestCase
     logger.info(message)
     sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
 
-    # Make sure the log messages before accessing the logger's `view_id` and `window_id` because those run the logger.
-    # This test should test logging a message and running the logger itself simultaneously.
-    # This is why the `TestViewHelper` is intialized after logging the message.
+    # Make sure the log messages before accessing the logger's `view_id` and
+    # `window_id` because those run the logger. This test should test logging a
+    # message and running the logger itself simultaneously. This is why the
+    # `TestViewHelper` is intialized after logging the message.
     test_view_helper = TestViewHelper.new(logger.window_id, logger.view_id)
 
     test_message = test_view_helper.last_log_message

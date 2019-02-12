@@ -95,7 +95,6 @@ module Repla
 
         result
       end
-
     end
   end
 end

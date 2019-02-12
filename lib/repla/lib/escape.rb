@@ -21,10 +21,6 @@ module Escape
       StringEscape.javascript_escape(self)
     end
 
-    def self.javascript_escape(string)
-      string.gsub('\\', '\\\\\\\\').gsub("\n", '\\\\n').gsub("'", "\\\\'")
-    end
-
     def javascript_escape!
       replace(StringEscape.javascript_escape(self))
     end
@@ -43,12 +39,18 @@ module Escape
       StringEscape.shell_escape(self)
     end
 
-    def self.shell_escape(string)
-      Shellwords.escape(string)
+    def shell_escape!
+      replace(StringEscape.shell_escape(self))
     end
 
-    def shell_escape!
-      replace(shell_escape)
+    private
+
+    def self.javascript_escape(string)
+      string.gsub('\\', '\\\\\\\\').gsub("\n", '\\\\n').gsub("'", "\\\\'")
+    end
+
+    def self.shell_escape(string)
+      Shellwords.escape(string)
     end
   end
 

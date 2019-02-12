@@ -93,29 +93,6 @@ module Repla
         result
       end
 
-      class ::String
-        def float?
-          !!Float(self)
-        rescue StandardError
-          false
-        end
-
-        def integer?
-          to_i.to_s == self
-        end
-      end
-
-      class ::Float
-        def javascript_argument
-          to_s
-        end
-      end
-
-      class ::Integer
-        def javascript_argument
-          to_s
-        end
-      end
     end
   end
 end

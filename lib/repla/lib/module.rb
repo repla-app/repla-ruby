@@ -1,5 +1,9 @@
 require 'Shellwords'
+require_relative 'escape'
+
 module Repla
+  using Escape
+
   LOAD_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'load_plugin.scpt')
   def self.load_plugin(path)
     run_applescript(LOAD_PLUGIN_SCRIPT, [path])
@@ -63,10 +67,13 @@ module Repla
   private
 
   def self.run_applescript(script, arguments = nil)
+
     command = "osascript #{script.shell_escape}"
 
     if arguments
-      command += ' ' + arguments.compact.map(&:to_s).map(&:shell_escape).join(' ')
+      command += ' ' + arguments.compact.map(&:to_s).map { |x|
+        x.shell_escape
+      }.join(' ')
     end
 
     result = `#{command}`
@@ -80,31 +87,4 @@ module Repla
     result
   end
 
-  class ::String
-    def is_float?
-      true if Float(self)
-    rescue StandardError
-      false
-    end
-
-    def is_integer?
-      to_i.to_s == self
-    end
-
-    def shell_escape
-      Shellwords.escape(self)
-    end
-
-    def shell_escape!
-      replace(shell_escape)
-    end
-  end
-
-  class ::Float
-    alias javascript_argument to_s
-  end
-
-  class ::Integer
-    alias javascript_argument to_s
-  end
 end

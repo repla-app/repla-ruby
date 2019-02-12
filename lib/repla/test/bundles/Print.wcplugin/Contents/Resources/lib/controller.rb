@@ -1,6 +1,8 @@
 require_relative 'view'
+require_relative '../../../../../../lib/escape'
 
 module Repla::Print
+  using Escape
   class Controller < Repla::Controller
     def initialize
       @view = View.new

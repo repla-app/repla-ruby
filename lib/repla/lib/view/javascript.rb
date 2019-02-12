@@ -1,7 +1,7 @@
-require_relative '../javascript_arguments'
+require_relative '../escape'
 
 module Repla
-  using JavaScriptArguments
+  using Escape
   class View < Window
     def do_javascript_function(function, arguments = nil)
       javascript = self.class.javascript_function(function, arguments)

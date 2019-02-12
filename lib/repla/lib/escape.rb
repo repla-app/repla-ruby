@@ -1,6 +1,11 @@
 require 'Shellwords'
 
 module Escape
+  module FloatEscape
+    def javascript_argument
+      to_s
+    end
+  end
   module IntegerEscape
     def javascript_argument
       to_s
@@ -41,11 +46,10 @@ module Escape
     def self.shell_escape(string)
       Shellwords.escape(string)
     end
-  
+
     def shell_escape!
       replace(shell_escape)
     end
-
   end
 
   refine String do
@@ -54,5 +58,9 @@ module Escape
 
   refine Integer do
     include IntegerEscape
+  end
+
+  refine Float do
+    include FloatEscape
   end
 end

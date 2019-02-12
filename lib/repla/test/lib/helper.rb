@@ -1,8 +1,11 @@
 require 'Shellwords'
+require_relative '../../lib/escape'
 
 module Repla
   module Test
     module Helper
+      using Escape
+
       APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), '..',
                                         'applescript')
 

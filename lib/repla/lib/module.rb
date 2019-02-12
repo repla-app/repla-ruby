@@ -81,8 +81,8 @@ module Repla
     result.chomp!
 
     return nil if result.empty?
-    return result.to_i if result.is_integer?
-    return result.to_f if result.is_float?
+    return result.to_i if result.integer?
+    return result.to_f if result.float?
 
     result
   end

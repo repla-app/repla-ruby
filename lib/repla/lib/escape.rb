@@ -29,13 +29,13 @@ module Escape
       replace(StringEscape.javascript_escape(self))
     end
 
-    def is_float?
+    def float?
       true if Float(self)
     rescue StandardError
       false
     end
 
-    def is_integer?
+    def integer?
       to_i.to_s == self
     end
 

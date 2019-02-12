@@ -58,10 +58,12 @@ class TestReplaRunPlugin < Test::Unit::TestCase
 
     sleep Repla::Test::TEST_PAUSE_TIME # Give time for script to run
 
-    path_result = @window.do_javascript(%[valueForKey('#{DATA_PLUGIN_PATH_KEY}');])
-    arguments_result = @window.do_javascript(%[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');])
+    javascript = %[valueForKey('#{DATA_PLUGIN_PATH_KEY}');]
+    path_result = @window.do_javascript(javascript)
+    javascript = %[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');]
+    arguments_result = @window.do_javascript(javascript)
 
-    assert_equal(path_result, path, 'The path result should match the path.')
-    assert_equal(arguments_result, arguments, 'The arguments result should match the arguments.')
+    assert_equal(path_result, path)
+    assert_equal(arguments_result, arguments)
   end
 end

@@ -13,8 +13,10 @@ class TestViewRootAccessDirectory < Test::Unit::TestCase
     view = Repla::View.new
     view.root_access_directory_path = TEST_ROOT_ACCESS_PATH
     view.load_file(TEST_TEMPLATE_FILE)
-    result = view.do_javascript_function(TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_NAME)
-    assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_RESULT, 'The result should equal the expected result.')
+    result = view.do_javascript_function(
+      TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_NAME
+    )
+    assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_RESULT)
     view.close
   end
 end

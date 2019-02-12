@@ -4,7 +4,7 @@ require 'test/unit'
 
 require_relative 'lib/test_setup'
 require Repla::Test::HELPER_FILE
-require_relative "lib/test_javascript_constants"
+require_relative 'lib/test_javascript_constants'
 
 require Repla::Test::HELPER_FILE
 

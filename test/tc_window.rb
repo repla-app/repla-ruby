@@ -4,7 +4,7 @@ require 'test/unit'
 
 require_relative 'lib/test_setup'
 require Repla::Test::HELPER_FILE
-require_relative "lib/test_javascript_constants"
+require_relative 'lib/test_javascript_constants'
 
 class TestWindowAttributes < Test::Unit::TestCase
   def test_window_id
@@ -78,7 +78,7 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     test_javascript = File.read(Repla::Test::TEXT_JAVASCRIPT_FILE)
     expected = @window.do_javascript(test_javascript)
 
-    assert_equal(expected, result, "The result should equal expected result.")
+    assert_equal(expected, result, 'The result should equal expected result.')
   end
 end
 

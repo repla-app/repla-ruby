@@ -24,7 +24,6 @@ module Repla::Dependencies
       def self.count_installation(window_manager)
         window_manager.do_javascript('$(".installation").length')
       end
-
     end
   end
 end

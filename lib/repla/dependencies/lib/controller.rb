@@ -3,9 +3,7 @@ require_relative 'model'
 require_relative 'view'
 
 module Repla::Dependencies
-
   class Controller < Repla::Controller
-
     def initialize
       @view = View.new
     end
@@ -14,9 +12,9 @@ module Repla::Dependencies
       name = dependency.name
       type = self.class.string_for_type(dependency.type)
       options = dependency.options
-      if options.has_key?(:installation_instructions)
+      if options.key?(:installation_instructions)
         installation_instructions = options[:installation_instructions]
-      end      
+      end
       @view.add_missing_dependency(name, type, installation_instructions)
     end
 
@@ -25,10 +23,9 @@ module Repla::Dependencies
     def self.string_for_type(type)
       case type
       when :shell_command
-        return "shell command"
+        return 'shell command'
       end
       nil
     end
-
   end
 end

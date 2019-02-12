@@ -9,15 +9,14 @@ module Repla::REPL
       load_file(VIEW_TEMPLATE)
     end
 
-    ADD_INPUT_JAVASCRIPT_FUNCTION = "WcREPL.addInput"
+    ADD_INPUT_JAVASCRIPT_FUNCTION = 'WcREPL.addInput'.freeze
     def add_input(input)
-      do_javascript_function(ADD_INPUT_JAVASCRIPT_FUNCTION, [input])      
-    end
-    
-    ADD_OUTPUT_JAVASCRIPT_FUNCTION = "WcREPL.addOutput"
-    def add_output(output)
-      do_javascript_function(ADD_OUTPUT_JAVASCRIPT_FUNCTION, [output])      
+      do_javascript_function(ADD_INPUT_JAVASCRIPT_FUNCTION, [input])
     end
 
+    ADD_OUTPUT_JAVASCRIPT_FUNCTION = 'WcREPL.addOutput'.freeze
+    def add_output(output)
+      do_javascript_function(ADD_OUTPUT_JAVASCRIPT_FUNCTION, [output])
+    end
   end
 end

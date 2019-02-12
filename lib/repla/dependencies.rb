@@ -7,17 +7,17 @@ module Repla::Dependencies
 
     def check_dependencies(dependencies)
       passed = true
-      dependencies.each { |dependency|  
+      dependencies.each do |dependency|
         dependency_passed = check(dependency)
         passed = false unless dependency_passed
-      }
+      end
       passed
     end
 
     def check(dependency)
       name = dependency.name
       type = dependency.type
-      passed = Tester::check(name, type)
+      passed = Tester.check(name, type)
       controller.missing_dependency(dependency) unless passed
       passed
     end
@@ -27,7 +27,5 @@ module Repla::Dependencies
     def controller
       @controller ||= Controller.new
     end
-
   end
-
 end

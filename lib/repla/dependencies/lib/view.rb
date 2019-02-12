@@ -1,5 +1,4 @@
 module Repla::Dependencies
-  
   class View < Repla::View
     ROOT_ACCESS_DIRECTORY = File.join(File.dirname(__FILE__), '../../')
     HTML_DIRECTORY = File.join(File.dirname(__FILE__), '../html/')
@@ -11,7 +10,7 @@ module Repla::Dependencies
       load_file(VIEW_TEMPLATE)
     end
 
-    ADD_MISSING_DEPENDENCY_FUNCTION = "addMissingDependency"
+    ADD_MISSING_DEPENDENCY_FUNCTION = 'addMissingDependency'.freeze
     def add_missing_dependency(name, type, installation_instructions = nil)
       do_javascript_function(ADD_MISSING_DEPENDENCY_FUNCTION, [name, type, installation_instructions])
     end

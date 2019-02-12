@@ -1,6 +1,5 @@
 module Repla::REPL
   class InputController < Repla::Controller
-
     attr_accessor :view
     def initialize(view)
       @view = view
@@ -9,10 +8,7 @@ module Repla::REPL
     def parse_input(input)
       input = input.dup
       input.chomp!
-      if !input.strip.empty? # Ignore empty lines
-        @view.add_input(input)
-      end
+      @view.add_input(input) unless input.strip.empty? # Ignore empty lines
     end
-
   end
 end

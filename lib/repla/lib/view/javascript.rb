@@ -1,6 +1,5 @@
 module Repla
   class View < Window
-
     def do_javascript_function(function, arguments = nil)
       javascript = self.class.javascript_function(function, arguments)
       do_javascript(javascript)
@@ -11,14 +10,14 @@ module Repla
       function << '('
 
       if arguments
-        arguments.each { |argument|
-          if argument
-            function << argument.javascript_argument
-          else
-            function << "null"
-          end
+        arguments.each do |argument|
+          function << if argument
+                        argument.javascript_argument
+                      else
+                        'null'
+                      end
           function << ', '
-        }
+        end
         function = function[0...-2]
       end
 
@@ -29,23 +28,22 @@ module Repla
 
     class ::Fixnum
       def javascript_argument
-        "#{self}"
+        to_s
       end
     end
 
     class ::String
       def javascript_argument
-        "'#{self.javascript_escape}'"
+        "'#{javascript_escape}'"
       end
 
       def javascript_escape
-        self.gsub('\\', "\\\\\\\\").gsub("\n", "\\\\n").gsub("'", "\\\\'")
+        gsub('\\', '\\\\\\\\').gsub("\n", '\\\\n').gsub("'", "\\\\'")
       end
 
       def javascript_escape!
-        replace(self.javascript_escape)
+        replace(javascript_escape)
       end
     end
-
   end
 end

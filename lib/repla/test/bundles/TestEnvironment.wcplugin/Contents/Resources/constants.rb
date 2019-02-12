@@ -1,1 +1,1 @@
-TEST_PLUGIN_NAME = "TestEnvironment"
+TEST_PLUGIN_NAME = 'TestEnvironment'.freeze

@@ -1,4 +1,4 @@
-require_relative "../../../test"
+require_relative '../../../test'
 require Repla::Test::HELPER_FILE
 require Repla::Test::REPLA_FILE
 

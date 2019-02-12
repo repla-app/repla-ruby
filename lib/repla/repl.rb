@@ -1,24 +1,22 @@
 require_relative '../repla'
 
 module Repla::REPL
-  require_relative "repl/lib/input_controller"
-  require_relative "repl/lib/output_controller"
-  require_relative "repl/lib/view"
+  require_relative 'repl/lib/input_controller'
+  require_relative 'repl/lib/output_controller'
+  require_relative 'repl/lib/view'
 
   class Wrapper
     require 'pty'
 
     def initialize(command)
-
-      PTY.spawn(command) do |output, input, pid|
+      PTY.spawn(command) do |output, input, _pid|
         Thread.new do
-          output.each { |line|
+          output.each do |line|
             output_controller.parse_output(line)
-          }
+          end
         end
         @input = input
       end
-
     end
 
     def parse_input(input)
@@ -35,14 +33,13 @@ module Repla::REPL
     def input_controller
       @input_controller ||= InputController.new(view)
     end
-    
+
     def output_controller
       @output_controller ||= OutputController.new(view)
     end
-    
+
     def view
       @view ||= View.new
     end
-
   end
 end

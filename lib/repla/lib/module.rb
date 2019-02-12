@@ -67,13 +67,12 @@ module Repla
   private
 
   def self.run_applescript(script, arguments = nil)
-
     command = "osascript #{script.shell_escape}"
 
     if arguments
-      command += ' ' + arguments.compact.map(&:to_s).map { |x|
+      command += ' ' + arguments.compact.map(&:to_s).map do |x|
         x.shell_escape
-      }.join(' ')
+      end.join(' ')
     end
 
     result = `#{command}`
@@ -86,5 +85,4 @@ module Repla
 
     result
   end
-
 end

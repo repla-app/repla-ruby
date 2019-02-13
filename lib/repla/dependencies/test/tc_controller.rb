@@ -8,6 +8,7 @@ require_relative 'lib/test_javascript_helper'
 
 require_relative '../lib/controller'
 
+# Test controller
 class TestController < Test::Unit::TestCase
   def setup
     @controller = Repla::Dependencies::Controller.new

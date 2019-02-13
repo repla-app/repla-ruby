@@ -6,6 +6,7 @@ require_relative 'lib/test_setup'
 
 require_relative '../lib/tester'
 
+# Test tester
 class TestTester < Test::Unit::TestCase
   def test_shell_command
     result = Repla::Dependencies::Tester.check('grep', :shell_command)

@@ -12,6 +12,13 @@ Style/SymbolProc:
   # `Style/SymbolProc` can break when using `map` with `refine` in Ruby 2.4>
   Enabled: false
 Style/FrozenStringLiteralComment:
+  # This rule doesn't work when run locally
+  Enabled: false
+Style/SafeNavigation:
+  # This rule doesn't work when run locally
+  Enabled: false
+Style/NumericPredicate:
+  # This rule doesn't work when run locally
   Enabled: false
 AllCops:
   Exclude:

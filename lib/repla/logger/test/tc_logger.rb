@@ -87,7 +87,8 @@ class TestLogger < Test::Unit::TestCase
     assert_equal(test_count, result_count)
 
     # Test Only Error Prefix
-    message = Repla::Logger::ERROR_PREFIX.rstrip # Note the trailing whitespace is trimmed
+    # Note the trailing whitespace is trimmed
+    message = Repla::Logger::ERROR_PREFIX.rstrip
     @logger.info(message)
     sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
     test_message = @test_view_helper.last_log_message
@@ -161,7 +162,9 @@ Line 3
     (1..3).each do |i|
       result = @test_view_helper.log_message_at_index(i - 1)
       test_result = "Line #{i}"
-      assert_equal(result, test_result, 'The number of log messages should match')
+      assert_equal(result,
+                   test_result,
+                   'The number of log messages should match')
     end
   end
 end

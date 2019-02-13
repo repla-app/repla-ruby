@@ -3,6 +3,7 @@ require_relative '../../lib/escape'
 
 module Repla
   module Test
+    # Test helper
     module Helper
       using Escape
 

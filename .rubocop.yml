@@ -11,6 +11,8 @@ Metrics/BlockLength:
 Style/SymbolProc:
   # `Style/SymbolProc` can break when using `map` with `refine` in Ruby 2.4>
   Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
 AllCops:
   Exclude:
     - '**/node_modules/**/*'

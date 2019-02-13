@@ -11,7 +11,8 @@ class TestWindowAttributes < Test::Unit::TestCase
     Repla.load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
     window_id = Repla.run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
     assert(!window_id.nil?, 'The window_id should not be nil')
-    assert(Repla.window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME) == window_id, "The window_id's should be equal")
+    name = Repla::Test::HELLOWORLD_PLUGIN_NAME
+    assert(Repla.window_id_for_plugin(name) == window_id)
     window = Repla::Window.new(window_id)
     assert(window_id == window.window_id, "The window id's should be equal.")
     window.close
@@ -24,7 +25,8 @@ class TestWindowClose < Test::Unit::TestCase
     window_id = Repla.run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
     window = Repla::Window.new(window_id)
     window.close
-    assert(Repla.window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME).nil?, 'The plugin should not have a window.')
+    assert(Repla.window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME).nil?,
+           'The plugin should not have a window.')
   end
 end
 
@@ -42,7 +44,7 @@ class TestWindowDoJavaScript < Test::Unit::TestCase
     javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
     expected = Repla::Test::Helper.run_javascript(javascript)
-    assert_equal(expected.to_i, result.to_i, 'The result should match expected result.')
+    assert_equal(expected.to_i, result.to_i)
   end
 end
 
@@ -120,7 +122,8 @@ class TestReplaPluginReadFromStandardInput < Test::Unit::TestCase
   def test_read_from_standard_input
     test_text = 'This is a test string'
     @window.read_from_standard_input(test_text + "\n")
-    sleep Repla::Test::TEST_PAUSE_TIME # Give read from standard input time to run
+    # Give read from standard input time to run
+    sleep Repla::Test::TEST_PAUSE_TIME
 
     javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
@@ -143,7 +146,7 @@ class TestTwoWindows < Test::Unit::TestCase
     window_id_two = Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
     @window_two = Repla::Window.new(window_id_two)
 
-    assert_not_equal(window_id_one, window_id_two, 'Window managers one and two should have different window ids.')
+    assert_not_equal(window_id_one, window_id_two)
   end
 
   def teardown
@@ -159,19 +162,27 @@ class TestTwoWindows < Test::Unit::TestCase
     test_text_two = 'The second test string'
 
     @window_one.read_from_standard_input(test_text_one + "\n")
-    sleep Repla::Test::TEST_PAUSE_TIME # Give read from standard input time to run
+    # Give read from standard input time to run
+    sleep Repla::Test::TEST_PAUSE_TIME
 
     @window_two.read_from_standard_input(test_text_two + "\n")
-    sleep Repla::Test::TEST_PAUSE_TIME # Give read from standard input time to run
+    # Give read from standard input time to run
+    sleep Repla::Test::TEST_PAUSE_TIME
 
     # Swap the two windows to test that the window numbers persist even
     # after the window changes.
     window_id_before = Repla::Test::Helper.window_id
-    assert_equal(window_id_before, @window_two.window_id, 'The second window should be in front.')
+    assert_equal(window_id_before,
+                 @window_two.window_id,
+                 'The second window should be in front.')
     Repla::Test::Helper.switch_windows
     window_id_after = Repla::Test::Helper.window_id
-    assert_equal(window_id_after, @window_one.window_id, 'The first window should be in front.')
-    assert_not_equal(window_id_before, window_id_after, 'The front window should have changed.')
+    assert_equal(window_id_after,
+                 @window_one.window_id,
+                 'The first window should be in front.')
+    assert_not_equal(window_id_before,
+                     window_id_after,
+                     'The front window should have changed.')
 
     # Read the window contents
     javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
@@ -186,7 +197,7 @@ class TestTwoWindows < Test::Unit::TestCase
     assert_not_nil(result_two)
     result_two.strip!
 
-    assert_equal(test_text_one, result_one, 'The first test text should equal the first result.')
-    assert_equal(test_text_two, result_two, 'The second test text should equal the second result.')
+    assert_equal(test_text_one, result_one)
+    assert_equal(test_text_two, result_two)
   end
 end

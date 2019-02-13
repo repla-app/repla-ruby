@@ -90,11 +90,12 @@ class TestController < Test::Unit::TestCase
     passed = @checker.check(failing_dependency_with_installation)
     assert(!passed, 'The check should have failed.')
 
-    assert(@checker.controller_exists?, "The checker's controller should exist.")
+    assert(@checker.controller_exists?)
 
-    test_result_count_name = Repla::Dependencies::Tests::JavaScriptHelper.count_name(@checker.view)
-    test_result_count_type = Repla::Dependencies::Tests::JavaScriptHelper.count_type(@checker.view)
-    test_result_count_installation = Repla::Dependencies::Tests::JavaScriptHelper.count_installation(@checker.view)
+    javascript_helper = Repla::Dependencies::Tests::JavaScriptHelper
+    test_result_count_name = javascript_helper.count_name(@checker.view)
+    test_result_count_type = javascript_helper.count_type(@checker.view)
+    test_result_count_installation = javascript_helper.count_installation(@checker.view)
 
     assert_equal(test_result_count_name, test_count_name, 'The test result name count should equal the test name count.')
     assert_equal(test_result_count_type, test_count_type, 'The test result type count should equal the test type count.')

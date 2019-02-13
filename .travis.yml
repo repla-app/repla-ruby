@@ -1,0 +1,5 @@
+language: ruby
+script: make ci
+branches:
+  only:
+    - master

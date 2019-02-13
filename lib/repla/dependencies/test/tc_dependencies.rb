@@ -95,20 +95,29 @@ class TestController < Test::Unit::TestCase
     javascript_helper = Repla::Dependencies::Tests::JavaScriptHelper
     test_result_count_name = javascript_helper.count_name(@checker.view)
     test_result_count_type = javascript_helper.count_type(@checker.view)
-    test_result_count_installation = javascript_helper.count_installation(@checker.view)
+    test_result_count_installation = javascript_helper.count_installation(
+      @checker.view
+    )
 
-    assert_equal(test_result_count_name, test_count_name, 'The test result name count should equal the test name count.')
-    assert_equal(test_result_count_type, test_count_type, 'The test result type count should equal the test type count.')
-    assert_equal(test_result_count_installation, test_count_installation, 'The test result installation count should equal the test installation count.')
+    assert_equal(test_result_count_name, test_count_name)
+    assert_equal(test_result_count_type, test_count_type)
+    assert_equal(test_result_count_installation, test_count_installation)
   end
 
   def test_batch_mixed_dependencies
-    test_installation = 'Using <a href="http://brew.sh/">Homebrew</a>, <code>brew install asdf</code>'
-    passing_dependency = Repla::Dependencies::Dependency.new('grep', :shell_command)
-    failing_dependency = Repla::Dependencies::Dependency.new('asdf', :shell_command)
-    failing_dependency_with_installation = Repla::Dependencies::Dependency.new('asdf', :shell_command, installation_instructions: test_installation)
+    test_installation = 'Using <a href="http://brew.sh/">Homebrew</a>,'\
+      ' <code>brew install asdf</code>'
+    passing_dependency = Repla::Dependencies::Dependency.new('grep',
+                                                             :shell_command)
+    failing_dependency = Repla::Dependencies::Dependency.new('asdf',
+                                                             :shell_command)
+    failing_dependency_with_installation = Repla::Dependencies::Dependency.new(
+      'asdf', :shell_command, installation_instructions: test_installation
+    )
 
-    dependencies = [passing_dependency, failing_dependency, failing_dependency_with_installation]
+    dependencies = [passing_dependency,
+                    failing_dependency,
+                    failing_dependency_with_installation]
 
     test_count_type = 2
     test_count_name = test_count_type
@@ -117,14 +126,17 @@ class TestController < Test::Unit::TestCase
     passed = @checker.check_dependencies(dependencies)
     assert(!passed, 'The check should have failed.')
 
-    assert(@checker.controller_exists?, "The checker's controller should exist.")
+    assert(@checker.controller_exists?)
 
-    test_result_count_name = Repla::Dependencies::Tests::JavaScriptHelper.count_name(@checker.view)
-    test_result_count_type = Repla::Dependencies::Tests::JavaScriptHelper.count_type(@checker.view)
-    test_result_count_installation = Repla::Dependencies::Tests::JavaScriptHelper.count_installation(@checker.view)
+    javascript_helper = Repla::Dependencies::Tests::JavaScriptHelper
+    test_result_count_name = javascript_helper.count_name(@checker.view)
+    test_result_count_type = javascript_helper.count_type(@checker.view)
+    test_result_count_installation = javascript_helper.count_installation(
+      @checker.view
+    )
 
-    assert_equal(test_result_count_name, test_count_name, 'The test result name count should equal the test name count.')
-    assert_equal(test_result_count_type, test_count_type, 'The test result type count should equal the test type count.')
-    assert_equal(test_result_count_installation, test_count_installation, 'The test result installation count should equal the test installation count.')
+    assert_equal(test_result_count_name, test_count_name)
+    assert_equal(test_result_count_type, test_count_type)
+    assert_equal(test_result_count_installation, test_count_installation)
   end
 end

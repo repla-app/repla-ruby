@@ -7,19 +7,22 @@ require_relative 'lib/test_setup.rb'
 require_relative 'lib/test_view_helper'
 require_relative '../../logger'
 
+# Test constants
 class TestConstants < Test::Unit::TestCase
   def test_constants
     message_prefix = Repla::Logger::MESSAGE_PREFIX
-    assert_not_nil(message_prefix, 'The message prefix should not be nil.')
+    assert_not_nil(message_prefix)
     error_prefix = Repla::Logger::ERROR_PREFIX
-    assert_not_nil(message_prefix, 'The error prefix should not be nil.')
+    assert_not_nil(error_prefix)
   end
 end
 
+# Test unitialized logger
 class TestUnintializedLogger < Test::Unit::TestCase
   def teardown
     Repla::Test::Helper.quit
-    assert(!Repla::Test::Helper.running?, 'The application should not be running.')
+    assert(!Repla::Test::Helper.running?,
+           'The application should not be running.')
   end
 
   def test_uninitialized_logger

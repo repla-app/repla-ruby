@@ -1,5 +1,6 @@
 require_relative 'test_setup'
 
+# Helper for testing view class
 class TestViewHelper
   def initialize(window_id, view_id)
     @view = Repla::View.new(window_id, view_id)

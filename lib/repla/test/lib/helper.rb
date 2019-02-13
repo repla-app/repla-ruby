@@ -1,8 +1,12 @@
 require 'Shellwords'
+require_relative '../../lib/escape'
 
 module Repla
   module Test
+    # Test helper
     module Helper
+      using Escape
+
       APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), '..',
                                         'applescript')
 
@@ -41,7 +45,7 @@ module Repla
 
       ISRUNNINGAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
                                             'is_running.applescript')
-      def running
+      def app_running?
         result = run_applescript(ISRUNNINGAPPLESCRIPT_FILE)
         result == 'true'
       end
@@ -91,30 +95,6 @@ module Repla
         return result.to_f if result.float?
 
         result
-      end
-
-      class ::String
-        def float?
-          !!Float(self)
-        rescue StandardError
-          false
-        end
-
-        def integer?
-          to_i.to_s == self
-        end
-      end
-
-      class ::Float
-        def javascript_argument
-          to_s
-        end
-      end
-
-      class ::Integer
-        def javascript_argument
-          to_s
-        end
       end
     end
   end

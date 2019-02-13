@@ -7,6 +7,7 @@ require_relative 'lib/test_setup'
 require_relative '../lib/input_controller'
 require_relative '../lib/view'
 
+# Test input controller
 class TestInputController < Test::Unit::TestCase
   def test_input_controller
     view = Repla::REPL::View.new

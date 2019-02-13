@@ -7,6 +7,7 @@ require_relative 'lib/test_setup'
 require_relative '../lib/output_controller'
 require_relative '../lib/view'
 
+# Test output controller
 class TestOutputController < Test::Unit::TestCase
   def setup
     view = Repla::REPL::View.new

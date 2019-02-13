@@ -8,6 +8,7 @@ require Repla::Test::HELPER_FILE
 
 require_relative '../../repl'
 
+# Test REPL
 class TestREPL < Test::Unit::TestCase
   def test_repl
     wrapper = Repla::REPL::Wrapper.new('irb')
@@ -35,7 +36,7 @@ class TestREPL < Test::Unit::TestCase
     assert_not_nil(result)
     result.strip!
     result.sub!('=&gt; ', '') # Remove the prompt that irb adds
-    assert_equal(result, test_result, 'The test result should equal the result.')
+    assert_equal(result, test_result)
 
     window.close
   end

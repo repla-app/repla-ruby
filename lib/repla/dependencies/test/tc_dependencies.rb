@@ -6,22 +6,26 @@ require_relative '../../dependencies'
 
 require_relative 'lib/test_javascript_helper'
 
-module Repla::Dependencies
-  class Checker
-    def close
-      @controller.view.close if @controller
-    end
+module Repla
+  module Dependencies
+    # Dependency checker test helper
+    class Checker
+      def close
+        @controller.view.close if @controller
+      end
 
-    def view
-      @controller.view
-    end
+      def view
+        @controller.view
+      end
 
-    def controller_exists?
-      !@controller.nil?
+      def controller_exists?
+        !@controller.nil?
+      end
     end
   end
 end
 
+# Test controller
 class TestController < Test::Unit::TestCase
   def setup
     @checker = Repla::Dependencies::Checker.new

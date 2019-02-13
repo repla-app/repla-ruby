@@ -1,7 +1,9 @@
 require_relative '../escape'
 
+# Repla
 module Repla
   using Escape
+  # View
   class View < Window
     def do_javascript_function(function, arguments = nil)
       javascript = self.class.javascript_function(function, arguments)

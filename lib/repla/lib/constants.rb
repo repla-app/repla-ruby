@@ -5,5 +5,5 @@ module Repla
   WINDOW_ID_KEY = 'WC_WINDOW_ID'.freeze
 
   # Directories
-  APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), '..', '..', 'applescript')
+  APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), '../../applescript')
 end

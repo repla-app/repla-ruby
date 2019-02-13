@@ -1,5 +1,6 @@
 module Repla
   module Dependencies
+    # Tester
     module Tester
       def self.check(name, type)
         case type

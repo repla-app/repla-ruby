@@ -3,6 +3,7 @@ require_relative 'view/javascript'
 require_relative 'view/resources'
 
 module Repla
+  # View
   class View < Window
     # Properties
     def initialize(window_id = nil, view_id = nil)

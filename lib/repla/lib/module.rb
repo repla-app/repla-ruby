@@ -1,6 +1,7 @@
 require 'Shellwords'
 require_relative 'escape'
 
+# Repla
 module Repla
   using Escape
 
@@ -23,25 +24,29 @@ module Repla
     run_applescript(RUN_PLUGIN_SCRIPT, parameters)
   end
 
-  RUN_PLUGIN_IN_SPLIT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'run_plugin_in_split.scpt')
+  RUN_PLUGIN_IN_SPLIT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY,
+                                         'run_plugin_in_split.scpt')
   def self.run_plugin_in_split(name, window_id, split_id)
     parameters = [name, window_id, split_id]
     run_applescript(RUN_PLUGIN_IN_SPLIT_SCRIPT, parameters)
   end
 
-  WINDOW_ID_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'window_id_for_plugin.scpt')
+  WINDOW_ID_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY,
+                                          'window_id_for_plugin.scpt')
   def self.window_id_for_plugin(name)
     run_applescript(WINDOW_ID_FOR_PLUGIN_SCRIPT, [name])
   end
 
-  SPLIT_ID_IN_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'split_id_in_window.scpt')
-  def self.split_id_in_window(window_id, pluginName = nil)
+  SPLIT_ID_IN_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY,
+                                        'split_id_in_window.scpt')
+  def self.split_id_in_window(window_id, plugin_name = nil)
     arguments = [window_id]
-    arguments.push(pluginName) unless pluginName.nil?
+    arguments.push(plugin_name) unless plugin_name.nil?
     run_applescript(SPLIT_ID_IN_WINDOW_SCRIPT, arguments)
   end
 
-  SPLIT_ID_IN_WINDOW_LAST_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'split_id_in_window_last.scpt')
+  SPLIT_ID_IN_WINDOW_LAST_SCRIPT = File.join(APPLESCRIPT_DIRECTORY,
+                                             'split_id_in_window_last.scpt')
   def self.split_id_in_window_last(window_id)
     arguments = [window_id]
     run_applescript(SPLIT_ID_IN_WINDOW_LAST_SCRIPT, arguments)
@@ -54,19 +59,19 @@ module Repla
 
   # Resources
 
-  RESOURCE_PATH_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'resource_path_for_plugin.scpt')
+  RESOURCE_PATH_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY,
+                                              'resource_path_for_plugin.scpt')
   def self.resource_path_for_plugin(name)
     run_applescript(RESOURCE_PATH_FOR_PLUGIN_SCRIPT, [name])
   end
 
-  RESOURCE_URL_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'resource_url_for_plugin.scpt')
+  RESOURCE_URL_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY,
+                                             'resource_url_for_plugin.scpt')
   def self.resource_url_for_plugin(name)
     run_applescript(RESOURCE_URL_FOR_PLUGIN_SCRIPT, [name])
   end
 
-  private
-
-  def self.run_applescript(script, arguments = nil)
+  private_class_method def self.run_applescript(script, arguments = nil)
     command = "osascript #{script.shell_escape}"
 
     if arguments

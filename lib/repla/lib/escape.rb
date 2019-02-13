@@ -1,17 +1,21 @@
 require 'Shellwords'
 
+# Escaping parameters
 module Escape
+  # Escaping floats
   module FloatEscape
     def javascript_argument
       to_s
     end
   end
+  # Escaping integers
   module IntegerEscape
     def javascript_argument
       to_s
     end
   end
 
+  # Escaping strings
   module StringEscape
     def javascript_argument
       "'#{StringEscape.javascript_escape(self)}'"
@@ -43,13 +47,11 @@ module Escape
       replace(StringEscape.shell_escape(self))
     end
 
-    private
-
-    def self.javascript_escape(string)
+    private_class_method def self.javascript_escape(string)
       string.gsub('\\', '\\\\\\\\').gsub("\n", '\\\\n').gsub("'", "\\\\'")
     end
 
-    def self.shell_escape(string)
+    private_class_method def self.shell_escape(string)
       Shellwords.escape(string)
     end
   end

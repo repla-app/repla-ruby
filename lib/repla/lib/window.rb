@@ -1,4 +1,5 @@
 module Repla
+  # Window
   class Window
     require_relative 'constants'
 
@@ -10,13 +11,16 @@ module Repla
     # Properties
 
     def window_id
-      @window_id ||= ENV.key?(WINDOW_ID_KEY) ? ENV[WINDOW_ID_KEY] : Repla.create_window
+      key = WINDOW_ID_KEY
+      @window_id ||= ENV.key?(key) ? ENV[key] : Repla.create_window
     end
 
     # Web
 
     LOAD_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'load.scpt')
-    LOADWITHROOTACCESSDIRECTORY_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'load_with_root_access_directory.scpt')
+    LOADWITHROOTACCESSDIRECTORY_SCRIPT = File.join(
+      APPLESCRIPT_DIRECTORY, 'load_with_root_access_directory.scpt'
+    )
     def load_file(file)
       arguments = [file]
 
@@ -35,7 +39,8 @@ module Repla
       run_script(DOJAVASCRIPT_SCRIPT, [javascript])
     end
 
-    READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'read_from_standard_input.scpt')
+    READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY,
+                                                'read_from_standard_input.scpt')
     def read_from_standard_input(text)
       run_script(READ_FROM_STANDARD_INPUT_SCRIPT, [text])
     end

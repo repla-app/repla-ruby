@@ -2,7 +2,7 @@
 
 require 'test/unit'
 
-require_relative 'lib/test_setup.rb'
+require_relative 'lib/test_setup'
 
 require_relative 'lib/test_view_helper'
 require_relative '../../logger'
@@ -21,7 +21,7 @@ end
 class TestUnintializedLogger < Test::Unit::TestCase
   def teardown
     Repla::Test::Helper.quit
-    assert(!Repla::Test::Helper.running?,
+    assert(!Repla::Test::Helper.app_running?,
            'The application should not be running.')
   end
 
@@ -55,7 +55,7 @@ class TestLogger < Test::Unit::TestCase
 
   def teardown
     Repla::Test::Helper.quit
-    assert(!Repla::Test::Helper.running?, 'The application should not be running.')
+    assert(!Repla::Test::Helper.app_running?, 'The application should not be running.')
   end
 
   def test_logger

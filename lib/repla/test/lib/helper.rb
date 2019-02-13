@@ -44,7 +44,7 @@ module Repla
 
       ISRUNNINGAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
                                             'is_running.applescript')
-      def running
+      def app_running?
         result = run_applescript(ISRUNNINGAPPLESCRIPT_FILE)
         result == 'true'
       end

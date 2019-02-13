@@ -20,9 +20,7 @@ module Repla
         @view.add_missing_dependency(name, type, installation_instructions)
       end
 
-      private
-
-      def self.string_for_type(type)
+      private_class_method def self.string_for_type(type)
         case type
         when :shell_command
           return 'shell command'

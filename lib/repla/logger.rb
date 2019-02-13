@@ -1,6 +1,7 @@
 require_relative '../repla'
 
 module Repla
+  # Logger
   class Logger
     MESSAGE_PREFIX = 'MESSAGE '.freeze
     ERROR_PREFIX = 'ERROR '.freeze
@@ -42,7 +43,8 @@ module Repla
     # Properties
 
     def window_id
-      @window_id ||= ENV.key?(WINDOW_ID_KEY) ? ENV[WINDOW_ID_KEY] : Repla.create_window
+      key = WINDOW_ID_KEY
+      @window_id ||= ENV.key?(key) ? ENV[key] : Repla.create_window
     end
 
     def view_id
@@ -56,11 +58,12 @@ module Repla
 
     private
 
-    READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'read_from_standard_input.scpt')
+    READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY)
     def log_message(message)
       message.rstrip!
       message += "\n"
-      Repla.run_applescript(READ_FROM_STANDARD_INPUT_SCRIPT, [message, window_id, view_id])
+      Repla.run_applescript(READ_FROM_STANDARD_INPUT_SCRIPT,
+                            [message, window_id, view_id])
     end
   end
 end

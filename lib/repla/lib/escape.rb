@@ -47,11 +47,15 @@ module Escape
       replace(StringEscape.shell_escape(self))
     end
 
-    private_class_method def self.javascript_escape(string)
+    # TODO: `self.javascript_escape` and `self.shell_escape` should be private,
+    # but instance methods can't call private class methods in Ruby? Or can
+    # they this only fails when the code imported into the `gem`?
+
+    def self.javascript_escape(string)
       string.gsub('\\', '\\\\\\\\').gsub("\n", '\\\\n').gsub("'", "\\\\'")
     end
 
-    private_class_method def self.shell_escape(string)
+    def self.shell_escape(string)
       Shellwords.escape(string)
     end
   end

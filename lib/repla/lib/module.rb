@@ -71,7 +71,9 @@ module Repla
     run_applescript(RESOURCE_URL_FOR_PLUGIN_SCRIPT, [name])
   end
 
-  private_class_method def self.run_applescript(script, arguments = nil)
+  # TODO: `self.run_applescript` should be private but now all of a sudden
+  # instances method can't call private class methods?
+  def self.run_applescript(script, arguments = nil)
     command = "osascript #{script.shell_escape}"
 
     if arguments

@@ -10,7 +10,7 @@ autocorrect:
 	rubocop -a
 
 deploy:
-	[[ $(git rev-parse --abbrev-ref HEAD) == "master" ]] \
+	[[ $(shell git rev-parse --abbrev-ref HEAD) == "master" ]] \
 		&& gem build repla.gemspec \
 		| grep "\s*File:" \
 		| cut -d: -f 2 \

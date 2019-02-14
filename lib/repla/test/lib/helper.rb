@@ -71,8 +71,6 @@ module Repla
         run_applescript(SETWINDOWBOUNDSAPPLESCRIPT_FILE, arguments)
       end
 
-      private
-
       # TODO: `self.run_applescript` should be private but now all of a sudden
       # instances method can't call private class methods?
       def self.run_applescript(script, arguments = nil)

@@ -20,7 +20,7 @@ module Repla
         @view.add_missing_dependency(name, type, installation_instructions)
       end
 
-      # TODO: `self.run_applescript` should be private but now all of a sudden
+      # TODO: `self.string_for_type` should be private but now all of a sudden
       # instances method can't call private class methods?
       def self.string_for_type(type)
         case type

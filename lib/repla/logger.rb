@@ -58,7 +58,8 @@ module Repla
 
     private
 
-    READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY)
+    READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY,
+                                                'read_from_standard_input.scpt')
     def log_message(message)
       message.rstrip!
       message += "\n"

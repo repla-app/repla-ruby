@@ -1,4 +1,4 @@
-.PHONY: ci ac autocorrect lint
+.PHONY: ci ac autocorrect lint deploy test
 
 ci: lint
 ac: autocorrect
@@ -15,3 +15,6 @@ deploy:
 		| grep "\s*File:" \
 		| cut -d: -f 2 \
 		| xargs gem push
+
+test:
+	./test/run_tests.sh

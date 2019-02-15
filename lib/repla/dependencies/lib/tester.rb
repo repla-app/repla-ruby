@@ -11,8 +11,8 @@ module Repla
 
       require 'shellwords'
 
-      # TODO: `self.run_applescript` should be private but now all of a sudden
-      # instances method can't call private class methods?
+      # TODO: `self.check_shell_command` should be private but now all of a
+      # sudden instances method can't call private class methods?
       def self.check_shell_command(name)
         command = "type -a #{Shellwords.escape(name)} > /dev/null 2>&1"
         system(command)

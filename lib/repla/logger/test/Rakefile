@@ -1,6 +1,6 @@
 require 'shellwords'
 
-require_relative 'lib/test_requires.rb'
+require_relative 'lib/test_setup'
 
 task default: ['logger:tests']
 

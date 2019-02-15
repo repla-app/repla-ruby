@@ -5,6 +5,11 @@ require_relative 'escape'
 module Repla
   using Escape
 
+  @debug = false
+  class << self
+    attr_accessor :debug
+  end
+
   LOAD_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'load_plugin.scpt')
   def self.load_plugin(path)
     run_applescript(LOAD_PLUGIN_SCRIPT, [path])
@@ -82,6 +87,7 @@ module Repla
       end.join(' ')
     end
 
+    puts command if @debug
     result = `#{command}`
 
     result.chomp!

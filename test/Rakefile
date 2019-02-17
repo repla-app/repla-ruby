@@ -44,8 +44,8 @@ end
 
 namespace :other do
   data_test_rakefile = File.join(File.dirname(__FILE__),
-                                 'data/Data.wcplugin/Contents/Resources/test/'\
-                                 'Rakefile')
+                                 'data/Data.replabundle/Contents/Resources/'\
+                                 'test/Rakefile')
   load data_test_rakefile
 
   dependencies_test_rakefile = File.join(File.dirname(__FILE__),

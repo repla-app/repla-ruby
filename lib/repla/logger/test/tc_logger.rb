@@ -128,7 +128,7 @@ class TestLogger < Test::Unit::TestCase
     test_class = @test_view_helper.last_log_class
     assert_equal('message', test_class)
 
-    # TODO: Also add the following tests the `Log.wcplugin`
+    # TODO: Also add the following tests the `Log.replabundle`
 
     # Test Whitespace
     # White space to the left should be preserved, whitespace to the right

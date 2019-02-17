@@ -13,7 +13,7 @@ TEST_ROOT_ACCESS_PATH = File.expand_path(File.join(TEST_LIB_DIRECTORY,
 
 # Data Plugin
 TEST_DATA_DIRECTORY = File.join(TEST_LIB_DIRECTORY, '../data')
-DATA_PLUGIN_FILE = File.join(TEST_DATA_DIRECTORY, 'Data.wcplugin')
+DATA_PLUGIN_FILE = File.join(TEST_DATA_DIRECTORY, 'Data.replabundle')
 DATA_PLUGIN_NAME = 'Data'.freeze
 DATA_PLUGIN_PATH_KEY = 'Path'.freeze
 DATA_PLUGIN_ARGUMENTS_KEY = 'Arguments'.freeze

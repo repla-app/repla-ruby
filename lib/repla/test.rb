@@ -14,13 +14,13 @@ module Repla
     # Plugins
     TEST_PLUGIN_DIRECTORY = File.join(TEST_DIRECTORY, 'bundles')
     HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
-                                       'HelloWorld.wcplugin')
+                                       'HelloWorld.replabundle')
     HELLOWORLD_PLUGIN_NAME = 'HelloWorld'.freeze
-    PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.wcplugin')
+    PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.replabundle')
     PRINT_PLUGIN_NAME = 'Print'.freeze
-    TESTLOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'TestLog.wcplugin')
+    TESTLOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'TestLog.replabundle')
     TESTLOG_PLUGIN_NAME = 'TestLog'.freeze
-    INVALID_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Invalid.wcplugin')
+    INVALID_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Invalid.replabundle')
     INVALID_PLUGIN_NAME = 'Invalid'.freeze
 
     # HTML

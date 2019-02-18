@@ -2,7 +2,7 @@
 
 require 'test/unit'
 
-require_relative '../../../../../../lib/repla'
+require_relative '../../../../../../repla'
 require_relative 'constants'
 require_relative '../../../../../lib/escape'
 

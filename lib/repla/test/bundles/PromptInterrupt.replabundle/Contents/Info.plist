@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>WCName</key>
-	<string>Cat</string>
+	<string>PromptInterrupt</string>
 	<key>WCCommand</key>
 	<string>cat.sh</string>
 	<key>WCUUID</key>

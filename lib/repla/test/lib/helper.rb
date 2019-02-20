@@ -18,53 +18,53 @@ module Repla
       end
 
       CONFIRMDIALOGAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
-                                                'confirm_dialog.applescript')
+                                                'confirm_dialog.scpt')
       def self.confirm_dialog
         run_applescript(CONFIRMDIALOGAPPLESCRIPT_FILE)
         sleep TEST_PAUSE_TIME # Give dialog time
       end
 
       WINDOWIDAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
-                                           'window_id.applescript')
+                                           'window_id.scpt')
       def self.window_id
         run_applescript(WINDOWIDAPPLESCRIPT_FILE)
       end
 
       CANCELDIALOGAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
-                                               'cancel_dialog.applescript')
+                                               'cancel_dialog.scpt')
       def self.cancel_dialog
         run_applescript(CANCELDIALOGAPPLESCRIPT_FILE)
         sleep TEST_PAUSE_TIME # Give dialog time
       end
 
       QUITAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
-                                       'quit.applescript')
+                                       'quit.scpt')
       def self.quit
         run_applescript(QUITAPPLESCRIPT_FILE)
       end
 
       ISRUNNINGAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
-                                            'is_running.applescript')
+                                            'is_running.scpt')
       def self.app_running?
         result = run_applescript(ISRUNNINGAPPLESCRIPT_FILE)
         result == 'true'
       end
 
       SWITCHWINDOWSAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
-                                                'switch_windows.applescript')
+                                                'switch_windows.scpt')
       def self.switch_windows
         run_applescript(SWITCHWINDOWSAPPLESCRIPT_FILE)
       end
 
       WINDOWBOUNDSAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
-                                               'window_bounds.applescript')
+                                               'window_bounds.scpt')
       def self.window_bounds(window_id = nil)
         run_applescript(WINDOWBOUNDSAPPLESCRIPT_FILE, [window_id])
       end
 
       SETWINDOWBOUNDSAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY,
                                                   'set_window_bounds'\
-                                                  '.applescript')
+                                                  '.scpt')
       def self.set_window_bounds(bounds, window_id = nil)
         arguments = [bounds]
         arguments = arguments.push(window_id) if window_id

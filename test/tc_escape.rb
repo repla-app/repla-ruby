@@ -106,5 +106,4 @@ lastCodeTag.innerHTML;'
       '</footer><!-- 1P -->\n</body>\n</html>\n\''
     assert_equal(test_result, result)
   end
-
 end

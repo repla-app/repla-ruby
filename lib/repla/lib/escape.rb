@@ -54,7 +54,10 @@ module Escape
     def self.javascript_escape(string)
       # string.gsub('\\', '\\\\\\\\').gsub("\n", '\\\\n').gsub("'", "\\\\'")
       # Combined as one command, comparable in speed:
-      string.gsub(/\\\\|\n|'/, '\\\\' => '\\\\\\\\', "\n" => '\\n', "'" => '\\\'')
+      string.gsub(/\\\\|\n|'/,
+                  '\\\\' => '\\\\\\\\',
+                  "\n" => '\\n',
+                  "'" => '\\\'')
     end
 
     def self.shell_escape(string)

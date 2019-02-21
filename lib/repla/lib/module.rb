@@ -79,7 +79,8 @@ module Repla
   # TODO: `self.run_applescript` should be private but now all of a sudden
   # instances method can't call private class methods?
   def self.run_applescript(script, arguments = nil)
-    command = "osascript #{script.shell_escape}"
+    # command = "osascript #{script.shell_escape}"
+    command = "osascript #{script}"
 
     if arguments
       command += ' ' + arguments.compact.map(&:to_s).map do |x|

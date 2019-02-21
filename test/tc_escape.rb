@@ -28,7 +28,8 @@ class TestEscape < Test::Unit::TestCase
 var lastCodeTag = codeTags[codeTags.length - 1];
 lastCodeTag.innerHTML;'
     result = string.shell_escape
-    test_result = 'var\ codeTags\ \=\ document.getElementsByTagName\(\'code\'\)\;\'
+    test_result = 'var\ codeTags\ \=\ document.'\
+'getElementsByTagName\(\\\'code\\\'\)\;\'
 \'var\ lastCodeTag\ \=\ codeTags\[codeTags.length\ -\ 1\]\;\'
 \'lastCodeTag.innerHTML\;'
     assert_equal(test_result, result)

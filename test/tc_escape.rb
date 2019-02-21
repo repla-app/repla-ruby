@@ -34,4 +34,18 @@ lastCodeTag.innerHTML;'
 \'lastCodeTag.innerHTML\;'
     assert_equal(test_result, result)
   end
+
+  def test_javascript_argument_word
+    string = 'one'
+    result = string.javascript_argument
+    test_result = '\'one\''
+    assert_equal(test_result, result)
+  end
+
+  def test_javascript_argument_words
+    string = '1 2 3'
+    result = string.javascript_argument
+    test_result = '\'1 2 3\''
+    assert_equal(test_result, result)
+  end
 end

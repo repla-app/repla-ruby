@@ -52,7 +52,9 @@ module Escape
     # they this only fails when the code imported into the `gem`?
 
     def self.javascript_escape(string)
-      string.gsub('\\', '\\\\\\\\').gsub("\n", '\\\\n').gsub("'", "\\\\'")
+      # string.gsub('\\', '\\\\\\\\').gsub("\n", '\\\\n').gsub("'", "\\\\'")
+      # Combined as one command, comparable in speed:
+      string.gsub(/\\\\|\n|'/, '\\\\' => '\\\\\\\\', "\n" => '\\n', "'" => '\\\'')
     end
 
     def self.shell_escape(string)

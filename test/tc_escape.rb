@@ -85,7 +85,25 @@ lastCodeTag.innerHTML;'
     file = File.open('html/index.html')
     string = file.read
     result = string.javascript_argument
-    test_result = '\'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <title>Test</title>\n  <link rel="stylesheet" href="../../lib/repla/resources/css/raster.css">\n  <script type="text/javascript" src=\n  "../../lib/repla/resources/js/zepto.js"></script>\n  <script type="text/javascript" src="js/test.js"></script>\n</head>\n<body>\n  <header role="banner">\n    <h1>1Percenter</h1>\n    <nav>\n      <ul>\n        <li>\n          <a href="#">About</a>\n        </li>\n      </ul>\n    </nav>\n  </header>\n  <section>\n    <header>\n      <h1>Content</h1>\n    </header>\n    <p id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed\n    do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad\n    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex\n    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id\n    est laborum.</p>\n  </section>\n  <footer>\n    ©2013 Roben Kleene\n  </footer><!-- 1P -->\n</body>\n</html>\n\''
+    test_result = '\'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta '\
+      'charset="utf-8">\n  <title>Test</title>\n  <link rel="stylesheet" '\
+      'href="../../lib/repla/resources/css/raster.css">\n  <script '\
+      'type="text/javascript" src=\n  "../../lib/repla/resources/js/zepto.js">'\
+      '</script>\n  <script type="text/javascript" '\
+      'src="js/test.js"></script>\n</head>\n<body>\n  <header '\
+      'role="banner">\n    <h1>1Percenter</h1>\n    <nav>\n      '\
+      '<ul>\n        <li>\n          <a href="#">About</a>\n        '\
+      '</li>\n      </ul>\n    </nav>\n  </header>\n  <section>\n    '\
+      '<header>\n      <h1>Content</h1>\n    </header>\n    <p id="text">'\
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed\n    do '\
+      'eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim '\
+      'ad\n    minim veniam, quis nostrud exercitation ullamco laboris nisi '\
+      'ut aliquip ex\n    ea commodo consequat. Duis aute irure dolor in '\
+      'reprehenderit in voluptate\n    velit esse cillum dolore eu fugiat '\
+      'nulla pariatur. Excepteur sint occaecat\n    cupidatat non proident, '\
+      'sunt in culpa qui officia deserunt mollit anim id\n    est '\
+      'laborum.</p>\n  </section>\n  <footer>\n    ©2013 Roben Kleene\n  '\
+      '</footer><!-- 1P -->\n</body>\n</html>\n\''
     assert_equal(test_result, result)
   end
 

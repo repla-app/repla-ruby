@@ -15,7 +15,8 @@ class TestEscape < Test::Unit::TestCase
   end
 
   def test_shell_escape_string
-    string = 'This is a test string'
+    string = 'This is a test string
+'
     result = string.shell_escape
     test_result = 'This\ is\ a\ test\ string\'
 \''

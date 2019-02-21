@@ -48,4 +48,20 @@ lastCodeTag.innerHTML;'
     test_result = '\'1 2 3\''
     assert_equal(test_result, result)
   end
+
+  def test_javascript_argument_punctuation
+    string = 'irb(main):001:0> 1 + 1'
+    result = string.javascript_argument
+    test_result = '\'irb(main):001:0> 1 + 1\''
+    assert_equal(test_result, result)
+  end
+
+  def test_javascript_argument_html
+    string = 'Using <a href="http://brew.sh/">Homebrew</a>, <code>brew '\
+      'install asdf</code>'
+    result = string.javascript_argument
+    test_result = '\'Using <a href="http://brew.sh/">Homebrew</a>, <code>brew '\
+      'install asdf</code>\''
+    assert_equal(test_result, result)
+  end
 end

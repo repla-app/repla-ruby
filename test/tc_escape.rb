@@ -64,4 +64,20 @@ lastCodeTag.innerHTML;'
       'install asdf</code>\''
     assert_equal(test_result, result)
   end
+
+  def test_javascript_escape_slashes
+    string = '    eiusmod self.gsub("\'", "\\\\\\\\\'")'
+    string.javascript_escape!
+    test_result = '    eiusmod self.gsub("\\\'", "\\\\\\\\\\\\\\\\\\\'")'
+    assert_equal(test_result, string)
+  end
+
 end
+
+# TODO: Add test with full multi-line HTML
+
+# ESCAPE self.javascript_escape, string =     eiusmod self.gsub("'", "\\\\'"), result =     eiusmod self.gsub("\'", "\\\\\\\\\'")
+# ESCAPE javascript_escape!, self =     eiusmod self.gsub("'", "\\\\'"), result =     eiusmod self.gsub("\'", "\\\\\\\\\'")
+
+# ESCAPE self.javascript_escape, string = WCSEARCH_FILE = File.join(File.dirname(__FILE__), "..", 'eiusmod.rb'), result = WCSEARCH_FILE = File.join(File.dirname(__FILE__), "..", \'eiusmod.rb\')
+# ESCAPE javascript_escape!, self = WCSEARCH_FILE = File.join(File.dirname(__FILE__), "..", 'eiusmod.rb'), result = WCSEARCH_FILE = File.join(File.dirname(__FILE__), "..", \'eiusmod.rb\')

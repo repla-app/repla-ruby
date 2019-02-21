@@ -72,12 +72,14 @@ lastCodeTag.innerHTML;'
     assert_equal(test_result, string)
   end
 
-end
+  def test_javascript_escape_quote
+    string = 'WCSEARCH_FILE = File.join(File.dirname(__FILE__), '\
+      '"..", \'eiusmod.rb\')'
+    string.javascript_escape!
+    test_result = 'WCSEARCH_FILE = File.join(File.dirname(__FILE__), '\
+      '"..", \\\'eiusmod.rb\\\')'
+    assert_equal(test_result, string)
+  end
 
 # TODO: Add test with full multi-line HTML
-
-# ESCAPE self.javascript_escape, string =     eiusmod self.gsub("'", "\\\\'"), result =     eiusmod self.gsub("\'", "\\\\\\\\\'")
-# ESCAPE javascript_escape!, self =     eiusmod self.gsub("'", "\\\\'"), result =     eiusmod self.gsub("\'", "\\\\\\\\\'")
-
-# ESCAPE self.javascript_escape, string = WCSEARCH_FILE = File.join(File.dirname(__FILE__), "..", 'eiusmod.rb'), result = WCSEARCH_FILE = File.join(File.dirname(__FILE__), "..", \'eiusmod.rb\')
-# ESCAPE javascript_escape!, self = WCSEARCH_FILE = File.join(File.dirname(__FILE__), "..", 'eiusmod.rb'), result = WCSEARCH_FILE = File.join(File.dirname(__FILE__), "..", \'eiusmod.rb\')
+end

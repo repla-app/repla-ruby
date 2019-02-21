@@ -87,7 +87,6 @@ class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
 
   def teardown
     @view_one.close
-    Repla::Test::Helper.confirm_dialog
   end
 
   def test_read_from_standard_input

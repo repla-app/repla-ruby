@@ -116,7 +116,6 @@ class TestReplaPluginReadFromStandardInput < Test::Unit::TestCase
 
   def teardown
     @window.close
-    Repla::Test::Helper.confirm_dialog
   end
 
   def test_read_from_standard_input
@@ -151,10 +150,7 @@ class TestTwoWindows < Test::Unit::TestCase
 
   def teardown
     @window_one.close
-    Repla::Test::Helper.confirm_dialog
-
     @window_two.close
-    Repla::Test::Helper.confirm_dialog
   end
 
   def test_two_windows

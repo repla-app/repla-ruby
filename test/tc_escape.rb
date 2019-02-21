@@ -17,8 +17,19 @@ class TestEscape < Test::Unit::TestCase
   def test_shell_escape_string
     string = 'This is a test string'
     result = string.shell_escape
-    test_result = 'result = This\ is\ a\ test\ string\'
+    test_result = 'This\ is\ a\ test\ string\'
 \''
+    assert_equal(test_result, result)
+  end
+
+  def test_shell_escape_code
+    string = 'var codeTags = document.getElementsByTagName(\'code\');
+var lastCodeTag = codeTags[codeTags.length - 1];
+lastCodeTag.innerHTML;'
+    result = string.shell_escape
+    test_result = 'var\ codeTags\ \=\ document.getElementsByTagName\(\'code\'\)\;\'
+\'var\ lastCodeTag\ \=\ codeTags\[codeTags.length\ -\ 1\]\;\'
+\'lastCodeTag.innerHTML\;'
     assert_equal(test_result, result)
   end
 end

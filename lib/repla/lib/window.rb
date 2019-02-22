@@ -37,7 +37,7 @@ module Repla
     LOAD_URL_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'load_url.scpt')
     def load_url(file)
       arguments = [file]
-      script = LOAD_SCRIPT
+      script = LOAD_URL_SCRIPT
       run_script(script, arguments)
     end
 

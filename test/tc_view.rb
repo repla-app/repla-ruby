@@ -31,7 +31,7 @@ end
 class TestURLViewDoJavaScript < Test::Unit::TestCase
   def setup
     Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_FILE)
-    Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME)
+    Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME, Repla::Test::TEST_HTML_DIRECTORY)
     window_id = Repla.window_id_for_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME)
     assert(window_id)
     @view = Repla::Window.new(window_id)

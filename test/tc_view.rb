@@ -30,6 +30,28 @@ end
 
 class TestViewDoJavaScript < Test::Unit::TestCase
   def setup
+    Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME)
+    Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME)
+    window_id = Repla.window_id_for_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME)
+    assert(window_id)
+    @view = Repla::Window.new(window_id)
+    @view.load_url(TEST_SERVER_URL)
+  end
+
+  def teardown
+    @view.close
+  end
+
+  def test_url_do_javascript
+    javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
+    result = @view.do_javascript(javascript)
+    expected = Repla::Test::Helper.run_javascript(javascript)
+    assert_equal(expected.to_i, result.to_i)
+  end
+end
+
+class TestViewDoJavaScript < Test::Unit::TestCase
+  def setup
     @view = Repla::Window.new
     @view.load_file(Repla::Test::INDEX_HTML_FILE)
   end

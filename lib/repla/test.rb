@@ -16,6 +16,8 @@ module Repla
     HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                        'HelloWorld.replabundle')
     HELLOWORLD_PLUGIN_NAME = 'HelloWorld'.freeze
+    TEST_SERVER_PLUGIN_NAME = 'TestServer'.freeze
+    TEST_SERVER_URL = 'http://127.0.0.1:5000'.freeze
     PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.replabundle')
     PRINT_PLUGIN_NAME = 'Print'.freeze
     TESTLOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,

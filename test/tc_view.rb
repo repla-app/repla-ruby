@@ -28,14 +28,14 @@ class TestViewAttributes < Test::Unit::TestCase
   end
 end
 
-class TestViewDoJavaScript < Test::Unit::TestCase
+class TestURLViewDoJavaScript < Test::Unit::TestCase
   def setup
-    Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME)
+    Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_FILE)
     Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME)
     window_id = Repla.window_id_for_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME)
     assert(window_id)
     @view = Repla::Window.new(window_id)
-    @view.load_url(TEST_SERVER_URL)
+    @view.load_url(Repla::Test::TEST_SERVER_URL)
   end
 
   def teardown

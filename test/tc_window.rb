@@ -4,6 +4,7 @@ require 'test/unit'
 
 require_relative 'lib/test_setup'
 require Repla::Test::HELPER_FILE
+require Repla::Test::VIEW_HELPER_FILE
 require_relative 'lib/test_javascript_constants'
 
 class TestWindowAttributes < Test::Unit::TestCase
@@ -31,20 +32,17 @@ class TestWindowClose < Test::Unit::TestCase
 end
 
 class TestWindowDoJavaScript < Test::Unit::TestCase
-  def setup
-    @window = Repla::Window.new
-    @window.load_file(Repla::Test::INDEX_HTML_FILE)
-  end
-
-  def teardown
-    @window.close
-  end
-
   def test_do_javascript
-    javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
-    result = @window.do_javascript(javascript)
-    expected = Repla::Test::Helper.run_javascript(javascript)
-    assert_equal(expected.to_i, result.to_i)
+    windows = Repla::Test::ViewHelper.make_windows(
+      Repla::Test::INDEX_HTML_FILENAME
+    )
+    windows.each do |window|
+      javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
+      result = window.do_javascript(javascript)
+      expected = Repla::Test::Helper.run_javascript(javascript)
+      assert_equal(expected.to_i, result.to_i)
+      window.close
+    end
   end
 end
 

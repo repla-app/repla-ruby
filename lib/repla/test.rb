@@ -8,9 +8,24 @@ module Repla
     TEST_DIRECTORY = File.join(File.dirname(__FILE__), 'test')
     LIB_DIRECTORY = File.join(TEST_DIRECTORY, 'lib')
     HELPER_FILE = File.join(LIB_DIRECTORY, 'helper')
+    VIEW_HELPER_FILE = File.join(LIB_DIRECTORY, 'view_helper')
 
     # Test Assets
 
+    # HTML
+    TEST_HTML_DIRECTORY = File.join(TEST_DIRECTORY, 'html')
+    INDEX_HTML_FILENAME = 'index.html'.freeze
+    INDEXJQUERY_HTML_FILENAME = 'indexjquery.html'.freeze
+    INDEX_HTML_FILE = File.join(TEST_HTML_DIRECTORY, INDEX_HTML_FILENAME)
+    INDEXJQUERY_HTML_FILE = File.join(TEST_HTML_DIRECTORY,
+                                      INDEXJQUERY_HTML_FILENAME)
+    INDEX_HTML_TITLE = 'Index'.freeze
+    INDEXJQUERY_HTML_TITLE = 'Index JQuery'.freeze
+
+    # JavaScript
+    TEST_ASSETS_JAVASCRIPT_DIRECTORY = File.join(TEST_DIRECTORY, 'js')
+    TITLE_JAVASCRIPT_FILE = File.join(TEST_ASSETS_JAVASCRIPT_DIRECTORY,
+                                      'title.js')
     # Plugins
     TEST_PLUGIN_DIRECTORY = File.join(TEST_DIRECTORY, 'bundles')
     HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
@@ -19,9 +34,10 @@ module Repla
     TEST_SERVER_PLUGIN_NAME = 'TestServer'.freeze
     TEST_SERVER_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                         'TestServer.replabundle')
-    TEST_SERVER_INDEX_HTML_URL = 'http://127.0.0.1:5000'.freeze
-    TEST_SERVER_INDEXJQUERY_HTML_URL = 'http://127.0.0.1:5000/'\
-      'indexjquery'.freeze
+    TEST_SERVER_INDEX_HTML_URL = 'http://127.0.0.1:5000/' +
+                                 INDEX_HTML_FILENAME.freeze
+    TEST_SERVER_INDEXJQUERY_HTML_URL = 'http://127.0.0.1:5000/' +
+                                       INDEXJQUERY_HTML_FILENAME.freeze
     PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.replabundle')
     PRINT_PLUGIN_NAME = 'Print'.freeze
     TESTLOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
@@ -30,18 +46,6 @@ module Repla
     INVALID_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                     'Invalid.replabundle')
     INVALID_PLUGIN_NAME = 'Invalid'.freeze
-
-    # HTML
-    TEST_HTML_DIRECTORY = File.join(TEST_DIRECTORY, 'html')
-    INDEX_HTML_FILE = File.join(TEST_HTML_DIRECTORY, 'index.html')
-    INDEXJQUERY_HTML_FILE = File.join(TEST_HTML_DIRECTORY, 'indexjquery.html')
-    INDEX_HTML_TITLE = 'Index'.freeze
-    INDEXJQUERY_HTML_TITLE = 'Index JQuery'.freeze
-
-    # JavaScript
-    TEST_ASSETS_JAVASCRIPT_DIRECTORY = File.join(TEST_DIRECTORY, 'js')
-    TITLE_JAVASCRIPT_FILE = File.join(TEST_ASSETS_JAVASCRIPT_DIRECTORY,
-                                      'title.js')
 
     # Local Asssets
 

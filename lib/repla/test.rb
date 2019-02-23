@@ -1,4 +1,5 @@
 module Repla
+  # Test
   module Test
     # General
     TEST_PAUSE_TIME = 2.00
@@ -11,14 +12,20 @@ module Repla
     VIEW_HELPER_FILE = File.join(LIB_DIRECTORY, 'view_helper')
 
     # Test Assets
+    def self.html_file(filename)
+      File.join(TEST_HTML_DIRECTORY, filename)
+    end
+
+    def self.html_server_url(filename)
+      'http://127.0.0.1:5000/' + filename
+    end
 
     # HTML
     TEST_HTML_DIRECTORY = File.join(TEST_DIRECTORY, 'html')
     INDEX_HTML_FILENAME = 'index.html'.freeze
     INDEXJQUERY_HTML_FILENAME = 'indexjquery.html'.freeze
-    INDEX_HTML_FILE = File.join(TEST_HTML_DIRECTORY, INDEX_HTML_FILENAME)
-    INDEXJQUERY_HTML_FILE = File.join(TEST_HTML_DIRECTORY,
-                                      INDEXJQUERY_HTML_FILENAME)
+    INDEX_HTML_FILE = html_file(INDEX_HTML_FILENAME)
+    INDEXJQUERY_HTML_FILE = html_file(INDEXJQUERY_HTML_FILENAME)
     INDEX_HTML_TITLE = 'Index'.freeze
     INDEXJQUERY_HTML_TITLE = 'Index JQuery'.freeze
 
@@ -34,10 +41,10 @@ module Repla
     TEST_SERVER_PLUGIN_NAME = 'TestServer'.freeze
     TEST_SERVER_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                         'TestServer.replabundle')
-    TEST_SERVER_INDEX_HTML_URL = 'http://127.0.0.1:5000/' +
-                                 INDEX_HTML_FILENAME.freeze
-    TEST_SERVER_INDEXJQUERY_HTML_URL = 'http://127.0.0.1:5000/' +
-                                       INDEXJQUERY_HTML_FILENAME.freeze
+    TEST_SERVER_INDEX_HTML_URL = html_server_url(INDEX_HTML_FILENAME)
+    TEST_SERVER_INDEXJQUERY_HTML_URL = html_server_url(
+      INDEXJQUERY_HTML_FILENAME
+    )
     PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.replabundle')
     PRINT_PLUGIN_NAME = 'Print'.freeze
     TESTLOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,

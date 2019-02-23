@@ -32,13 +32,13 @@ end
 class TestViewDoJavaScript < Test::Unit::TestCase
   def test_do_javascript
     views = Repla::Test::ViewHelper.make_views(Repla::Test::INDEX_HTML_FILENAME)
-    views.each { |view|
+    views.each do |view|
       javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
       result = view.do_javascript(javascript)
       expected = Repla::Test::Helper.run_javascript(javascript)
       assert_equal(expected.to_i, result.to_i)
       view.close
-    }
+    end
   end
 end
 

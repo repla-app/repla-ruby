@@ -12,14 +12,14 @@ module Repla
 
       def self.make_file_view(filename)
         file = Repla::Test.html_file(filename)
-        view = Repla::Window.new
+        view = Repla::View.new
         view.load_file(file)
         view
       end
 
       def self.make_url_view(filename)
         url = Repla::Test.html_server_url(filename)
-        view = Repla::Window.new
+        view = Repla::View.new
         view.load_url(url)
         view
       end

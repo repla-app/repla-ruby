@@ -4,6 +4,7 @@ require 'test/unit'
 
 require_relative 'lib/test_setup'
 require Repla::Test::HELPER_FILE
+require Repla::Test::VIEW_HELPER_FILE
 
 class TestViewAttributes < Test::Unit::TestCase
   def test_view_id
@@ -28,45 +29,16 @@ class TestViewAttributes < Test::Unit::TestCase
   end
 end
 
-class TestURLViewDoJavaScript < Test::Unit::TestCase
-  def setup
-    Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_FILE)
-    Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME,
-                     Repla::Test::TEST_HTML_DIRECTORY)
-    window_id = Repla.window_id_for_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME)
-    assert(window_id)
-    @view = Repla::Window.new(window_id)
-    @view.load_url(Repla::Test::TEST_SERVER_INDEX_HTML_URL)
-  end
-
-  def teardown
-    @view.close
-  end
-
-  def test_url_do_javascript
-    javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
-    result = @view.do_javascript(javascript)
-    expected = Repla::Test::Helper.run_javascript(javascript)
-    assert_equal(expected.to_i, result.to_i)
-  end
-end
-
 class TestViewDoJavaScript < Test::Unit::TestCase
-  def setup
-    @view = Repla::Window.new
-    @view.load_file(Repla::Test::INDEX_HTML_FILE)
-  end
-
-  def teardown
-    @view.close
-  end
-
   def test_do_javascript
-    javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
-    result = @view.do_javascript(javascript)
-    expected = Repla::Test::Helper.run_javascript(javascript)
-    assert_equal(expected.to_i, result.to_i,
-                 'The result should match expected result.')
+    views = Repla::Test::ViewHelper.make_views(Repla::Test::INDEX_HTML_FILENAME)
+    views.each { |view|
+      javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
+      result = view.do_javascript(javascript)
+      expected = Repla::Test::Helper.run_javascript(javascript)
+      assert_equal(expected.to_i, result.to_i)
+      view.close
+    }
   end
 end
 

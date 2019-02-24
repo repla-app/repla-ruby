@@ -1,10 +1,10 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require "minitest/autorun"
 
 require_relative 'lib/test_setup'
 
-class TestReplaProperties < Test::Unit::TestCase
+class TestReplaProperties < Minitest::Test
   def test_window_id
     Repla.load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
 
@@ -30,7 +30,7 @@ class TestReplaProperties < Test::Unit::TestCase
   end
 end
 
-class TestReplaRunPlugin < Test::Unit::TestCase
+class TestReplaRunPlugin < Minitest::Test
   def teardown
     @window.close
   end

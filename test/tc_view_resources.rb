@@ -1,6 +1,6 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require "minitest/autorun"
 
 require_relative 'lib/test_setup'
 require Repla::Test::HELPER_FILE
@@ -8,7 +8,7 @@ require_relative 'lib/test_javascript_constants'
 
 require Repla::Test::HELPER_FILE
 
-class TestViewRootAccessDirectory < Test::Unit::TestCase
+class TestViewRootAccessDirectory < Minitest::Test
   def test_root_access_directory
     view = Repla::View.new
     view.root_access_directory_path = TEST_ROOT_ACCESS_PATH
@@ -21,7 +21,7 @@ class TestViewRootAccessDirectory < Test::Unit::TestCase
   end
 end
 
-class TestViewTitle < Test::Unit::TestCase
+class TestViewTitle < Minitest::Test
   def test_no_title
     view = Repla::View.new
     view.root_access_directory_path = TEST_ROOT_ACCESS_PATH

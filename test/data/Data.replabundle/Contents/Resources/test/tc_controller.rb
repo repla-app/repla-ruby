@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
-require 'test/unit'
+require "minitest/autorun"
 
 require_relative 'lib/test_setup'
 
 require_relative '../lib/controller'
 
-class TestController < Test::Unit::TestCase
+class TestController < Minitest::Test
   def test_controller
     controller = Repla::Data::Controller.new
     controller.add_key_value(TEST_KEY, TEST_VALUE)

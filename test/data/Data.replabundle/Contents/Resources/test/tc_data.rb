@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'test/unit'
+require "minitest/autorun"
 
 require_relative 'lib/test_setup.rb'
 
-class TestClass < Test::Unit::TestCase
+class TestClass < Minitest::Test
   def test_run_plugin_in_directory_with_arguments
     arguments = '1 2 3'
     path = File.expand_path(TEST_DATA_DIRECTORY)

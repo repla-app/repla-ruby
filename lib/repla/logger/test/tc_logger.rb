@@ -1,6 +1,6 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require "minitest/autorun"
 
 require_relative 'lib/test_setup'
 
@@ -8,17 +8,17 @@ require_relative 'lib/test_view_helper'
 require_relative '../../logger'
 
 # Test constants
-class TestConstants < Test::Unit::TestCase
+class TestConstants < Minitest::Test
   def test_constants
     message_prefix = Repla::Logger::MESSAGE_PREFIX
-    assert_not_nil(message_prefix)
+    refute_nil(message_prefix)
     error_prefix = Repla::Logger::ERROR_PREFIX
-    assert_not_nil(error_prefix)
+    refute_nil(error_prefix)
   end
 end
 
 # Test unitialized logger
-class TestUnintializedLogger < Test::Unit::TestCase
+class TestUnintializedLogger < Minitest::Test
   def teardown
     Repla::Test::Helper.quit
     assert(!Repla::Test::Helper.app_running?,
@@ -47,7 +47,7 @@ class TestUnintializedLogger < Test::Unit::TestCase
 end
 
 # Test logger
-class TestLogger < Test::Unit::TestCase
+class TestLogger < Minitest::Test
   def setup
     @logger = Repla::Logger.new
     @logger.show

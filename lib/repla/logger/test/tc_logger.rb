@@ -36,8 +36,8 @@ class TestUnintializedLogger < Test::Unit::TestCase
     # Make sure the log messages before accessing the logger's `view_id` and
     # `window_id` because those run the logger. This test should test logging a
     # message and running the logger itself simultaneously. This is why the
-    # `TestViewHelper` is intialized after logging the message.
-    test_view_helper = TestViewHelper.new(logger.window_id, logger.view_id)
+    # `LogHelper` is intialized after logging the message.
+    test_view_helper = LogHelper.new(logger.window_id, logger.view_id)
 
     test_message = test_view_helper.last_log_message
     assert_equal(message, test_message, 'The messages should match')
@@ -51,7 +51,7 @@ class TestLogger < Test::Unit::TestCase
   def setup
     @logger = Repla::Logger.new
     @logger.show
-    @test_view_helper = TestViewHelper.new(@logger.window_id, @logger.view_id)
+    @test_view_helper = LogHelper.new(@logger.window_id, @logger.view_id)
   end
 
   def teardown

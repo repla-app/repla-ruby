@@ -1,7 +1,7 @@
 require_relative 'test_setup'
 
 # Helper for testing view class
-class TestViewHelper
+class LogHelper
   def initialize(window_id, view_id)
     @view = Repla::View.new(window_id, view_id)
     javascript = File.read(TEST_JAVASCRIPT_FILE)

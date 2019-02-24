@@ -41,8 +41,8 @@ module Repla
     TEST_SERVER_PLUGIN_NAME = 'TestServer'.freeze
     TEST_SERVER_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                         'TestServer.replabundle')
-    TEST_SERVER_INDEX_HTML_URL = html_server_url(INDEX_HTML_FILENAME)
-    TEST_SERVER_INDEXJQUERY_HTML_URL = html_server_url(
+    INDEX_HTML_URL = html_server_url(INDEX_HTML_FILENAME)
+    INDEXJQUERY_HTML_URL = html_server_url(
       INDEXJQUERY_HTML_FILENAME
     )
     PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.replabundle')

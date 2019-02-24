@@ -33,9 +33,8 @@ end
 
 class TestWindowDoJavaScript < Test::Unit::TestCase
   def setup
-    html = File.read(WebConsole::Tests::INDEX_HTML_FILE)
-    @window = WebConsole::Window.new
-    @window.load_html(html)
+    @window = Repla::Window.new
+    @window.load_file(Repla::Test::INDEX_HTML_FILE)
   end
 
   def teardown
@@ -43,9 +42,9 @@ class TestWindowDoJavaScript < Test::Unit::TestCase
   end
 
   def test_do_javascript
-    javascript = File.read(WebConsole::Tests::NODOM_JAVASCRIPT_FILE)
+    javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
-    expected = WebConsole::Tests::Helper.run_javascript(javascript)
+    expected = Repla::Test::Helper.run_javascript(javascript)
     assert_equal(expected.to_i, result.to_i)
   end
 end

@@ -32,7 +32,7 @@ module Repla
         view
       end
 
-      def self.make_url_view(filename, _initializer = View.new)
+      def self.make_url_view(filename, view_class = View.new)
         Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_FILE)
         window_id = Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME,
                                      Repla::Test::TEST_HTML_DIRECTORY)

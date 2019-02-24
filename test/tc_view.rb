@@ -30,15 +30,20 @@ class TestViewAttributes < Test::Unit::TestCase
 end
 
 class TestViewDoJavaScript < Test::Unit::TestCase
+  def setup
+    @view = Repla::View.new
+    @view.load_file(Repla::Test::INDEX_HTML_FILE)
+  end
+
+  def teardown
+    @view.close
+  end
+
   def test_do_javascript
-    views = Repla::Test::ViewHelper.make_views(Repla::Test::INDEX_HTML_FILENAME)
-    views.each do |view|
-      javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
-      result = view.do_javascript(javascript)
-      expected = Repla::Test::Helper.run_javascript(javascript)
-      assert_equal(expected.to_i, result.to_i)
-      view.close
-    end
+    javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
+    result = @view.do_javascript(javascript)
+    expected = Repla::Test::Helper.run_javascript(javascript)
+    assert_equal(expected.to_i, result.to_i)
   end
 end
 

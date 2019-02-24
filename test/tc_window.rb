@@ -48,7 +48,9 @@ end
 
 class TestWindowLoadHTML < Test::Unit::TestCase
   def setup
-    window_id = Repla.create_window
+    Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME,
+                                 Repla::Test::TEST_HTML_DIRECTORY)
     @window = Repla::Window.new(window_id)
     assert(window_id == @window.window_id)
   end
@@ -57,11 +59,16 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     @window.close
   end
 
-  def test_load_file
-    @window.load_file(Repla::Test::INDEX_HTML_FILE)
+  def test_load_file_and_url
     javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
+
+    @window.load_file(Repla::Test::INDEX_HTML_FILE)
     result = @window.do_javascript(javascript)
     assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
+
+    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL)
+    result = @window.do_javascript(javascript)
+    assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
   end
 
   def test_load_file_twice

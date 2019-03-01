@@ -29,6 +29,14 @@ class TestViewAttributes < Minitest::Test
   end
 end
 
+class TestViewBadURL < Minitest::Test
+  def test_no_server
+    view = Repla::View.new
+    view.load_url(Repla::Test::NO_SERVER_URL)
+    view.close
+  end
+end
+
 class TestViewDoJavaScript < Minitest::Test
   def setup
     @view = Repla::View.new

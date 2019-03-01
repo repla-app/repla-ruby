@@ -45,6 +45,7 @@ module Repla
     INDEXJQUERY_HTML_URL = html_server_url(
       INDEXJQUERY_HTML_FILENAME
     )
+    NO_SERVER_URL = 'NoServer'
     PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.replabundle')
     PRINT_PLUGIN_NAME = 'Print'.freeze
     TESTLOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,

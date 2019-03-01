@@ -31,6 +31,14 @@ class TestWindowClose < Minitest::Test
   end
 end
 
+class TestWindowBadURL < Minitest::Test
+  def test_no_server
+    window = Repla::Window.new
+    window.load_url(Repla::Test::NO_SERVER_URL)
+    window.close
+  end
+end
+
 class TestWindowDoJavaScript < Minitest::Test
   def setup
     @window = Repla::Window.new

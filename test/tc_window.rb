@@ -1,12 +1,13 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
 require Repla::Test::HELPER_FILE
+require Repla::Test::VIEW_HELPER_FILE
 require_relative 'lib/test_javascript_constants'
 
-class TestWindowAttributes < Test::Unit::TestCase
+class TestWindowAttributes < Minitest::Test
   def test_window_id
     Repla.load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
     window_id = Repla.run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
@@ -19,7 +20,7 @@ class TestWindowAttributes < Test::Unit::TestCase
   end
 end
 
-class TestWindowClose < Test::Unit::TestCase
+class TestWindowClose < Minitest::Test
   def test_close
     Repla.load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
     window_id = Repla.run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
@@ -30,7 +31,7 @@ class TestWindowClose < Test::Unit::TestCase
   end
 end
 
-class TestWindowDoJavaScript < Test::Unit::TestCase
+class TestWindowDoJavaScript < Minitest::Test
   def setup
     @window = Repla::Window.new
     @window.load_file(Repla::Test::INDEX_HTML_FILE)
@@ -48,9 +49,11 @@ class TestWindowDoJavaScript < Test::Unit::TestCase
   end
 end
 
-class TestWindowLoadHTML < Test::Unit::TestCase
+class TestWindowLoadHTML < Minitest::Test
   def setup
-    window_id = Repla.create_window
+    Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME,
+                                 Repla::Test::TEST_HTML_DIRECTORY)
     @window = Repla::Window.new(window_id)
     assert(window_id == @window.window_id)
   end
@@ -59,11 +62,16 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     @window.close
   end
 
-  def test_load_file
-    @window.load_file(Repla::Test::INDEX_HTML_FILE)
+  def test_load_file_and_url
     javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
+
+    @window.load_file(Repla::Test::INDEX_HTML_FILE)
     result = @window.do_javascript(javascript)
     assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
+
+    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL)
+    result = @window.do_javascript(javascript)
+    assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
   end
 
   def test_load_file_twice
@@ -84,7 +92,7 @@ class TestWindowLoadHTML < Test::Unit::TestCase
   end
 end
 
-class TestWindowLoadHTMLWithRootAccessDirectory < Test::Unit::TestCase
+class TestWindowLoadHTMLWithRootAccessDirectory < Minitest::Test
   def setup
     @window = Repla::Window.new
     @window.root_access_directory_path = Repla::Test::TEST_HTML_DIRECTORY
@@ -106,7 +114,7 @@ class TestWindowLoadHTMLWithRootAccessDirectory < Test::Unit::TestCase
   end
 end
 
-class TestReplaPluginReadFromStandardInput < Test::Unit::TestCase
+class TestReplaPluginReadFromStandardInput < Minitest::Test
   def setup
     Repla.load_plugin(Repla::Test::PRINT_PLUGIN_FILE)
     Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
@@ -126,14 +134,14 @@ class TestReplaPluginReadFromStandardInput < Test::Unit::TestCase
 
     javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
-    assert_not_nil(result)
+    refute_nil(result)
     result.strip!
 
     assert_equal(test_text, result, 'The test text should equal the result.')
   end
 end
 
-class TestTwoWindows < Test::Unit::TestCase
+class TestTwoWindows < Minitest::Test
   def setup
     Repla.load_plugin(Repla::Test::PRINT_PLUGIN_FILE)
 
@@ -145,7 +153,7 @@ class TestTwoWindows < Test::Unit::TestCase
     window_id_two = Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
     @window_two = Repla::Window.new(window_id_two)
 
-    assert_not_equal(window_id_one, window_id_two)
+    refute_equal(window_id_one, window_id_two)
   end
 
   def teardown
@@ -176,21 +184,21 @@ class TestTwoWindows < Test::Unit::TestCase
     assert_equal(window_id_after,
                  @window_one.window_id,
                  'The first window should be in front.')
-    assert_not_equal(window_id_before,
-                     window_id_after,
-                     'The front window should have changed.')
+    refute_equal(window_id_before,
+                 window_id_after,
+                 'The front window should have changed.')
 
     # Read the window contents
     javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
 
     # Window Manager One
     result_one = @window_one.do_javascript(javascript)
-    assert_not_nil(result_one)
+    refute_nil(result_one)
     result_one.strip!
 
     # Window Manager Two
     result_two = @window_two.do_javascript(javascript)
-    assert_not_nil(result_two)
+    refute_nil(result_two)
     result_two.strip!
 
     assert_equal(test_text_one, result_one)

@@ -1,13 +1,13 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
 
 require_relative '../lib/tester'
 
 # Test tester
-class TestTester < Test::Unit::TestCase
+class TestTester < Minitest::Test
   def test_shell_command
     result = Repla::Dependencies::Tester.check('grep', :shell_command)
     assert(result, 'The dependency check should have succeeded.')

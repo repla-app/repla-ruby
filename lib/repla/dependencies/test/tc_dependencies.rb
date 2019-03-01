@@ -1,6 +1,6 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require 'minitest/autorun'
 
 require_relative '../../dependencies'
 
@@ -26,7 +26,7 @@ module Repla
 end
 
 # Test controller
-class TestController < Test::Unit::TestCase
+class TestController < Minitest::Test
   def setup
     @checker = Repla::Dependencies::Checker.new
   end

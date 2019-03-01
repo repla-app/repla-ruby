@@ -1,13 +1,13 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require 'minitest/autorun'
 
 require_relative '../../../../../../repla'
 require_relative 'constants'
 require_relative '../../../../../lib/escape'
 
 # Test environment
-class TestEnviroment < Test::Unit::TestCase
+class TestEnviroment < Minitest::Test
   using Escape
   def test_plugin_name_key
     assert(ENV.key?(Repla::PLUGIN_NAME_KEY))

@@ -1,11 +1,11 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require 'minitest/autorun'
 
 require_relative '../lib/repla/lib/escape.rb'
 
 # Test escape
-class TestEscape < Test::Unit::TestCase
+class TestEscape < Minitest::Test
   using Escape
   def test_shell_escape_path
     string = '/../../applescript/exists.scpt'

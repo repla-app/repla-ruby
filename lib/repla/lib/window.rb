@@ -34,6 +34,13 @@ module Repla
       run_script(script, arguments)
     end
 
+    LOAD_URL_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'load_url.scpt')
+    def load_url(file)
+      arguments = [file]
+      script = LOAD_URL_SCRIPT
+      run_script(script, arguments)
+    end
+
     DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'do_javascript.scpt')
     def do_javascript(javascript)
       run_script(DOJAVASCRIPT_SCRIPT, [javascript])

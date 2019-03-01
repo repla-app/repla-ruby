@@ -1,6 +1,6 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
 
@@ -9,7 +9,7 @@ require_relative 'lib/test_javascript_helper'
 require_relative '../lib/controller'
 
 # Test controller
-class TestController < Test::Unit::TestCase
+class TestController < Minitest::Test
   def setup
     @controller = Repla::Dependencies::Controller.new
   end

@@ -1,6 +1,6 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
 
@@ -9,7 +9,7 @@ require Repla::Test::HELPER_FILE
 require_relative '../../repl'
 
 # Test REPL
-class TestREPL < Test::Unit::TestCase
+class TestREPL < Minitest::Test
   def test_repl
     wrapper = Repla::REPL::Wrapper.new('irb')
 
@@ -26,14 +26,14 @@ class TestREPL < Test::Unit::TestCase
     # Test Wrapper Input
     javascript = File.read(Repla::Test::FIRSTCODE_JAVASCRIPT_FILE)
     result = window.do_javascript(javascript)
-    assert_not_nil(result)
+    refute_nil(result)
     result.strip!
     assert_equal(test_text, result, 'The test text should equal the result.')
 
     # Test Wrapper Output
     javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
     result = window.do_javascript(javascript)
-    assert_not_nil(result)
+    refute_nil(result)
     result.strip!
     result.sub!('=&gt; ', '') # Remove the prompt that irb adds
     assert_equal(result, test_result)

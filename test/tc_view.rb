@@ -1,11 +1,12 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
 
-require 'test/unit'
+require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
 require Repla::Test::HELPER_FILE
+require Repla::Test::VIEW_HELPER_FILE
 
-class TestViewAttributes < Test::Unit::TestCase
+class TestViewAttributes < Minitest::Test
   def test_view_id
     Repla.load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
     window_id = Repla.run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
@@ -28,9 +29,9 @@ class TestViewAttributes < Test::Unit::TestCase
   end
 end
 
-class TestViewDoJavaScript < Test::Unit::TestCase
+class TestViewDoJavaScript < Minitest::Test
   def setup
-    @view = Repla::Window.new
+    @view = Repla::View.new
     @view.load_file(Repla::Test::INDEX_HTML_FILE)
   end
 
@@ -42,12 +43,11 @@ class TestViewDoJavaScript < Test::Unit::TestCase
     javascript = File.read(Repla::Test::NODOM_JAVASCRIPT_FILE)
     result = @view.do_javascript(javascript)
     expected = Repla::Test::Helper.run_javascript(javascript)
-    assert_equal(expected.to_i, result.to_i,
-                 'The result should match expected result.')
+    assert_equal(expected.to_i, result.to_i)
   end
 end
 
-class TestTwoViews < Test::Unit::TestCase
+class TestTwoViews < Minitest::Test
   def setup
     window = Repla::Window.new
     @view_one = Repla::View.new(window.window_id, window.split_id)
@@ -71,7 +71,7 @@ class TestTwoViews < Test::Unit::TestCase
   end
 end
 
-class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
+class TestTwoViewsReadFromStandardInput < Minitest::Test
   def setup
     Repla.load_plugin(Repla::Test::PRINT_PLUGIN_FILE)
     window_id = Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
@@ -102,13 +102,13 @@ class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
 
     javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
     result = @view_one.do_javascript(javascript)
-    assert_not_nil(result)
+    refute_nil(result)
     result.strip!
     assert_equal(test_text_one, result,
                  'The test text should equal the result.')
 
     result = @view_two.do_javascript(javascript)
-    assert_not_nil(result)
+    refute_nil(result)
     result.strip!
     assert_equal(test_text_two, result,
                  'The test text should equal the result.')

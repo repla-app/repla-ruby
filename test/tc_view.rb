@@ -49,7 +49,9 @@ end
 
 class TestTwoViews < Minitest::Test
   def test_load_file
-    windows = Repla::Test::ViewHelper.make_windows(Repla::Test::INDEX_HTML_FILENAME)
+    windows = Repla::Test::ViewHelper.make_windows(
+      Repla::Test::INDEX_HTML_FILENAME
+    )
     windows.each_with_index do |window, index|
       view_one = Repla::View.new(window.window_id)
       view_two = Repla::View.new(window.window_id, window.split_id_last)

@@ -1,5 +1,5 @@
 require_relative '../../test'
-require "minitest/autorun"
+require 'minitest/autorun'
 
 module Repla
   module Test

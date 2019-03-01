@@ -13,6 +13,5 @@ namespace :logger do
   end
 
   task clean_up: [:test_logger] do
-    Repla::Test::Helper.quit
   end
 end

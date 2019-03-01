@@ -20,6 +20,5 @@ namespace :data do
   end
 
   task clean_up: [:test_data] do
-    Repla::Test::Helper.quit
   end
 end

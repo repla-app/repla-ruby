@@ -28,6 +28,5 @@ namespace :repl do
   end
 
   task clean_up: [:test_repl] do
-    Repla::Test::Helper.quit
   end
 end

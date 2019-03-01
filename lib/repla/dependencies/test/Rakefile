@@ -26,6 +26,5 @@ namespace :dependencies do
   end
 
   task clean_up: [:test_dependencies] do
-    Repla::Test::Helper.quit
   end
 end

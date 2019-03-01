@@ -29,6 +29,14 @@ class TestViewAttributes < Minitest::Test
   end
 end
 
+class TestViewBadURL < Minitest::Test
+  def test_no_server
+    view = Repla::View.new
+    view.load_url(Repla::Test::NO_SERVER_URL)
+    view.close
+  end
+end
+
 class TestViewDoJavaScript < Minitest::Test
   def setup
     @view = Repla::View.new
@@ -48,26 +56,27 @@ class TestViewDoJavaScript < Minitest::Test
 end
 
 class TestTwoViews < Minitest::Test
-  def setup
-    window = Repla::Window.new
-    @view_one = Repla::View.new(window.window_id, window.split_id)
-    @view_two = Repla::View.new(window.window_id, window.split_id_last)
-  end
-
-  def teardown
-    @view_one.close
-  end
-
   def test_load_file
-    @view_one.load_file(Repla::Test::INDEX_HTML_FILE)
-    @view_two.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
+    windows = Repla::Test::ViewHelper.make_windows(
+      Repla::Test::INDEX_HTML_FILENAME
+    )
+    windows.each_with_index do |window, index|
+      view_one = Repla::View.new(window.window_id)
+      view_two = Repla::View.new(window.window_id, window.split_id_last)
+      if index == 0
+        view_two.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
+      else
+        view_two.load_url(Repla::Test::INDEXJQUERY_HTML_URL)
+      end
 
-    javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
-    result = @view_one.do_javascript(javascript)
-    assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
+      javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
+      result = view_one.do_javascript(javascript)
+      assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
 
-    result = @view_two.do_javascript(javascript)
-    assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
+      result = view_two.do_javascript(javascript)
+      assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
+      view_one.close
+    end
   end
 end
 

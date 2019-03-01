@@ -4,7 +4,7 @@ require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
 
-require_relative 'lib/test_view_helper'
+require_relative 'lib/test_log_helper'
 require_relative '../../logger'
 
 # Test constants

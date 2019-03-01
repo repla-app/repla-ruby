@@ -56,8 +56,8 @@ class TestLogger < Minitest::Test
   end
 
   def teardown
-    Repla::Test::Helper.quit
-    assert(!Repla::Test::Helper.app_running?)
+    window = Repla::Window.new(@logger.window_id)
+    window.close
   end
 
   def test_logger

@@ -3,8 +3,6 @@
 require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
-
-require_relative 'lib/test_log_helper'
 require_relative '../../logger'
 
 # Test constants
@@ -38,8 +36,8 @@ class TestUnintializedLogger < Minitest::Test
     # `window_id` because those run the logger. This test should test logging a
     # message and running the logger itself simultaneously. This is why the
     # `LogHelper` is intialized after logging the message.
-    test_log_helper = LogHelper.new(@logger.window_id, @logger.view_id)
-
+    test_log_helper = Repla::Test::LogHelper.new(@logger.window_id,
+                                                 @logger.view_id)
     test_message = test_log_helper.last_log_message
     assert_equal(message, test_message, 'The messages should match')
     test_class = test_log_helper.last_log_class
@@ -52,7 +50,8 @@ class TestLogger < Minitest::Test
   def setup
     @logger = Repla::Logger.new
     @logger.show
-    @test_log_helper = LogHelper.new(@logger.window_id, @logger.view_id)
+    @test_log_helper = Repla::Test::LogHelper.new(@logger.window_id,
+                                                  @logger.view_id)
   end
 
   def teardown

@@ -167,4 +167,20 @@ Line 3
                    'The number of log messages should match')
     end
   end
+
+  def test_multi_threading
+    message_called = false
+    thread.new do
+      @logger.info('Info line')
+      message_called = true
+    end
+
+    error_called = false
+    thread.new do
+      @logger.error('Error line')
+      error_called = true
+    end
+
+    Repla::Test.block_until { error_called && message_called }
+  end
 end

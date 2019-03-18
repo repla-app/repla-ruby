@@ -22,6 +22,19 @@ module Repla
       'http://127.0.0.1:5000/' + filename
     end
 
+    def block_until_with_timeout(timeout)
+      cycles = [timeout / POLLING_INTERVAL, 1].max
+      count = 0
+      until yield || count >= cycles
+        sleep(POLLING_INTERVAL)
+        count += 1
+      end
+    end
+
+    def block_until(&block)
+      block_until_with_timeout(TEST_PAUSE_TIME, &block)
+    end
+
     # HTML
     TEST_HTML_DIRECTORY = File.join(TEST_DIRECTORY, 'html')
     INDEX_HTML_FILENAME = 'index.html'.freeze

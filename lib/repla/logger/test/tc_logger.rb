@@ -164,12 +164,16 @@ Line 1
 Line 2
 Line 3
 '
+    lines = 3
     @logger.info(message)
-    sleep Repla::Test::TEST_PAUSE_TIME * 2 # Pause for output to be processed
-    result_count = @test_log_helper.number_of_log_messages
-    assert_equal(result_count, 3, 'The number of log messages should match')
+    result_count = nil
+    Repla::Test.block_until do
+      result_count = @test_log_helper.number_of_log_messages
+      result_count == lines
+    end
+    assert_equal(result_count, lines)
 
-    (1..3).each do |i|
+    (1..lines).each do |i|
       result = @test_log_helper.log_message_at_index(i - 1)
       test_result = "Line #{i}"
       assert_equal(result,

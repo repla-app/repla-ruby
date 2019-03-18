@@ -137,12 +137,13 @@ class TestReplaPluginReadFromStandardInput < Minitest::Test
   def test_read_from_standard_input
     test_text = 'This is a test string'
     @window.read_from_standard_input(test_text + "\n")
-    # Give read from standard input time to run
-    sleep Repla::Test::TEST_PAUSE_TIME
 
     javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
-    result = @window.do_javascript(javascript)
-    refute_nil(result)
+    result = nil
+    Repla::Test.block_until do
+      result = @window.do_javascript(javascript)
+      !result.nil?
+    end
     result.strip!
 
     assert_equal(test_text, result, 'The test text should equal the result.')

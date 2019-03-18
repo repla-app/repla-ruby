@@ -167,25 +167,46 @@ Line 3
                    'The number of log messages should match')
     end
   end
+end
+
+# Test logger threads
+class TestLoggerThreads < Minitest::Test
+  def setup
+    @logger = Repla::Logger.new
+    @logger.show
+  end
+
+  def teardown
+    window = Repla::Window.new(@logger.window_id)
+    window.close
+  end
 
   def test_multiple_threads
+    error_text = 'Error line'
+    message_text = 'Info line'
     message_called = false
     message_thread = Thread.new do
-      @logger.info('Info line')
+      @logger.info(message_text)
       message_called = true
     end
 
     error_called = false
     error_thread = Thread.new do
-      @logger.error('Error line')
+      @logger.error(error_text)
       error_called = true
     end
 
-    # message_thread.join
-    # error_thread.join
+    message_thread.join
+    error_thread.join
 
-    Repla::Test.block_until { error_called && message_called }
     assert(error_called)
     assert(message_called)
+    @test_log_helper = Repla::Test::LogHelper.new(@logger.window_id,
+                                                  @logger.view_id)
+    Repla::Test.block_until { @test_log_helper.number_of_log_messages >= 2 }
+    result = @test_log_helper.last_log_message
+    result_two = @test_log_helper.log_message_at_index(0)
+    assert(result == message_text || result_two == message_text)
+    assert(result == error_text || result_two == error_text)
   end
 end

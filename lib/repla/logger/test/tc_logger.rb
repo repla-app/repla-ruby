@@ -168,7 +168,7 @@ Line 3
     end
   end
 
-  def test_multi_threading
+  def test_multiple_threads
     message_called = false
     thread.new do
       @logger.info('Info line')

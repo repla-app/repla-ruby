@@ -30,15 +30,18 @@ class TestUnintializedLogger < Minitest::Test
     # Test Message
     message = 'Testing log message'
     @logger.info(message)
-    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
-
-    # Make sure the log messages before accessing the logger's `view_id` and
-    # `window_id` because those run the logger. This test should test logging a
-    # message and running the logger itself simultaneously. This is why the
-    # `LogHelper` is intialized after logging the message.
+    # Make sure the log messages appear before accessing the logger's `view_id`
+    # and `window_id` because those run the logger. This test should test
+    # logging a message and running the logger itself simultaneously. This is
+    # why the `LogHelper` is intialized after logging the message.
     test_log_helper = Repla::Test::LogHelper.new(@logger.window_id,
                                                  @logger.view_id)
-    test_message = test_log_helper.last_log_message
+    test_message = nil
+    Repla::Test.block_until do
+      test_message = test_log_helper.last_log_message
+      test_message == message
+    end
+
     assert_equal(message, test_message, 'The messages should match')
     test_class = test_log_helper.last_log_class
     assert_equal('message', test_class, 'The classes should match')

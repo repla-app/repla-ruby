@@ -3,6 +3,7 @@ module Repla
   module Test
     # General
     TEST_PAUSE_TIME = 2.00
+    POLLING_INTERVAL = 0.5
 
     # Ruby
     REPLA_FILE = File.join(File.dirname(__FILE__), '../repla')
@@ -22,7 +23,7 @@ module Repla
       'http://127.0.0.1:5000/' + filename
     end
 
-    def block_until_with_timeout(timeout)
+    def self.block_until_with_timeout(timeout)
       cycles = [timeout / POLLING_INTERVAL, 1].max
       count = 0
       until yield || count >= cycles
@@ -31,7 +32,7 @@ module Repla
       end
     end
 
-    def block_until(&block)
+    def self.block_until(&block)
       block_until_with_timeout(TEST_PAUSE_TIME, &block)
     end
 

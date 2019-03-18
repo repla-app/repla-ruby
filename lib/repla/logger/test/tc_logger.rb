@@ -170,17 +170,22 @@ Line 3
 
   def test_multiple_threads
     message_called = false
-    thread.new do
+    message_thread = Thread.new do
       @logger.info('Info line')
       message_called = true
     end
 
     error_called = false
-    thread.new do
+    error_thread = Thread.new do
       @logger.error('Error line')
       error_called = true
     end
 
+    # message_thread.join
+    # error_thread.join
+
     Repla::Test.block_until { error_called && message_called }
+    assert(error_called)
+    assert(message_called)
   end
 end

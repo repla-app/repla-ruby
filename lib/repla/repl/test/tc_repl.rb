@@ -17,18 +17,18 @@ class TestREPL < Minitest::Test
     test_result = '2'
 
     wrapper.parse_input(test_text + "\n")
-
-    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
-
     window_id = Repla::Test::Helper.window_id
     window = Repla::Window.new(window_id)
 
-    # Test Wrapper Input
     javascript = File.read(Repla::Test::FIRSTCODE_JAVASCRIPT_FILE)
-    result = window.do_javascript(javascript)
-    refute_nil(result)
+    result = nil
+    Repla::Test.block_until do
+      result = window.do_javascript(javascript)
+      result == test_text
+    end
+    # Test Wrapper Input
     result.strip!
-    assert_equal(test_text, result, 'The test text should equal the result.')
+    assert_equal(test_text, result)
 
     # Test Wrapper Output
     javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)

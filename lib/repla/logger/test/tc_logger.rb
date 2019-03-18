@@ -68,8 +68,11 @@ class TestLogger < Minitest::Test
     # Test Error
     message = 'Testing log error'
     @logger.error(message)
-    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
-    test_message = @test_log_helper.last_log_message
+    test_message = nil
+    Repla::Test.block_until do
+      test_message = @test_log_helper.last_log_message
+      message == test_message
+    end
     assert_equal(message, test_message)
     test_class = @test_log_helper.last_log_class
     assert_equal('error', test_class)
@@ -80,8 +83,11 @@ class TestLogger < Minitest::Test
     # Test Message
     message = 'Testing log message'
     @logger.info(message)
-    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
-    test_message = @test_log_helper.last_log_message
+    test_message = nil
+    Repla::Test.block_until do
+      test_message = @test_log_helper.last_log_message
+      message == test_message
+    end
     assert_equal(message, test_message)
     test_class = @test_log_helper.last_log_class
     assert_equal('message', test_class)
@@ -93,8 +99,11 @@ class TestLogger < Minitest::Test
     # Note the trailing whitespace is trimmed
     message = Repla::Logger::ERROR_PREFIX.rstrip
     @logger.info(message)
-    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
-    test_message = @test_log_helper.last_log_message
+    test_message = nil
+    Repla::Test.block_until do
+      test_message = @test_log_helper.last_log_message
+      message == test_message
+    end
     assert_equal(message, test_message)
     test_class = @test_log_helper.last_log_class
     assert_equal('message', test_class)
@@ -106,8 +115,11 @@ class TestLogger < Minitest::Test
     # Note the trailing whitespace is trimmed
     message = Repla::Logger::MESSAGE_PREFIX.rstrip
     @logger.info(message)
-    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
-    test_message = @test_log_helper.last_log_message
+    test_message = nil
+    Repla::Test.block_until do
+      test_message = @test_log_helper.last_log_message
+      message == test_message
+    end
     assert_equal(message, test_message)
     test_class = @test_log_helper.last_log_class
     assert_equal('message', test_class)
@@ -115,16 +127,11 @@ class TestLogger < Minitest::Test
     test_count += 1
     assert_equal(test_count, result_count)
 
-    # Test Blank Spaces
-    @logger.info("  \t")
-    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
-    test_message = @test_log_helper.last_log_message
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('message', test_class)
-
-    # Test Empty String
+    # Test empty string is ignored
+    # Test blank space is ignored
+    # Note this uses the same `message` from the last test
     @logger.info('')
+    @logger.info("  \t")
     sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
     test_message = @test_log_helper.last_log_message
     assert_equal(message, test_message)

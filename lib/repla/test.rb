@@ -3,6 +3,7 @@ module Repla
   module Test
     # General
     TEST_PAUSE_TIME = 2.00
+    TEST_TIMEOUT_TIME = 4.00
     POLLING_INTERVAL = 0.5
 
     # Ruby
@@ -33,7 +34,7 @@ module Repla
     end
 
     def self.block_until(&block)
-      block_until_with_timeout(TEST_PAUSE_TIME, &block)
+      block_until_with_timeout(TEST_TIMEOUT_TIME, &block)
     end
 
     # HTML

@@ -137,12 +137,13 @@ class TestReplaPluginReadFromStandardInput < Minitest::Test
   def test_read_from_standard_input
     test_text = 'This is a test string'
     @window.read_from_standard_input(test_text + "\n")
-    # Give read from standard input time to run
-    sleep Repla::Test::TEST_PAUSE_TIME
 
     javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
-    result = @window.do_javascript(javascript)
-    refute_nil(result)
+    result = nil
+    Repla::Test.block_until do
+      result = @window.do_javascript(javascript)
+      !result.nil?
+    end
     result.strip!
 
     assert_equal(test_text, result, 'The test text should equal the result.')
@@ -172,14 +173,17 @@ class TestTwoWindows < Minitest::Test
   def test_two_windows
     test_text_one = 'The first test string'
     test_text_two = 'The second test string'
-
     @window_one.read_from_standard_input(test_text_one + "\n")
-    # Give read from standard input time to run
-    sleep Repla::Test::TEST_PAUSE_TIME
-
     @window_two.read_from_standard_input(test_text_two + "\n")
-    # Give read from standard input time to run
-    sleep Repla::Test::TEST_PAUSE_TIME
+
+    javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
+    result_one = nil
+    result_two = nil
+    Repla::Test.block_until do
+      result_one = @window_one.do_javascript(javascript)
+      result_two = @window_two.do_javascript(javascript)
+      !result_one.nil? && !result_two.nil?
+    end
 
     # Swap the two windows to test that the window numbers persist even
     # after the window changes.
@@ -195,20 +199,8 @@ class TestTwoWindows < Minitest::Test
     refute_equal(window_id_before,
                  window_id_after,
                  'The front window should have changed.')
-
-    # Read the window contents
-    javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
-
-    # Window Manager One
-    result_one = @window_one.do_javascript(javascript)
-    refute_nil(result_one)
     result_one.strip!
-
-    # Window Manager Two
-    result_two = @window_two.do_javascript(javascript)
-    refute_nil(result_two)
     result_two.strip!
-
     assert_equal(test_text_one, result_one)
     assert_equal(test_text_two, result_two)
   end

@@ -56,10 +56,13 @@ class TestReplaRunPlugin < Minitest::Test
     window_id = Repla.window_id_for_plugin(DATA_PLUGIN_NAME)
     @window = Repla::Window.new(window_id)
 
-    sleep Repla::Test::TEST_PAUSE_TIME # Give time for script to run
-
     javascript = %[valueForKey('#{DATA_PLUGIN_PATH_KEY}');]
-    path_result = @window.do_javascript(javascript)
+    path_result = nil
+    Repla::Test.block_until do
+      path_result = @window.do_javascript(javascript)
+      path == path_result
+    end
+
     javascript = %[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');]
     arguments_result = @window.do_javascript(javascript)
 

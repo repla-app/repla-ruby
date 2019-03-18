@@ -101,25 +101,21 @@ class TestTwoViewsReadFromStandardInput < Minitest::Test
   def test_read_from_standard_input
     test_text_one = 'This is a test string'
     @view_one.read_from_standard_input(test_text_one + "\n")
-    # Give read from standard input time to run
-    sleep Repla::Test::TEST_PAUSE_TIME
-
     test_text_two = 'This is a test string two'
     @view_two.read_from_standard_input(test_text_two + "\n")
-    # Give read from standard input time to run
-    sleep Repla::Test::TEST_PAUSE_TIME
 
     javascript = File.read(Repla::Test::LASTCODE_JAVASCRIPT_FILE)
-    result = @view_one.do_javascript(javascript)
-    refute_nil(result)
-    result.strip!
-    assert_equal(test_text_one, result,
-                 'The test text should equal the result.')
+    result_one = nil
+    result_two = nil
+    Repla::Test.block_until do
+      result_one = @view_one.do_javascript(javascript)
+      result_two = @view_two.do_javascript(javascript)
+      !result_one.nil? && !result_two.nil?
+    end
 
-    result = @view_two.do_javascript(javascript)
-    refute_nil(result)
-    result.strip!
-    assert_equal(test_text_two, result,
-                 'The test text should equal the result.')
+    result_one.strip!
+    result_two.strip!
+    assert_equal(test_text_one, result_one)
+    assert_equal(test_text_two, result_two)
   end
 end

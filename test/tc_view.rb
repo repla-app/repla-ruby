@@ -60,6 +60,8 @@ class TestTwoViews < Minitest::Test
     windows = Repla::Test::ViewHelper.make_windows(
       Repla::Test::INDEX_HTML_FILENAME
     )
+
+    javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
     windows.each_with_index do |window, index|
       view_one = Repla::View.new(window.window_id)
       view_two = Repla::View.new(window.window_id, window.split_id_last)
@@ -69,7 +71,6 @@ class TestTwoViews < Minitest::Test
         view_two.load_url(Repla::Test::INDEXJQUERY_HTML_URL)
       end
 
-      javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
       result = view_one.do_javascript(javascript)
       assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
 

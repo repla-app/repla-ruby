@@ -32,7 +32,7 @@ end
 class TestViewBadURL < Minitest::Test
   def test_no_server
     view = Repla::View.new
-    view.load_url(Repla::Test::NO_SERVER_URL)
+    view.load_url(Repla::Test::NO_SERVER_URL, should_clear_cache: true)
     view.close
   end
 end
@@ -68,7 +68,7 @@ class TestTwoViews < Minitest::Test
       if index == 0
         view_two.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
       else
-        view_two.load_url(Repla::Test::INDEXJQUERY_HTML_URL)
+        view_two.load_url(Repla::Test::INDEXJQUERY_HTML_URL, should_clear_cache: true)
       end
 
       result = view_one.do_javascript(javascript)

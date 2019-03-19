@@ -34,7 +34,7 @@ end
 class TestWindowBadURL < Minitest::Test
   def test_no_server
     window = Repla::Window.new
-    window.load_url(Repla::Test::NO_SERVER_URL)
+    window.load_url(Repla::Test::NO_SERVER_URL, should_clear_cache: true)
     window.close
   end
 end
@@ -77,7 +77,7 @@ class TestWindowLoadHTML < Minitest::Test
     result = @window.do_javascript(javascript)
     assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
 
-    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL)
+    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL, should_clear_cache: true)
     result = @window.do_javascript(javascript)
     assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
   end
@@ -108,7 +108,7 @@ class TestWindowClearingCache < Minitest::Test
     window = Repla::Window.new(window_id)
 
     javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
-    window.load_url(Repla::Test::INDEX_HTML_URL)
+    window.load_url(Repla::Test::INDEX_HTML_URL, should_clear_cache: true)
     result = window.do_javascript(javascript)
     assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
     window.close

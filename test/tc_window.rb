@@ -34,7 +34,7 @@ end
 class TestWindowBadURL < Minitest::Test
   def test_no_server
     window = Repla::Window.new
-    window.load_url(Repla::Test::NO_SERVER_URL)
+    window.load_url(Repla::Test::NO_SERVER_URL, should_clear_cache: true)
     window.close
   end
 end
@@ -77,7 +77,8 @@ class TestWindowLoadHTML < Minitest::Test
     result = @window.do_javascript(javascript)
     assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
 
-    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL)
+    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
+                     should_clear_cache: true)
     result = @window.do_javascript(javascript)
     assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
   end
@@ -97,6 +98,30 @@ class TestWindowLoadHTML < Minitest::Test
     expected = @window.do_javascript(test_javascript)
 
     assert_equal(expected, result, 'The result should equal expected result.')
+  end
+end
+
+class TestWindowClearingCache < Minitest::Test
+  def test_clearing_cache
+    Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME,
+                                 Repla::Test::TEST_HTML_DIRECTORY)
+    window = Repla::Window.new(window_id)
+
+    javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
+    window.load_url(Repla::Test::INDEX_HTML_URL, should_clear_cache: true)
+    result = window.do_javascript(javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+    window.close
+
+    # Confirm loading the URL in a new window after the server has been killed
+    # fails
+    window_two = Repla::Window.new
+    window_two.load_url(Repla::Test::INDEX_HTML_URL,
+                        should_clear_cache: true)
+    result = window_two.do_javascript(javascript)
+    refute_equal(result, Repla::Test::INDEX_HTML_TITLE)
+    window_two.close
   end
 end
 

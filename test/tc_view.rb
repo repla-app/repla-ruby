@@ -32,7 +32,7 @@ end
 class TestViewBadURL < Minitest::Test
   def test_no_server
     view = Repla::View.new
-    view.load_url(Repla::Test::NO_SERVER_URL)
+    view.load_url(Repla::Test::NO_SERVER_URL, should_clear_cache: true)
     view.close
   end
 end
@@ -60,16 +60,18 @@ class TestTwoViews < Minitest::Test
     windows = Repla::Test::ViewHelper.make_windows(
       Repla::Test::INDEX_HTML_FILENAME
     )
+
+    javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
     windows.each_with_index do |window, index|
       view_one = Repla::View.new(window.window_id)
       view_two = Repla::View.new(window.window_id, window.split_id_last)
       if index == 0
         view_two.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
       else
-        view_two.load_url(Repla::Test::INDEXJQUERY_HTML_URL)
+        view_two.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
+                          should_clear_cache: true)
       end
 
-      javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
       result = view_one.do_javascript(javascript)
       assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
 

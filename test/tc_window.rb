@@ -77,7 +77,8 @@ class TestWindowLoadHTML < Minitest::Test
     result = @window.do_javascript(javascript)
     assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
 
-    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL, should_clear_cache: true)
+    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
+                     should_clear_cache: true)
     result = @window.do_javascript(javascript)
     assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
   end

@@ -68,7 +68,8 @@ class TestTwoViews < Minitest::Test
       if index == 0
         view_two.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
       else
-        view_two.load_url(Repla::Test::INDEXJQUERY_HTML_URL, should_clear_cache: true)
+        view_two.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
+                          should_clear_cache: true)
       end
 
       result = view_one.do_javascript(javascript)

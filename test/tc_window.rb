@@ -111,7 +111,7 @@ class TestWindowClearingCache < Minitest::Test
     javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
     window.load_url(Repla::Test::INDEX_HTML_URL, should_clear_cache: true)
     result = window.do_javascript(javascript)
-    assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
     window.close
 
     # Confirm loading the URL in a new window after the server has been killed

@@ -8,7 +8,7 @@ namespace :logger do
   task tests: [:clean_up]
 
   task :test_logger do
-    logger_tests_file = File.join(File.dirname(__FILE__), 'tc_logger.rb')
+    logger_tests_file = File.join(__dir__, 'tc_logger.rb')
     ruby Shellwords.escape(logger_tests_file)
   end
 

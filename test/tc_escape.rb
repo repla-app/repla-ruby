@@ -73,10 +73,10 @@ lastCodeTag.innerHTML;'
   end
 
   def test_javascript_escape_quote
-    string = 'WCSEARCH_FILE = File.join(File.dirname(__FILE__), '\
+    string = 'WCSEARCH_FILE = File.join(__dir__, '\
       '"..", \'eiusmod.rb\')'
     string.javascript_escape!
-    test_result = 'WCSEARCH_FILE = File.join(File.dirname(__FILE__), '\
+    test_result = 'WCSEARCH_FILE = File.join(__dir__, '\
       '"..", \\\'eiusmod.rb\\\')'
     assert_equal(test_result, string)
   end

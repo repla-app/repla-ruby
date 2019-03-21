@@ -7,7 +7,7 @@ module Repla
     module Helper
       using Escape
 
-      APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), '..',
+      APPLESCRIPT_DIRECTORY = File.join(__dir__, '..',
                                         'applescript')
 
       def self.run_javascript(javascript)

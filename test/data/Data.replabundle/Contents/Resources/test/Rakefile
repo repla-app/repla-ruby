@@ -9,13 +9,13 @@ namespace :data do
   task tests: [:clean_up]
 
   task :test_controller do
-    controller_tests_file = File.join(File.dirname(__FILE__),
+    controller_tests_file = File.join(__dir__,
                                       'tc_controller.rb')
     ruby Shellwords.escape(controller_tests_file)
   end
 
   task test_data: [:test_controller] do
-    data_tests_file = File.join(File.dirname(__FILE__), 'tc_data.rb')
+    data_tests_file = File.join(__dir__, 'tc_data.rb')
     ruby Shellwords.escape(data_tests_file)
   end
 

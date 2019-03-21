@@ -2,7 +2,7 @@ require_relative '../../lib/repla/test'
 require Repla::Test::HELPER_FILE
 require Repla::Test::REPLA_FILE
 
-TEST_LIB_DIRECTORY = File.dirname(__FILE__)
+TEST_LIB_DIRECTORY = __dir__
 
 # Template
 TEST_TEMPLATE_FILE = File.join(TEST_LIB_DIRECTORY, '../html/index.html')

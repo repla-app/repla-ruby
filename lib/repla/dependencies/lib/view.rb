@@ -2,8 +2,8 @@ module Repla
   module Dependencies
     # Dependency view
     class View < Repla::View
-      ROOT_ACCESS_DIRECTORY = File.join(File.dirname(__FILE__), '../../')
-      HTML_DIRECTORY = File.join(File.dirname(__FILE__), '../html/')
+      ROOT_ACCESS_DIRECTORY = File.join(__dir__, '../../')
+      HTML_DIRECTORY = File.join(__dir__, '../html/')
       VIEW_TEMPLATE = File.join(HTML_DIRECTORY, 'index.html')
 
       def initialize

@@ -7,12 +7,12 @@ module Repla
     POLLING_INTERVAL = 0.5
 
     # Ruby
-    REPLA_FILE = File.join(File.dirname(__FILE__), '../repla')
-    TEST_DIRECTORY = File.join(File.dirname(__FILE__), 'test')
+    REPLA_FILE = File.join(__dir__, '../repla')
+    TEST_DIRECTORY = File.join(__dir__, 'test')
     LIB_DIRECTORY = File.join(TEST_DIRECTORY, 'lib')
     HELPER_FILE = File.join(LIB_DIRECTORY, 'helper')
     VIEW_HELPER_FILE = File.join(LIB_DIRECTORY, 'view_helper')
-    LOG_HELPER_FILE = File.join(File.dirname(__FILE__),
+    LOG_HELPER_FILE = File.join(__dir__,
                                 'logger/test/lib/log_helper')
 
     # Test Assets

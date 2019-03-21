@@ -11,29 +11,29 @@ namespace :repla do
   task tests: [:clean_up]
 
   task :test_window do
-    window_tests_file = File.join(File.dirname(__FILE__), 'tc_window.rb')
+    window_tests_file = File.join(__dir__, 'tc_window.rb')
     ruby Shellwords.escape(window_tests_file)
   end
 
   task test_view: [:test_window] do
-    view_tests_file = File.join(File.dirname(__FILE__), 'tc_view.rb')
+    view_tests_file = File.join(__dir__, 'tc_view.rb')
     ruby Shellwords.escape(view_tests_file)
   end
 
   task test_view_resources: [:test_view] do
-    view_resources_tests_file = File.join(File.dirname(__FILE__),
+    view_resources_tests_file = File.join(__dir__,
                                           'tc_view_resources.rb')
     ruby Shellwords.escape(view_resources_tests_file)
   end
 
   task test_view_javascript: [:test_view_resources] do
-    view_javascript_tests_file = File.join(File.dirname(__FILE__),
+    view_javascript_tests_file = File.join(__dir__,
                                            'tc_view_javascript.rb')
     ruby Shellwords.escape(view_javascript_tests_file)
   end
 
   task test_module: [:test_view_javascript] do
-    module_tests_file = File.join(File.dirname(__FILE__), 'tc_module.rb')
+    module_tests_file = File.join(__dir__, 'tc_module.rb')
     ruby Shellwords.escape(module_tests_file)
   end
 
@@ -42,21 +42,21 @@ namespace :repla do
 end
 
 namespace :other do
-  data_test_rakefile = File.join(File.dirname(__FILE__),
+  data_test_rakefile = File.join(__dir__,
                                  'data/Data.replabundle/Contents/Resources/'\
                                  'test/Rakefile')
   load data_test_rakefile
 
-  dependencies_test_rakefile = File.join(File.dirname(__FILE__),
+  dependencies_test_rakefile = File.join(__dir__,
                                          '../lib/repla/dependencies/test/'\
                                          'Rakefile')
   load dependencies_test_rakefile
 
-  logger_test_rakefile = File.join(File.dirname(__FILE__),
+  logger_test_rakefile = File.join(__dir__,
                                    '../lib/repla/logger/test/Rakefile')
   load logger_test_rakefile
 
-  repl_test_rakefile = File.join(File.dirname(__FILE__),
+  repl_test_rakefile = File.join(__dir__,
                                  '../lib/repla/repl/test/Rakefile')
   load repl_test_rakefile
 

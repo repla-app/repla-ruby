@@ -10,5 +10,7 @@
 	<string>7A95638E-798D-437C-9404-08E7DC68655B</string>
 	<key>WCEditable</key>
 	<integer>0</integer>
+	<key>WCDebugModeEnabled</key>
+	<integer>1</integer>
 </dict>
 </plist>

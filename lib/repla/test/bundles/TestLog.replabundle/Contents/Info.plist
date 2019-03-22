@@ -12,5 +12,7 @@
 	<integer>0</integer>
 	<key>WCDebugModeEnabled</key>
 	<integer>1</integer>
+	<key>WCAutoShowLog</key>
+	<integer>1</integer>
 </dict>
 </plist>

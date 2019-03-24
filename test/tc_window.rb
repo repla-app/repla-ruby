@@ -25,11 +25,11 @@ class TestWindowAttributes < Minitest::Test
     assert_nil(ENV[key])
     refute(window.dark_mode)
     window.close
-    ENV[key] = "1"
+    ENV[key] = '1'
     window = Repla::Window.new
     assert(window.dark_mode)
     window.close
-    ENV[key] = "0"
+    ENV[key] = '0'
     window = Repla::Window.new
     refute(window.dark_mode)
     window.close

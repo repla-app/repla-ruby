@@ -18,6 +18,22 @@ class TestWindowAttributes < Minitest::Test
     assert(window_id == window.window_id, "The window id's should be equal.")
     window.close
   end
+
+  def test_dark_mode
+    key = Repla::DARK_MODE_KEY
+    window = Repla::Window.new
+    assert_nil(ENV[key])
+    refute(window.dark_mode)
+    window.close
+    ENV[key] = '1'
+    window = Repla::Window.new
+    assert(window.dark_mode)
+    window.close
+    ENV[key] = '0'
+    window = Repla::Window.new
+    refute(window.dark_mode)
+    window.close
+  end
 end
 
 class TestWindowClose < Minitest::Test

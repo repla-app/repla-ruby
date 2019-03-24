@@ -15,6 +15,11 @@ module Repla
       @window_id ||= ENV.key?(key) ? ENV[key] : Repla.create_window
     end
 
+    def dark_mode
+      key = DARK_MODE_KEY
+      @dark_mode ||= ENV.key?(key) ? ENV[key].to_i > 0 : false
+    end
+
     # Web
 
     LOAD_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'load.scpt')

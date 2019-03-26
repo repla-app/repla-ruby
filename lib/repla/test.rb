@@ -66,7 +66,7 @@ module Repla
     PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.replabundle')
     PRINT_PLUGIN_NAME = 'Print'.freeze
     TEST_LOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
-                                    'TestLog.replabundle')
+                                     'TestLog.replabundle')
     TEST_LOG_PLUGIN_NAME = 'TestLog'.freeze
     INVALID_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                     'Invalid.replabundle')

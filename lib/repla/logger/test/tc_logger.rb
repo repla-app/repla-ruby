@@ -49,7 +49,7 @@ class TestUnintializedLogger < Minitest::Test
 end
 
 # Test logger
-class TestLogger < Minitest::Test
+class TestLoggerObject < Minitest::Test
   def setup
     @logger = Repla::Logger.new
     @logger.show
@@ -62,7 +62,7 @@ class TestLogger < Minitest::Test
     window.close
   end
 
-  def test_logger
+  def test_logger_object
     test_count = 0
 
     # Test Error

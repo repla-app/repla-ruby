@@ -194,7 +194,8 @@ class TestSimpleLogging < Minitest::Test
   end
 
   def test_simple_logging
-    Repla::Test.test_log(@window)
+    result = Repla::Test.test_log(@window)
+    assert(result)
   end
 
   def teardown

@@ -8,6 +8,13 @@ module Repla
       'MESSAGE',
       'Done'
     ].freeze
+    CLASSES = [
+      'error',
+      'message',
+      'message',
+      'message',
+      'message'
+    ].freeze
     def self.test_log(window)
       test_message = 'Done'
       test_log_helper = Repla::Test::LogHelper.new(window.window_id)
@@ -21,6 +28,12 @@ module Repla
         message = MESSAGES[i]
         if result != message
           STDERR.puts "Expected #{message} instead of #{result}"
+          return false
+        end
+        type = CLASSES[i]
+        type_result = test_log_helper.log_class_at(i)
+        if type_result != type
+          STDERR.puts "Expected #{type_result} instead of #{type}"
           return false
         end
       end

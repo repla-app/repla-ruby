@@ -22,6 +22,10 @@ module Repla
         @view.do_javascript_function('innerTextOfBodyChildAtIndex', [index])
       end
 
+      def log_class_at(index)
+        @view.do_javascript_function('classOfBodyChildAtIndex', [index])
+      end
+
       def number_of_log_messages
         @view.do_javascript(TEST_MESSAGE_COUNT_JAVASCRIPT)
       end

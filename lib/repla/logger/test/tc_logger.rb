@@ -114,7 +114,7 @@ Line 3
     assert_equal(result_count, lines)
 
     (1..lines).each do |i|
-      result = @test_log_helper.log_message_at_index(i - 1)
+      result = @test_log_helper.log_message_at(i - 1)
       test_result = "Line #{i}"
       assert_equal(result,
                    test_result,
@@ -178,7 +178,7 @@ class TestLoggerThreads < Minitest::Test
                                                   @logger.view_id)
     Repla::Test.block_until { @test_log_helper.number_of_log_messages >= 2 }
     result = @test_log_helper.last_log_message
-    result_two = @test_log_helper.log_message_at_index(0)
+    result_two = @test_log_helper.log_message_at(0)
     assert(result == message_text || result_two == message_text)
     assert(result == error_text || result_two == error_text)
   end

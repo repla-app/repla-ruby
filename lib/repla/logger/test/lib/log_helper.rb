@@ -11,14 +11,19 @@ module Repla
       TEST_JAVASCRIPT_DIRECTORY = File.join(__dir__, '..', 'js')
       TEST_JAVASCRIPT_FILE = File.join(TEST_JAVASCRIPT_DIRECTORY,
                                        'test_view_helper.js')
-      def initialize(window_id, view_id)
+      def initialize(window_id, view_id = nil)
+        view_id ||= Repla.split_id_in_window_last(window_id)
         @view = Repla::View.new(window_id, view_id)
         javascript = File.read(TEST_JAVASCRIPT_FILE)
         @view.do_javascript(javascript)
       end
 
-      def log_message_at_index(index)
+      def log_message_at(index)
         @view.do_javascript_function('innerTextOfBodyChildAtIndex', [index])
+      end
+
+      def log_class_at(index)
+        @view.do_javascript_function('classOfBodyChildAtIndex', [index])
       end
 
       def number_of_log_messages

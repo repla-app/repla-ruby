@@ -3,6 +3,7 @@
 require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
+require_relative 'lib/log_tester'
 require_relative '../../logger'
 
 # Test constants
@@ -49,95 +50,34 @@ class TestUnintializedLogger < Minitest::Test
 end
 
 # Test logger
-class TestLogger < Minitest::Test
+class TestLoggerObject < Minitest::Test
   def setup
     @logger = Repla::Logger.new
     @logger.show
     @test_log_helper = Repla::Test::LogHelper.new(@logger.window_id,
                                                   @logger.view_id)
+    @window = Repla::Window.new(@logger.window_id)
   end
 
   def teardown
-    window = Repla::Window.new(@logger.window_id)
-    window.close
+    @window.close
   end
 
-  def test_logger
-    test_count = 0
-
+  def test_logger_object
     # Test Error
     message = 'Testing log error'
     @logger.error(message)
-    test_message = nil
-    Repla::Test.block_until do
-      test_message = @test_log_helper.last_log_message
-      message == test_message
-    end
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('error', test_class)
-    result_count = @test_log_helper.number_of_log_messages
-    test_count += 1
-    assert_equal(test_count, result_count)
-
-    # Test Message
     message = 'Testing log message'
     @logger.info(message)
-    test_message = nil
-    Repla::Test.block_until do
-      test_message = @test_log_helper.last_log_message
-      message == test_message
-    end
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('message', test_class)
-    result_count = @test_log_helper.number_of_log_messages
-    test_count += 1
-    assert_equal(test_count, result_count)
-
-    # Test Only Error Prefix
-    # Note the trailing whitespace is trimmed
     message = Repla::Logger::ERROR_PREFIX.rstrip
     @logger.info(message)
-    test_message = nil
-    Repla::Test.block_until do
-      test_message = @test_log_helper.last_log_message
-      message == test_message
-    end
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('message', test_class)
-    result_count = @test_log_helper.number_of_log_messages
-    test_count += 1
-    assert_equal(test_count, result_count)
-
-    # Test Only Message Prefix
-    # Note the trailing whitespace is trimmed
     message = Repla::Logger::MESSAGE_PREFIX.rstrip
     @logger.info(message)
-    test_message = nil
-    Repla::Test.block_until do
-      test_message = @test_log_helper.last_log_message
-      message == test_message
-    end
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('message', test_class)
-    result_count = @test_log_helper.number_of_log_messages
-    test_count += 1
-    assert_equal(test_count, result_count)
-
-    # Test empty string is ignored
-    # Test blank space is ignored
-    # Note this uses the same `message` from the last test
     @logger.info('')
     @logger.info("  \t")
-    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
-    test_message = @test_log_helper.last_log_message
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('message', test_class)
-
+    @logger.info('Done')
+    result = Repla::Test.test_log(@window)
+    assert(result)
     # TODO: Also add the following tests the `Log.replabundle`
 
     # Test Whitespace
@@ -174,12 +114,31 @@ Line 3
     assert_equal(result_count, lines)
 
     (1..lines).each do |i|
-      result = @test_log_helper.log_message_at_index(i - 1)
+      result = @test_log_helper.log_message_at(i - 1)
       test_result = "Line #{i}"
       assert_equal(result,
                    test_result,
                    'The number of log messages should match')
     end
+  end
+end
+
+# Test logging via standard out
+class TestSimpleLogging < Minitest::Test
+  def setup
+    Repla.load_plugin(Repla::Test::TEST_LOG_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::TEST_LOG_PLUGIN_NAME)
+    @window = Repla::Window.new(window_id)
+    assert(window_id == @window.window_id)
+  end
+
+  def test_simple_logging
+    result = Repla::Test.test_log(@window)
+    assert(result)
+  end
+
+  def teardown
+    @window.close
   end
 end
 
@@ -219,7 +178,7 @@ class TestLoggerThreads < Minitest::Test
                                                   @logger.view_id)
     Repla::Test.block_until { @test_log_helper.number_of_log_messages >= 2 }
     result = @test_log_helper.last_log_message
-    result_two = @test_log_helper.log_message_at_index(0)
+    result_two = @test_log_helper.log_message_at(0)
     assert(result == message_text || result_two == message_text)
     assert(result == error_text || result_two == error_text)
   end

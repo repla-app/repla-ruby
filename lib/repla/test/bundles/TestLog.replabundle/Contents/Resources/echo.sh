@@ -8,4 +8,4 @@ echo 'ERROR '
 echo 'MESSAGE '
 echo
 printf "\t"
-echo
+echo 'Done'

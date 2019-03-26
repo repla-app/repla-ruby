@@ -3,6 +3,7 @@
 require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
+require_relative 'lib/log_tester'
 require_relative '../../logger'
 
 # Test constants
@@ -190,16 +191,15 @@ class TestSimpleLogging < Minitest::Test
     window_id = Repla.run_plugin(Repla::Test::TEST_LOG_PLUGIN_NAME)
     @window = Repla::Window.new(window_id)
     assert(window_id == @window.window_id)
-    @test_helper = Repla::Log::Tests::TestHelper.new(window_id)
   end
 
   def test_simple_logging
-    assert(window_id == @window.window_id)
+    Repla::Test.test_log(@window)
   end
 
-  # def teardown
-  #   @window.close
-  # end
+  def teardown
+    @window.close
+  end
 end
 
 # Test logger threads

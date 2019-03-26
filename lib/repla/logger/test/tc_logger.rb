@@ -56,89 +56,28 @@ class TestLoggerObject < Minitest::Test
     @logger.show
     @test_log_helper = Repla::Test::LogHelper.new(@logger.window_id,
                                                   @logger.view_id)
+    @window = Repla::Window.new(@logger.window_id)
   end
 
   def teardown
-    window = Repla::Window.new(@logger.window_id)
-    window.close
+    @window.close
   end
 
   def test_logger_object
-    test_count = 0
-
     # Test Error
     message = 'Testing log error'
     @logger.error(message)
-    test_message = nil
-    Repla::Test.block_until do
-      test_message = @test_log_helper.last_log_message
-      message == test_message
-    end
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('error', test_class)
-    result_count = @test_log_helper.number_of_log_messages
-    test_count += 1
-    assert_equal(test_count, result_count)
-
-    # Test Message
     message = 'Testing log message'
     @logger.info(message)
-    test_message = nil
-    Repla::Test.block_until do
-      test_message = @test_log_helper.last_log_message
-      message == test_message
-    end
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('message', test_class)
-    result_count = @test_log_helper.number_of_log_messages
-    test_count += 1
-    assert_equal(test_count, result_count)
-
-    # Test Only Error Prefix
-    # Note the trailing whitespace is trimmed
     message = Repla::Logger::ERROR_PREFIX.rstrip
     @logger.info(message)
-    test_message = nil
-    Repla::Test.block_until do
-      test_message = @test_log_helper.last_log_message
-      message == test_message
-    end
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('message', test_class)
-    result_count = @test_log_helper.number_of_log_messages
-    test_count += 1
-    assert_equal(test_count, result_count)
-
-    # Test Only Message Prefix
-    # Note the trailing whitespace is trimmed
     message = Repla::Logger::MESSAGE_PREFIX.rstrip
     @logger.info(message)
-    test_message = nil
-    Repla::Test.block_until do
-      test_message = @test_log_helper.last_log_message
-      message == test_message
-    end
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('message', test_class)
-    result_count = @test_log_helper.number_of_log_messages
-    test_count += 1
-    assert_equal(test_count, result_count)
-
-    # Test empty string is ignored
-    # Test blank space is ignored
-    # Note this uses the same `message` from the last test
     @logger.info('')
     @logger.info("  \t")
-    sleep Repla::Test::TEST_PAUSE_TIME # Pause for output to be processed
-    test_message = @test_log_helper.last_log_message
-    assert_equal(message, test_message)
-    test_class = @test_log_helper.last_log_class
-    assert_equal('message', test_class)
-
+    @logger.info('Done')
+    result = Repla::Test.test_log(@window)
+    assert(result)
     # TODO: Also add the following tests the `Log.replabundle`
 
     # Test Whitespace

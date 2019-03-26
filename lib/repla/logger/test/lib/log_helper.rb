@@ -12,6 +12,7 @@ module Repla
       TEST_JAVASCRIPT_FILE = File.join(TEST_JAVASCRIPT_DIRECTORY,
                                        'test_view_helper.js')
       def initialize(window_id, view_id)
+        view_id ||= Repla.split_id_in_window_last(window_id)
         @view = Repla::View.new(window_id, view_id)
         javascript = File.read(TEST_JAVASCRIPT_FILE)
         @view.do_javascript(javascript)

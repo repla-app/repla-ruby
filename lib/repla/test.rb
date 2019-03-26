@@ -65,9 +65,9 @@ module Repla
     NO_SERVER_URL = 'NoServer'.freeze
     PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.replabundle')
     PRINT_PLUGIN_NAME = 'Print'.freeze
-    TESTLOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
+    TEST_LOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                     'TestLog.replabundle')
-    TESTLOG_PLUGIN_NAME = 'TestLog'.freeze
+    TEST_LOG_PLUGIN_NAME = 'TestLog'.freeze
     INVALID_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                     'Invalid.replabundle')
     INVALID_PLUGIN_NAME = 'Invalid'.freeze

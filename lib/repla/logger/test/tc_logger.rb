@@ -183,6 +183,25 @@ Line 3
   end
 end
 
+# Test logging via standard out
+class TestSimpleLogging < Minitest::Test
+  def setup
+    Repla.load_plugin(Repla::Test::TEST_LOG_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::TEST_LOG_PLUGIN_NAME)
+    @window = Repla::Window.new(window_id)
+    assert(window_id == @window.window_id)
+    @test_helper = Repla::Log::Tests::TestHelper.new(window_id)
+  end
+
+  def test_simple_logging
+    assert(window_id == @window.window_id)
+  end
+
+  # def teardown
+  #   @window.close
+  # end
+end
+
 # Test logger threads
 class TestLoggerThreads < Minitest::Test
   def setup

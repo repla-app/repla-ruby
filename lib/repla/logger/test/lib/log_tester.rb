@@ -8,12 +8,12 @@ module Repla
       'MESSAGE',
       'Done'
     ].freeze
-    CLASSES = [
-      'error',
-      'message',
-      'message',
-      'message',
-      'message'
+    CLASSES = %w[
+      error
+      message
+      message
+      message
+      message
     ].freeze
     def self.test_log(window)
       test_message = 'Done'
@@ -36,6 +36,12 @@ module Repla
           STDERR.puts "Expected #{type_result} instead of #{type}"
           return false
         end
+      end
+      expected = MESSAGES.count
+      result = test_log_helper.number_of_log_messages
+      if expected != result
+        STDERR.puts "Expected #{expected} instead of #{result}"
+        return false
       end
       true
     end

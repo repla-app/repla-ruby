@@ -10,11 +10,5 @@
 	<string>33EE3C86-3377-4F6D-B8FB-89B9539152AA</string>
 	<key>WCEditable</key>
 	<integer>0</integer>
-	<key>WCDebugModeEnabled</key>
-	<integer>0</integer>
-	<key>WCAutoShowLog</key>
-	<integer>0</integer>
-	<key>WCTransparentBackground</key>
-	<integer>0</integer>
 </dict>
 </plist>

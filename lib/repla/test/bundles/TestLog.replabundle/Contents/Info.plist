@@ -11,10 +11,10 @@
 	<key>WCEditable</key>
 	<integer>0</integer>
 	<key>WCDebugModeEnabled</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>WCAutoShowLog</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>WCTransparentBackground</key>
-	<integer>1</integer>
+	<integer>0</integer>
 </dict>
 </plist>

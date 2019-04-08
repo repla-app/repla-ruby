@@ -51,25 +51,25 @@ module Repla
     TITLE_JAVASCRIPT_FILE = File.join(TEST_ASSETS_JAVASCRIPT_DIRECTORY,
                                       'title.js')
     # Plugins
-    TEST_PLUGIN_DIRECTORY = File.join(TEST_DIRECTORY, 'bundles')
+    TEST_PLUGIN_DIRECTORY = File.join(TEST_DIRECTORY, 'packages')
     HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
-                                       'HelloWorld.replabundle')
+                                       'HelloWorld.replaplugin')
     HELLOWORLD_PLUGIN_NAME = 'HelloWorld'.freeze
     TEST_SERVER_PLUGIN_NAME = 'TestServer'.freeze
     TEST_SERVER_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
-                                        'TestServer.replabundle')
+                                        'TestServer.replaplugin')
     INDEX_HTML_URL = html_server_url(INDEX_HTML_FILENAME)
     INDEXJQUERY_HTML_URL = html_server_url(
       INDEXJQUERY_HTML_FILENAME
     )
     NO_SERVER_URL = 'NoServer'.freeze
-    PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.replabundle')
+    PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, 'Print.replaplugin')
     PRINT_PLUGIN_NAME = 'Print'.freeze
     TEST_LOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
-                                     'TestLog.replabundle')
+                                     'TestLog.replaplugin')
     TEST_LOG_PLUGIN_NAME = 'TestLog'.freeze
     INVALID_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
-                                    'Invalid.replabundle')
+                                    'Invalid.replaplugin')
     INVALID_PLUGIN_NAME = 'Invalid'.freeze
 
     # Local Asssets

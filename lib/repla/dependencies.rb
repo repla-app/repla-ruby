@@ -2,7 +2,7 @@ require_relative '../repla'
 
 module Repla
   module Dependencies
-    # Checks whether bundle dependencies are installed
+    # Checks whether plugin dependencies are installed
     class Checker
       require_relative 'dependencies/lib/model'
       require_relative 'dependencies/lib/controller'

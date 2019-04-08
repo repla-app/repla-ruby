@@ -78,7 +78,7 @@ class TestLoggerObject < Minitest::Test
     @logger.info('Done')
     result = Repla::Test.test_log(@window)
     assert(result)
-    # TODO: Also add the following tests the `Log.replabundle`
+    # TODO: Also add the following tests the `Log.replaplugin`
 
     # Test Whitespace
     # White space to the left should be preserved, whitespace to the right

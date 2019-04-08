@@ -43,7 +43,7 @@ end
 
 namespace :other do
   data_test_rakefile = File.join(__dir__,
-                                 'data/Data.replabundle/Contents/Resources/'\
+                                 'data/Data.replaplugin/Contents/Resources/'\
                                  'test/Rakefile')
   load data_test_rakefile
 

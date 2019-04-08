@@ -51,7 +51,7 @@ module Repla
     TITLE_JAVASCRIPT_FILE = File.join(TEST_ASSETS_JAVASCRIPT_DIRECTORY,
                                       'title.js')
     # Plugins
-    TEST_PLUGIN_DIRECTORY = File.join(TEST_DIRECTORY, 'bundles')
+    TEST_PLUGIN_DIRECTORY = File.join(TEST_DIRECTORY, 'packages')
     HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,
                                        'HelloWorld.replaplugin')
     HELLOWORLD_PLUGIN_NAME = 'HelloWorld'.freeze

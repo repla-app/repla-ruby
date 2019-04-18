@@ -16,5 +16,7 @@
 	<integer>0</integer>
 	<key>WCTransparentBackground</key>
 	<integer>0</integer>
+	<key>WCUsesEnvironment</key>
+	<integer>0</integer>
 </dict>
 </plist>

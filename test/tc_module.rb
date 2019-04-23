@@ -3,6 +3,7 @@
 require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
+require_relative '../lib/repla/logger/test/lib/log_helper'
 
 class TestModuleProperties < Minitest::Test
   def test_window_id
@@ -35,6 +36,7 @@ class TestModuleRunPlugin < Minitest::Test
     @window.close
   end
 
+  TEST_ENVIRONMENT_END_REGEXP = Regexp.new('^\d*.\d\d tests.*').freeze
   def test_environment
     Repla.load_plugin(Repla::Test::TEST_ENVIRONMENT_PLUGIN_FILE)
     Repla.run_plugin(Repla::Test::TEST_ENVIRONMENT_PLUGIN_NAME)
@@ -43,6 +45,14 @@ class TestModuleRunPlugin < Minitest::Test
       Repla::Test::TEST_ENVIRONMENT_PLUGIN_NAME
     )
     refute_nil(window_id)
+
+    test_log_helper = Repla::Test::LogHelper.new(window_id)
+    test_message = nil
+    Repla::Test.block_until do
+      test_message = test_log_helper.last_log_message
+      test_message =~ TEST_ENVIRONMENT_END_REGEXP
+    end
+    assert(test_message =~ TEST_ENVIRONMENT_END_REGEXP)
 
     # Clean up
     @window = Repla::Window.new(window_id)

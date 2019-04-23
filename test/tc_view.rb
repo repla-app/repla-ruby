@@ -8,14 +8,14 @@ require Repla::Test::VIEW_HELPER_FILE
 
 class TestViewAttributes < Minitest::Test
   def test_view_id
-    Repla.load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
-    window_id = Repla.run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
+    Repla.load_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
     assert(!window_id.nil?)
     split_id = Repla.split_id_in_window(window_id)
     assert(!split_id.nil?)
     split_id_two = Repla.split_id_in_window(window_id,
                                             Repla::Test::
-                                            HELLOWORLD_PLUGIN_NAME)
+                                            TEST_HELLOWORLD_PLUGIN_NAME)
     assert(!split_id_two.nil?)
     assert(split_id == split_id_two)
     split_id_three = Repla.split_id_in_window_last(window_id)

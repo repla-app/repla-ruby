@@ -126,8 +126,11 @@ class TestWindowClearingCache < Minitest::Test
     window = Repla::Window.new(window_id)
 
     javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
-    window.load_url(Repla::Test::INDEX_HTML_URL, should_clear_cache: true)
-    result = window.do_javascript(javascript)
+    result = nil
+    Repla::Test.block_until do
+      window.load_url(Repla::Test::INDEX_HTML_URL, should_clear_cache: true)
+      result = Repla::Test::INDEX_HTML_TITLE
+    end
     assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
     window.close
 

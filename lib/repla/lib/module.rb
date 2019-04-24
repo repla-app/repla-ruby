@@ -29,6 +29,14 @@ module Repla
     run_applescript(RUN_PLUGIN_SCRIPT, parameters)
   end
 
+  RUN_PLUGIN_WITH_ENVIRONMENT_SCRIPT = File.join(
+    APPLESCRIPT_DIRECTORY, 'run_plugin_with_environment.scpt'
+  )
+  def self.run_plugin_with_environment(name, environment)
+    parameters = [name, environment]
+    run_applescript(RUN_PLUGIN_WITH_ENVIRONMENT_SCRIPT, parameters)
+  end
+
   RUN_PLUGIN_IN_SPLIT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY,
                                          'run_plugin_in_split.scpt')
   def self.run_plugin_in_split(name, window_id, split_id)

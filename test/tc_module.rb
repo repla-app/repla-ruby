@@ -37,6 +37,9 @@ class TestModuleRunPlugin < Minitest::Test
   end
 
   TEST_ENVIRONMENT_END_REGEXP = Regexp.new('^\d*.\d\d tests.*').freeze
+  TEST_ENVIRONMENT_SUMMARY_OFFSET = -4
+  TEST_ENVIRONMENT_FAILURES_INDEX = 2
+  TEST_ENVIRONMENT_ERRORS_INDEX = 3
   def test_environment
     Repla.load_plugin(Repla::Test::TEST_ENVIRONMENT_PLUGIN_FILE)
     Repla.run_plugin(Repla::Test::TEST_ENVIRONMENT_PLUGIN_NAME)
@@ -45,6 +48,7 @@ class TestModuleRunPlugin < Minitest::Test
       Repla::Test::TEST_ENVIRONMENT_PLUGIN_NAME
     )
     refute_nil(window_id)
+    @window = Repla::Window.new(window_id)
 
     test_log_helper = Repla::Test::LogHelper.new(window_id)
     test_message = nil
@@ -53,9 +57,16 @@ class TestModuleRunPlugin < Minitest::Test
       test_message =~ TEST_ENVIRONMENT_END_REGEXP
     end
     assert(test_message =~ TEST_ENVIRONMENT_END_REGEXP)
-
-    # Clean up
-    @window = Repla::Window.new(window_id)
+    message_count = test_log_helper.number_of_log_messages
+    message_index = message_count + TEST_ENVIRONMENT_SUMMARY_OFFSET
+    message = test_log_helper.log_message_at(message_index)
+    stats = message.split(',')
+    errors_message = stats[TEST_ENVIRONMENT_ERRORS_INDEX]
+    failures_message = stats[TEST_ENVIRONMENT_FAILURES_INDEX]
+    errors_message.strip!
+    failures_message.strip!
+    assert_equal('0', errors_message[0])
+    assert_equal('0', failures_message[0])
   end
 
   def test_run_plugin

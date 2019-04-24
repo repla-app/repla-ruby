@@ -4,24 +4,32 @@ require 'minitest/autorun'
 
 require_relative 'lib/test_setup'
 require_relative '../lib/repla/logger/test/lib/log_helper'
+require_relative '../lib/repla/test/packages/TestEnvironment.replaplugin/'\
+  'Contents/Resources/constants.rb'
 
 class TestModuleProperties < Minitest::Test
   def test_window_id
     Repla.load_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_FILE)
 
     # Test the window_id is nil before running the plugin
-    window_id = Repla.window_id_for_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla.window_id_for_plugin(
+      Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME
+    )
     assert(!window_id, 'The window_id should be nil')
 
     Repla.run_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
-    window_id = Repla.window_id_for_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla.window_id_for_plugin(
+      Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME
+    )
     assert(window_id, 'The window_id should not be nil')
 
     window = Repla::Window.new(window_id)
     window.close
 
     # Test the window_id is nil after closing the window
-    window_id = Repla.window_id_for_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
+    window_id = Repla.window_id_for_plugin(
+      Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME
+    )
     assert_nil(window_id, 'The window_id should be nil')
   end
 
@@ -42,7 +50,10 @@ class TestModuleRunPlugin < Minitest::Test
   TEST_ENVIRONMENT_ERRORS_INDEX = 3
   def test_environment
     Repla.load_plugin(Repla::Test::TEST_ENVIRONMENT_PLUGIN_FILE)
-    Repla.run_plugin(Repla::Test::TEST_ENVIRONMENT_PLUGIN_NAME)
+    Repla.run_plugin_with_environment(
+      Repla::Test::TEST_ENVIRONMENT_PLUGIN_NAME,
+      "#{TEST_MESSAGE_KEY}=#{TEST_MESSAGE_VALUE}"
+    )
 
     window_id = Repla.window_id_for_plugin(
       Repla::Test::TEST_ENVIRONMENT_PLUGIN_NAME

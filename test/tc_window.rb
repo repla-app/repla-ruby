@@ -42,8 +42,9 @@ class TestWindowClose < Minitest::Test
     window_id = Repla.run_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
     window = Repla::Window.new(window_id)
     window.close
-    assert(Repla.window_id_for_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME).nil?,
-           'The plugin should not have a window.')
+    refute_nil(Repla.window_id_for_plugin(
+                 Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME
+               ))
   end
 end
 

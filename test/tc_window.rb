@@ -42,7 +42,7 @@ class TestWindowClose < Minitest::Test
     window_id = Repla.run_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
     window = Repla::Window.new(window_id)
     window.close
-    refute_nil(Repla.window_id_for_plugin(
+    assert_nil(Repla.window_id_for_plugin(
                  Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME
                ))
   end
@@ -167,8 +167,7 @@ end
 class TestReplaPluginReadFromStandardInput < Minitest::Test
   def setup
     Repla.load_plugin(Repla::Test::PRINT_PLUGIN_FILE)
-    Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
-    window_id = Repla.window_id_for_plugin(Repla::Test::PRINT_PLUGIN_NAME)
+    window_id = Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
     @window = Repla::Window.new(window_id)
   end
 

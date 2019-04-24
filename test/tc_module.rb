@@ -50,13 +50,9 @@ class TestModuleRunPlugin < Minitest::Test
   TEST_ENVIRONMENT_ERRORS_INDEX = 3
   def test_environment
     Repla.load_plugin(Repla::Test::TEST_ENVIRONMENT_PLUGIN_FILE)
-    Repla.run_plugin_with_environment(
+    window_id = Repla.run_plugin_with_environment(
       Repla::Test::TEST_ENVIRONMENT_PLUGIN_NAME,
       "#{TEST_MESSAGE_KEY}=#{TEST_MESSAGE_VALUE}"
-    )
-
-    window_id = Repla.window_id_for_plugin(
-      Repla::Test::TEST_ENVIRONMENT_PLUGIN_NAME
     )
     refute_nil(window_id)
     @window = Repla::Window.new(window_id)
@@ -82,11 +78,7 @@ class TestModuleRunPlugin < Minitest::Test
 
   def test_run_plugin
     Repla.load_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_FILE)
-    Repla.run_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
-
-    window_id = Repla.window_id_for_plugin(
-      Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME
-    )
+    window_id = Repla.run_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
     refute_nil(window_id)
 
     # Clean up
@@ -98,8 +90,7 @@ class TestModuleRunPlugin < Minitest::Test
     path = File.expand_path(TEST_DATA_DIRECTORY)
 
     Repla.load_plugin(DATA_PLUGIN_FILE)
-    Repla.run_plugin(DATA_PLUGIN_NAME, path, arguments.split(' '))
-    window_id = Repla.window_id_for_plugin(DATA_PLUGIN_NAME)
+    window_id = Repla.run_plugin(DATA_PLUGIN_NAME, path, arguments.split(' '))
     @window = Repla::Window.new(window_id)
 
     javascript = %[valueForKey('#{DATA_PLUGIN_PATH_KEY}');]

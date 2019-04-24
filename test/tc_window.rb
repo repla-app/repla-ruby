@@ -9,10 +9,10 @@ require_relative 'lib/test_javascript_constants'
 
 class TestWindowAttributes < Minitest::Test
   def test_window_id
-    Repla.load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
-    window_id = Repla.run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
+    Repla.load_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
     assert(!window_id.nil?, 'The window_id should not be nil')
-    name = Repla::Test::HELLOWORLD_PLUGIN_NAME
+    name = Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME
     assert(Repla.window_id_for_plugin(name) == window_id)
     window = Repla::Window.new(window_id)
     assert(window_id == window.window_id, "The window id's should be equal.")
@@ -38,12 +38,13 @@ end
 
 class TestWindowClose < Minitest::Test
   def test_close
-    Repla.load_plugin(Repla::Test::HELLOWORLD_PLUGIN_FILE)
-    window_id = Repla.run_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME)
+    Repla.load_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME)
     window = Repla::Window.new(window_id)
     window.close
-    assert(Repla.window_id_for_plugin(Repla::Test::HELLOWORLD_PLUGIN_NAME).nil?,
-           'The plugin should not have a window.')
+    assert_nil(Repla.window_id_for_plugin(
+                 Repla::Test::TEST_HELLOWORLD_PLUGIN_NAME
+               ))
   end
 end
 
@@ -166,8 +167,7 @@ end
 class TestReplaPluginReadFromStandardInput < Minitest::Test
   def setup
     Repla.load_plugin(Repla::Test::PRINT_PLUGIN_FILE)
-    Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
-    window_id = Repla.window_id_for_plugin(Repla::Test::PRINT_PLUGIN_NAME)
+    window_id = Repla.run_plugin(Repla::Test::PRINT_PLUGIN_NAME)
     @window = Repla::Window.new(window_id)
   end
 

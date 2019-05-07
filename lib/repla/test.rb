@@ -50,6 +50,8 @@ module Repla
     TEST_ASSETS_JAVASCRIPT_DIRECTORY = File.join(TEST_DIRECTORY, 'js')
     TITLE_JAVASCRIPT_FILE = File.join(TEST_ASSETS_JAVASCRIPT_DIRECTORY,
                                       'title.js')
+    BODY_JAVASCRIPT_FILE = File.join(TEST_ASSETS_JAVASCRIPT_DIRECTORY,
+                                     'body.js')
     # Plugins
     TEST_PLUGIN_DIRECTORY = File.join(TEST_DIRECTORY, 'packages')
     TEST_HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY,

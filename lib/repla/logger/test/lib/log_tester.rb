@@ -27,20 +27,20 @@ module Repla
         result = test_log_helper.log_message_at(i)
         message = MESSAGES[i]
         if result != message
-          STDERR.puts "Expected #{message} instead of #{result}"
+          STDERR.puts "Index #{i} Expected #{message} instead of #{result}"
           return false
         end
         type = CLASSES[i]
         type_result = test_log_helper.log_class_at(i)
         if type_result != type
-          STDERR.puts "Expected #{type_result} instead of #{type}"
+          STDERR.puts "Index #{i} Expected #{type} instead of #{type_result}"
           return false
         end
       end
       expected = MESSAGES.count
       result = test_log_helper.number_of_log_messages
       if expected != result
-        STDERR.puts "Expected #{expected} instead of #{result}"
+        STDERR.puts "Index #{i} Expected #{expected} instead of #{result}"
         return false
       end
       true

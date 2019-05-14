@@ -19,10 +19,7 @@ module Repla
       end
 
       def log_message_at(index)
-        message = @view.do_javascript_function('innerTextOfBodyChildAtIndex',
-                                               [index])
-        return nil if message == 'nil'
-        message
+        @view.do_javascript_function('innerTextOfBodyChildAtIndex', [index])
       end
 
       def log_class_at(index)

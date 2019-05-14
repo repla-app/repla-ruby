@@ -3,7 +3,7 @@ module Repla
   module Test
     ERROR_MESSAGES = [
       'Testing log error',
-      'ERROR',
+      'ERROR'
     ].freeze
     MESSAGES = [
       'Testing log message',
@@ -25,6 +25,7 @@ module Repla
         message = test_log_helper.log_message_at(i)
         type = test_log_helper.log_class_at(i)
         next if message.nil?
+
         if type == 'error'
           error_messages.push(message)
         else
@@ -51,10 +52,11 @@ module Repla
       (0..combined_expected.count).each do |i|
         expected = combined_expected[i]
         result = messages[i]
-        if expected != result
-          STDERR.puts "At index #{i}, expected message #{expected} instead of #{result}"
-          return false
-        end
+        next unless expected != result
+
+        STDERR.puts "At index #{i}, expected message #{expected} instead of "\
+          "#{result}"
+        return false
       end
       # expected = MESSAGES.count
       # result = messages.count
@@ -72,7 +74,8 @@ module Repla
       #   expected = MESSAGES[i]
       #   result = messages[i]
       #   if expected != result
-      #     STDERR.puts "At index #{i}, expected message #{expected} instead of #{result}"
+      #     STDERR.puts "At index #{i}, expected message #{expected} instead "\
+      #       "of #{result}"
       #     return false
       #   end
       # end
@@ -80,7 +83,8 @@ module Repla
       #   expected = ERROR_MESSAGES[i]
       #   result = error_messages[i]
       #   if expected != result
-      #     STDERR.puts "At index #{i}, expected error message #{expected} instead of #{result}"
+      #     STDERR.puts "At index #{i}, expected error message #{expected} "\
+      #       "instead of #{result}"
       #     return false
       #   end
       # end

@@ -19,20 +19,23 @@ module Repla
         result = test_log_helper.number_of_log_messages
         result == expected
       end
-      if expected != result
-        STDERR.puts "Expected #{expected} total messages instead of #{result}"
-        return false
-      end
       error_messages = []
       messages = []
       (0...MESSAGE_COUNT).each do |i|
         message = test_log_helper.log_message_at(i)
         type = test_log_helper.log_class_at(i)
-        if type == 'error' && !message.nil?
+        next if message.nil?
+        if type == 'error'
           error_messages.push(message)
         else
           messages.push(message)
         end
+      end
+      if expected != result
+        STDERR.puts "Expected #{expected} total messages instead of #{result}"
+        STDERR.puts "Messages #{messages}"
+        STDERR.puts "Error messages #{error_messages}"
+        return false
       end
       expected = MESSAGES.count
       result = messages.count

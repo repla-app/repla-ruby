@@ -121,9 +121,9 @@ class TestWindowLoadHTML < Minitest::Test
     assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
     new_title = 'Changed'
     refute_equal(result, new_title)
-    # @window.do_javascript("document.title = #{new_title}")
-    # result = @window.do_javascript(@title_javascript)
-    # assert_equal(new_title, result)
+    @window.do_javascript("document.title = '#{new_title}'")
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(new_title, result)
   end
 end
 

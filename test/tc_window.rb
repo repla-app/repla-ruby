@@ -81,6 +81,7 @@ class TestWindowLoadHTML < Minitest::Test
                                  Repla::Test::TEST_HTML_DIRECTORY)
     @window = Repla::Window.new(window_id)
     assert(window_id == @window.window_id)
+    @title_javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
   end
 
   def teardown
@@ -88,15 +89,13 @@ class TestWindowLoadHTML < Minitest::Test
   end
 
   def test_load_file_and_url
-    javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
-
     @window.load_file(Repla::Test::INDEX_HTML_FILE)
-    result = @window.do_javascript(javascript)
+    result = @window.do_javascript(@title_javascript)
     assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
 
     @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
                      should_clear_cache: true)
-    result = @window.do_javascript(javascript)
+    result = @window.do_javascript(@title_javascript)
     assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
   end
 
@@ -104,8 +103,7 @@ class TestWindowLoadHTML < Minitest::Test
     @window.load_file(Repla::Test::INDEX_HTML_FILE)
     @window.root_access_directory_path = Repla::Test::TEST_HTML_DIRECTORY
     @window.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
-    javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
-    result = @window.do_javascript(javascript)
+    result = @window.do_javascript(@title_javascript)
     assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
 
     # Also confirm that the jQuery resource loaded properly
@@ -116,9 +114,16 @@ class TestWindowLoadHTML < Minitest::Test
 
     assert_equal(expected, result, 'The result should equal expected result.')
   end
+
+  def test_reload
+    @window.load_url(Repla::Test::INDEX_HTML_URL,
+                     should_clear_cache: true)
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
+  end
 end
 
-class TestWindowClearingCache < Minitest::Test
+class TestWindowTestServer < Minitest::Test
   def test_clearing_cache
     Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_FILE)
     window_id = Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME,

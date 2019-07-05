@@ -96,7 +96,7 @@ class TestWindowLoadHTML < Minitest::Test
     @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
                      should_clear_cache: true)
     result = @window.do_javascript(@title_javascript)
-    assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
   end
 
   def test_load_file_twice
@@ -149,7 +149,7 @@ class TestWindowTestServer < Minitest::Test
     window_two.load_url(Repla::Test::INDEX_HTML_URL,
                         should_clear_cache: true)
     result = window_two.do_javascript(javascript)
-    refute_equal(result, Repla::Test::INDEX_HTML_TITLE)
+    refute_equal(Repla::Test::INDEX_HTML_TITLE, result)
     window_two.close
   end
 end

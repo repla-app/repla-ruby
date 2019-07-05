@@ -116,13 +116,13 @@ Line 3
       result_count = @test_log_helper.number_of_log_messages
       result_count == lines
     end
-    assert_equal(result_count, lines)
+    assert_equal(lines, result_count)
 
     (1..lines).each do |i|
       result = @test_log_helper.log_message_at(i - 1)
       test_result = "Line #{i}"
-      assert_equal(result,
-                   test_result,
+      assert_equal(test_result,
+                   result,
                    'The number of log messages should match')
     end
   end

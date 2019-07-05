@@ -11,7 +11,7 @@ class TestController < Minitest::Test
     controller = Repla::Data::Controller.new
     controller.add_key_value(TEST_KEY, TEST_VALUE)
     result = controller.value_for_key(TEST_KEY)
-    assert_equal(result, TEST_VALUE, 'The result should equal the test value.')
+    assert_equal(TEST_VALUE, result, 'The result should equal the test value.')
     controller.view.close
   end
 end

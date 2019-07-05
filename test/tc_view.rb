@@ -73,10 +73,10 @@ class TestTwoViews < Minitest::Test
       end
 
       result = view_one.do_javascript(javascript)
-      assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
+      assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
 
       result = view_two.do_javascript(javascript)
-      assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
+      assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
       view_one.close
     end
   end

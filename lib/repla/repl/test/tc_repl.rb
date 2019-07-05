@@ -36,7 +36,7 @@ class TestREPL < Minitest::Test
     refute_nil(result)
     result.strip!
     result.sub!('=&gt; ', '') # Remove the prompt that irb adds
-    assert_equal(result, test_result)
+    assert_equal(test_result, result)
 
     window.close
   end

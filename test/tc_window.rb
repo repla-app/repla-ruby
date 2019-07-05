@@ -91,7 +91,7 @@ class TestWindowLoadHTML < Minitest::Test
   def test_load_file_and_url
     @window.load_file(Repla::Test::INDEX_HTML_FILE)
     result = @window.do_javascript(@title_javascript)
-    assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
 
     @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
                      should_clear_cache: true)
@@ -111,7 +111,6 @@ class TestWindowLoadHTML < Minitest::Test
     result = @window.do_javascript(javascript)
     test_javascript = File.read(Repla::Test::TEXT_JAVASCRIPT_FILE)
     expected = @window.do_javascript(test_javascript)
-
     assert_equal(expected, result, 'The result should equal expected result.')
   end
 
@@ -119,7 +118,12 @@ class TestWindowLoadHTML < Minitest::Test
     @window.load_url(Repla::Test::INDEX_HTML_URL,
                      should_clear_cache: true)
     result = @window.do_javascript(@title_javascript)
-    assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+    new_title = 'Changed'
+    refute_equal(result, new_title)
+    # @window.do_javascript("document.title = #{new_title}")
+    # result = @window.do_javascript(@title_javascript)
+    # assert_equal(new_title, result)
   end
 end
 

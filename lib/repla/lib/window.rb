@@ -61,7 +61,7 @@ module Repla
 
     RELOAD_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'reload.scpt')
     def reload
-      run_script(RELOAD_SCRIPT, [javascript])
+      run_script(RELOAD_SCRIPT)
     end
 
     READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY,

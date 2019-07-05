@@ -117,13 +117,21 @@ class TestWindowLoadHTML < Minitest::Test
   def test_reload
     @window.load_url(Repla::Test::INDEX_HTML_URL,
                      should_clear_cache: true)
-    result = @window.do_javascript(@title_javascript)
+    result = nil
+    Repla::Test.block_until do
+      @window.load_url(Repla::Test::INDEX_HTML_URL, should_clear_cache: true)
+      result = @window.do_javascript(@title_javascript)
+      result == Repla::Test::INDEX_HTML_TITLE
+    end
     assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
     new_title = 'Changed'
     refute_equal(result, new_title)
     @window.do_javascript("document.title = '#{new_title}'")
     result = @window.do_javascript(@title_javascript)
     assert_equal(new_title, result)
+    @window.reload
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
   end
 end
 
@@ -138,7 +146,8 @@ class TestWindowTestServer < Minitest::Test
     result = nil
     Repla::Test.block_until do
       window.load_url(Repla::Test::INDEX_HTML_URL, should_clear_cache: true)
-      result = Repla::Test::INDEX_HTML_TITLE
+      result = @window.do_javascript(javascript)
+      result == Repla::Test::INDEX_HTML_TITLE
     end
     assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
     window.close

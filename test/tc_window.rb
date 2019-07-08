@@ -140,16 +140,22 @@ class TestWindowLoadHTML < Minitest::Test
   def test_backforward
     @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
                      should_clear_cache: true)
-    result = @window.do_javascript(@title_javascript)
+    result = nil
+    Repla::Test.block_until do
+      @window.load_url(Repla::Test::INDEXJQUERY_HTML_TITLE, should_clear_cache: true)
+      result = @window.do_javascript(@title_javascript)
+      result == Repla::Test::INDEX_HTML_TITLE
+    end
     assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
     # Nothing should happen if there's no back or forward to go to
     @window.go_back
     result = @window.do_javascript(@title_javascript)
-    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
     @window.go_forward
     result = @window.do_javascript(@title_javascript)
-    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
 
+    # Load a second URL
     @window.load_file(Repla::Test::INDEX_HTML_FILE)
     result = @window.do_javascript(@title_javascript)
     assert_equal(Repla::Test::INDEX_HTML_TITLE, result)

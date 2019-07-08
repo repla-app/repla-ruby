@@ -206,7 +206,7 @@ class TestWindowTestServer < Minitest::Test
       # Try reloading the URL in the loop in case the server hasn't finished
       # loading
       window.load_url(Repla::Test::INDEX_HTML_URL, should_clear_cache: true)
-      result = @window.do_javascript(javascript)
+      result = window.do_javascript(javascript)
       result == Repla::Test::INDEX_HTML_TITLE
     end
     assert_equal(Repla::Test::INDEX_HTML_TITLE, result)

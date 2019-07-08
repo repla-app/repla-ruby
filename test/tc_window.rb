@@ -101,6 +101,9 @@ class TestWindowLoadHTML < Minitest::Test
 
   def test_load_file_twice
     @window.load_file(Repla::Test::INDEX_HTML_FILE)
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
     @window.root_access_directory_path = Repla::Test::TEST_HTML_DIRECTORY
     @window.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
     result = @window.do_javascript(@title_javascript)
@@ -130,6 +133,24 @@ class TestWindowLoadHTML < Minitest::Test
     result = @window.do_javascript(@title_javascript)
     assert_equal(new_title, result)
     @window.reload
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+  end
+
+  def test_backforward
+    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
+                     should_clear_cache: true)
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
+    # Nothing should happen if there's no back or forward to go to
+    @window.go_back
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+    @window.go_forward
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
+    @window.load_file(Repla::Test::INDEX_HTML_FILE)
     result = @window.do_javascript(@title_javascript)
     assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
   end

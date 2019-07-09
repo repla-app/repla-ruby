@@ -159,7 +159,8 @@ class TestWindowLoadHTML < Minitest::Test
     assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
 
     # Load a second URL
-    @window.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
+    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
+                     should_clear_cache: true)
     result = nil
     Repla::Test.block_until do
       result = @window.do_javascript(@title_javascript)
@@ -172,24 +173,24 @@ class TestWindowLoadHTML < Minitest::Test
     result = @window.do_javascript(@title_javascript)
     assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
 
-    # # Go back
-    # @window.go_back
-    # result = nil
-    # Repla::Test.block_until do
-    #   result = @window.do_javascript(@title_javascript)
-    #   result == Repla::Test::INDEX_HTML_TITLE
-    # end
-    # assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+    # Go back
+    @window.go_back
+    result = nil
+    Repla::Test.block_until do
+      result = @window.do_javascript(@title_javascript)
+      result == Repla::Test::INDEX_HTML_TITLE
+    end
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
 
-    # # Confirm going back is no-op
-    # @window.go_back
-    # result = @window.do_javascript(@title_javascript)
-    # assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+    # Confirm going back is no-op
+    @window.go_back
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
 
-    # # Go forward
-    # @window.go_forward
-    # result = @window.do_javascript(@title_javascript)
-    # assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
+    # Go forward
+    @window.go_forward
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
   end
 end
 

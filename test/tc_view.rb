@@ -5,6 +5,7 @@ require 'minitest/autorun'
 require_relative 'lib/test_setup'
 require Repla::Test::HELPER_FILE
 require Repla::Test::VIEW_HELPER_FILE
+require_relative '../lib/repla/logger.rb'
 
 class TestViewAttributes < Minitest::Test
   def test_view_id
@@ -73,12 +74,89 @@ class TestTwoViews < Minitest::Test
       end
 
       result = view_one.do_javascript(javascript)
-      assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
+      assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
 
       result = view_two.do_javascript(javascript)
-      assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
+      assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
       view_one.close
     end
+  end
+end
+
+class TestServer < Minitest::Test
+  def setup
+    Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_FILE)
+    window_id = Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME,
+                                 Repla::Test::TEST_HTML_DIRECTORY)
+    @window = Repla::Window.new(window_id)
+    assert(window_id == @window.window_id)
+    @title_javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
+  end
+
+  def teardown
+    @window.close
+  end
+
+  def test_backforward
+    window = Repla::Window.new
+    logger = Repla::Logger.new(window.window_id)
+    logger.show
+    view = Repla::View.new(window.window_id, window.split_id_last)
+    refute_nil(view)
+    result = nil
+    Repla::Test.block_until do
+      # Try reloading the URL in the loop in case the server hasn't finished
+      # loading
+      view.load_url(Repla::Test::INDEX_HTML_URL,
+                    should_clear_cache: true)
+      result = view.do_javascript(@title_javascript)
+      result == Repla::Test::INDEX_HTML_TITLE
+    end
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
+    # Nothing should happen if there's no back or forward to go to
+    view.go_back
+    result = view.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+    view.go_forward
+    result = view.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
+    # Load a second URL
+    view.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
+                  should_clear_cache: true)
+    result = nil
+    Repla::Test.block_until do
+      result = view.do_javascript(@title_javascript)
+      result == Repla::Test::INDEXJQUERY_HTML_TITLE
+    end
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
+
+    # Confirm going forward is no-op
+    view.go_forward
+    result = view.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
+
+    # Go back
+    view.go_back
+    result = nil
+    Repla::Test.block_until do
+      result = view.do_javascript(@title_javascript)
+      result == Repla::Test::INDEX_HTML_TITLE
+    end
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
+    # Confirm going back is no-op
+    view.go_back
+    result = view.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
+    # Go forward
+    view.go_forward
+    result = view.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
+
+    window.close
   end
 end
 

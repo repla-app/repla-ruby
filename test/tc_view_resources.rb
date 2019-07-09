@@ -16,7 +16,7 @@ class TestViewRootAccessDirectory < Minitest::Test
     result = view.do_javascript_function(
       TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_NAME
     )
-    assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_RESULT)
+    assert_equal(TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_RESULT, result)
     view.close
   end
 end

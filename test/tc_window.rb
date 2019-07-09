@@ -81,6 +81,7 @@ class TestWindowLoadHTML < Minitest::Test
                                  Repla::Test::TEST_HTML_DIRECTORY)
     @window = Repla::Window.new(window_id)
     assert(window_id == @window.window_id)
+    @title_javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
   end
 
   def teardown
@@ -88,24 +89,24 @@ class TestWindowLoadHTML < Minitest::Test
   end
 
   def test_load_file_and_url
-    javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
-
     @window.load_file(Repla::Test::INDEX_HTML_FILE)
-    result = @window.do_javascript(javascript)
-    assert_equal(result, Repla::Test::INDEX_HTML_TITLE)
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
 
     @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
                      should_clear_cache: true)
-    result = @window.do_javascript(javascript)
-    assert_equal(result, Repla::Test::INDEXJQUERY_HTML_TITLE)
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
   end
 
   def test_load_file_twice
     @window.load_file(Repla::Test::INDEX_HTML_FILE)
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
     @window.root_access_directory_path = Repla::Test::TEST_HTML_DIRECTORY
     @window.load_file(Repla::Test::INDEXJQUERY_HTML_FILE)
-    javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
-    result = @window.do_javascript(javascript)
+    result = @window.do_javascript(@title_javascript)
     assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
 
     # Also confirm that the jQuery resource loaded properly
@@ -113,12 +114,87 @@ class TestWindowLoadHTML < Minitest::Test
     result = @window.do_javascript(javascript)
     test_javascript = File.read(Repla::Test::TEXT_JAVASCRIPT_FILE)
     expected = @window.do_javascript(test_javascript)
-
     assert_equal(expected, result, 'The result should equal expected result.')
+  end
+
+  def test_reload
+    result = nil
+    Repla::Test.block_until do
+      # Try reloading the URL in the loop in case the server hasn't finished
+      # loading
+      @window.load_url(Repla::Test::INDEX_HTML_URL,
+                       should_clear_cache: true)
+      result = @window.do_javascript(@title_javascript)
+      result == Repla::Test::INDEX_HTML_TITLE
+    end
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+    new_title = 'Changed'
+    refute_equal(result, new_title)
+    @window.do_javascript("document.title = '#{new_title}'")
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(new_title, result)
+    @window.reload
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+  end
+
+  def test_backforward
+    result = nil
+    Repla::Test.block_until do
+      # Try reloading the URL in the loop in case the server hasn't finished
+      # loading
+      @window.load_url(Repla::Test::INDEX_HTML_URL,
+                       should_clear_cache: true)
+      result = @window.do_javascript(@title_javascript)
+      result == Repla::Test::INDEX_HTML_TITLE
+    end
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
+    # Nothing should happen if there's no back or forward to go to
+    @window.go_back
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+    @window.go_forward
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
+    # Load a second URL
+    @window.load_url(Repla::Test::INDEXJQUERY_HTML_URL,
+                     should_clear_cache: true)
+    result = nil
+    Repla::Test.block_until do
+      result = @window.do_javascript(@title_javascript)
+      result == Repla::Test::INDEXJQUERY_HTML_TITLE
+    end
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
+
+    # Confirm going forward is no-op
+    @window.go_forward
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
+
+    # Go back
+    @window.go_back
+    result = nil
+    Repla::Test.block_until do
+      result = @window.do_javascript(@title_javascript)
+      result == Repla::Test::INDEX_HTML_TITLE
+    end
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
+    # Confirm going back is no-op
+    @window.go_back
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
+
+    # Go forward
+    @window.go_forward
+    result = @window.do_javascript(@title_javascript)
+    assert_equal(Repla::Test::INDEXJQUERY_HTML_TITLE, result)
   end
 end
 
-class TestWindowClearingCache < Minitest::Test
+class TestWindowTestServer < Minitest::Test
   def test_clearing_cache
     Repla.load_plugin(Repla::Test::TEST_SERVER_PLUGIN_FILE)
     window_id = Repla.run_plugin(Repla::Test::TEST_SERVER_PLUGIN_NAME,
@@ -128,8 +204,11 @@ class TestWindowClearingCache < Minitest::Test
     javascript = File.read(Repla::Test::TITLE_JAVASCRIPT_FILE)
     result = nil
     Repla::Test.block_until do
+      # Try reloading the URL in the loop in case the server hasn't finished
+      # loading
       window.load_url(Repla::Test::INDEX_HTML_URL, should_clear_cache: true)
-      result = Repla::Test::INDEX_HTML_TITLE
+      result = window.do_javascript(javascript)
+      result == Repla::Test::INDEX_HTML_TITLE
     end
     assert_equal(Repla::Test::INDEX_HTML_TITLE, result)
     window.close
@@ -140,7 +219,7 @@ class TestWindowClearingCache < Minitest::Test
     window_two.load_url(Repla::Test::INDEX_HTML_URL,
                         should_clear_cache: true)
     result = window_two.do_javascript(javascript)
-    refute_equal(result, Repla::Test::INDEX_HTML_TITLE)
+    refute_equal(Repla::Test::INDEX_HTML_TITLE, result)
     window_two.close
   end
 end

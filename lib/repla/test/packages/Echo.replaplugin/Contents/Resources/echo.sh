@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-echo "$MESSAGE"
+if [[ -n "$1" ]]; then
+  echo "$@"
+else
+  echo "$ECHO_MESSAGE"
+fi
+

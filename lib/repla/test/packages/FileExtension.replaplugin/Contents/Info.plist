@@ -8,8 +8,6 @@
 	<string>cat.sh</string>
 	<key>WCUUID</key>
 	<string>C4B09ED5-ED60-44FF-A0BB-43EF6F8AF569</string>
-	<key>WCEditable</key>
-	<integer>0</integer>
 	<key>WCFileExtensions</key>
 	<array>
 		<string>txt</string>

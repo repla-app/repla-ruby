@@ -88,7 +88,6 @@ module Repla
   # instances method can't call private class methods?
   def self.run_applescript(script, arguments = nil)
     command = "/usr/bin/osascript #{script.shell_escape}"
-    # command = "/usr/bin/osascript #{script}"
 
     if arguments
       command += ' ' + arguments.compact.map(&:to_s).map do |x|

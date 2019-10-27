@@ -33,9 +33,9 @@ module Repla
         end
       end
       if expected != result
-        STDERR.puts "Expected #{expected} total messages instead of #{result}"
-        STDERR.puts "Messages #{messages}"
-        STDERR.puts "Error messages #{error_messages}"
+        warn "Expected #{expected} total messages instead of #{result}"
+        warn "Messages #{messages}"
+        warn "Error messages #{error_messages}"
         return false
       end
       # Buffering issues are causing the output of `TestLog.replaplugin` to be
@@ -46,7 +46,7 @@ module Repla
       expected = combined_expected.count
       result = combined_result.count
       if expected != result
-        STDERR.puts "Expected #{expected} messages instead of #{result}"
+        warn "Expected #{expected} messages instead of #{result}"
         return false
       end
       (0..combined_expected.count).each do |i|
@@ -54,7 +54,7 @@ module Repla
         result = messages[i]
         next unless expected != result
 
-        STDERR.puts "At index #{i}, expected message #{expected} instead of "\
+        warn "At index #{i}, expected message #{expected} instead of "\
           "#{result}"
         return false
       end

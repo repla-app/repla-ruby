@@ -1,4 +1,4 @@
-#!/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby
+#!/usr/bin/env ruby
 
 # This shebang doesn't use `--disable-gems` because otherwise it wouldn't be able to access `test/unit`.
 

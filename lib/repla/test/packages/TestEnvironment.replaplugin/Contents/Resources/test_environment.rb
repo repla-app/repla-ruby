@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-# This shebang doesn't use `--disable-gems` because otherwise it wouldn't be able to access `test/unit`.
+# This shebang doesn't use `--disable-gems` because otherwise it wouldn't be
+# able to access `test/unit`.
 
 require 'test/unit'
 

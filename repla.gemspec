@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.description = 'Bridge from Ruby to AppleScript to control Repla.'
   s.authors = ['Roben Kleene']
   s.email = 'contact@robenkleene.com'
-  s.files = Dir.glob('lib/**/*').reject { |f|
+  s.files = Dir.glob('lib/**/*').reject do |f|
     f['lib/repla/repl/test'] ||
       f['lib/repla/dependencies/test']
-  }
+  end
 end

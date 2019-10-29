@@ -16,7 +16,7 @@ module Repla
     prefix = ENV[PATH_PREFIX]
     return if prefix.empty?
 
-    ENV['PATH'].delete_prefix!(prefix)
+    ENV['PATH'] = ENV['PATH'].delete_prefix(prefix)
     ENV.delete(PATH_PREFIX)
   end
 

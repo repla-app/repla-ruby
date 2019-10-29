@@ -39,16 +39,17 @@ class TestModuleProperties < Minitest::Test
   end
 
   def test_clean_path
-    test_path_prefix = `pwd` + ':'
+    test_path_prefix = Repla::Test::TEST_DIRECTORY + ':'
     refute_nil(ENV['PATH'])
     original_path = ENV['PATH']
     assert_nil(ENV[Repla::PATH_PREFIX])
-    ENV['PATH'] += test_path_prefix
+    ENV['PATH'] = test_path_prefix + ENV['PATH']
+    ENV[Repla::PATH_PREFIX] = test_path_prefix
     result = `echo $PATH`
-    assert(result.starts_with?(test_path_prefix))
+    assert(result.start_with?(test_path_prefix))
     Repla.clean_path
     result = `echo $PATH`
-    refute(result.starts_with?(test_path_prefix))
+    refute(result.start_with?(test_path_prefix))
     assert_equal(ENV['PATH'], original_path)
   end
 end

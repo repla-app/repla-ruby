@@ -10,6 +10,16 @@ module Repla
     attr_accessor :debug
   end
 
+  def self.clean_path
+    return unless ENV.key?(PATH_PREFIX)
+
+    prefix = ENV[PATH_PREFIX]
+    return if prefix.empty?
+
+    ENV['PATH'] = ENV['PATH'].delete_prefix(prefix)
+    ENV.delete(PATH_PREFIX)
+  end
+
   LOAD_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, 'load_plugin.scpt')
   def self.load_plugin(path)
     run_applescript(LOAD_PLUGIN_SCRIPT, [path])

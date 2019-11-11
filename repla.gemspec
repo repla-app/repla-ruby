@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'repla'
-  s.version     = '0.10.2'
+  s.version     = '0.10.3'
   s.date        = '2013-07-04'
   s.summary     = 'Repla helper gem'
   s.description = 'Bridge from Ruby to AppleScript to control Repla.'

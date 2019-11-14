@@ -12,6 +12,7 @@ module Repla
       require 'pty'
 
       def initialize(command)
+        @mutex = Mutex.new
         PTY.spawn(command) do |output, input, _pid|
           Thread.new do
             output.each do |line|
@@ -42,7 +43,10 @@ module Repla
       end
 
       def view
-        @view ||= View.new
+        @mutex.synchronize do
+          @view = View.new if @view.nil?
+        end
+        @view
       end
     end
   end

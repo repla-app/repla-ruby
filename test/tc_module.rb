@@ -73,16 +73,21 @@ class TestModuleRunPlugin < Minitest::Test
     @window = Repla::Window.new(window_id)
 
     test_log_helper = Repla::Test::LogHelper.new(window_id)
-    test_message = nil
+    summary_message = nil
     Repla::Test.block_until do
-      test_message = test_log_helper.last_log_message
-      test_message =~ TEST_ENVIRONMENT_END_REGEXP
+      ending_index = TEST_ENVIRONMENT_SUMMARY_OFFSET
+      starting_index = test_log_helper.number_of_log_messages + ending_index
+      (starting_index..ending_index).each do |i|
+        message = test_log_helper.log_message_at(i)
+        if message =~ TEST_ENVIRONMENT_END_REGEXP
+          summary_message = message
+          return true
+        end
+      end
+      false
     end
-    assert(test_message =~ TEST_ENVIRONMENT_END_REGEXP)
-    message_count = test_log_helper.number_of_log_messages
-    message_index = message_count + TEST_ENVIRONMENT_SUMMARY_OFFSET
-    message = test_log_helper.log_message_at(message_index)
-    stats = message.split(',')
+    refute_nil(summary_message)
+    stats = summary_message.split(',')
     errors_message = stats[TEST_ENVIRONMENT_ERRORS_INDEX]
     failures_message = stats[TEST_ENVIRONMENT_FAILURES_INDEX]
     errors_message.strip!

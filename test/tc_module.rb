@@ -55,12 +55,12 @@ class TestModuleProperties < Minitest::Test
 end
 
 class TestModuleRunPlugin < Minitest::Test
-  # def teardown
-  #   @window.close
-  # end
+  def teardown
+    @window.close
+  end
 
   TEST_ENVIRONMENT_END_REGEXP = Regexp.new('^\d*.\d\d tests.*').freeze
-  TEST_ENVIRONMENT_OFFSET = 4
+  TEST_ENVIRONMENT_SUMMARY_OFFSET = -4
   TEST_ENVIRONMENT_FAILURES_INDEX = 2
   TEST_ENVIRONMENT_ERRORS_INDEX = 3
   def test_environment
@@ -73,26 +73,16 @@ class TestModuleRunPlugin < Minitest::Test
     @window = Repla::Window.new(window_id)
 
     test_log_helper = Repla::Test::LogHelper.new(window_id)
-    summary_message = nil
-    default_timeout = Repla::Test::TEST_TIMEOUT_TIME
-    timeout = default_timeout * 2.0
-    Repla::Test.block_until_with_timeout(timeout, default_timeout) do
-      message_count = test_log_helper.number_of_log_messages
-      next if message_count < TEST_ENVIRONMENT_OFFSET
-
-      ending_index = message_count
-      starting_index = message_count - TEST_ENVIRONMENT_OFFSET
-      (starting_index..ending_index).each do |i|
-        message = test_log_helper.log_message_at(i)
-        if message =~ TEST_ENVIRONMENT_END_REGEXP
-          summary_message = message
-          next true
-        end
-      end
+    test_message = nil
+    Repla::Test.block_until do
+      test_message = test_log_helper.last_log_message
+      test_message =~ TEST_ENVIRONMENT_END_REGEXP
     end
-    puts "summary_message = #{summary_message}"
-    refute_nil(summary_message)
-    stats = summary_message.split(',')
+    assert(test_message =~ TEST_ENVIRONMENT_END_REGEXP)
+    message_count = test_log_helper.number_of_log_messages
+    message_index = message_count + TEST_ENVIRONMENT_SUMMARY_OFFSET
+    message = test_log_helper.log_message_at(message_index)
+    stats = message.split(',')
     errors_message = stats[TEST_ENVIRONMENT_ERRORS_INDEX]
     failures_message = stats[TEST_ENVIRONMENT_FAILURES_INDEX]
     errors_message.strip!

@@ -29,7 +29,7 @@ module Repla
       cycles = [timeout / polling_interval, 1].max
       count = 0
       until yield || count >= cycles
-        sleep(POLLING_INTERVAL)
+        sleep(polling_interval)
         count += 1
       end
     end

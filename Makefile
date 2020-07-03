@@ -1,4 +1,4 @@
-.PHONY: ci ac autocorrect lint deploy test
+.PHONY: ci ac autocorrect lint deploy test loc
 
 ci: lint
 ac: autocorrect
@@ -18,3 +18,6 @@ deploy:
 
 test:
 	./test/run_tests.sh
+
+loc:
+	cloc --vcs=git --not-match-f='(handlebars|mousetrap|zepto|chai|mocha)\.js'

@@ -20,4 +20,4 @@ test:
 	./test/run_tests.sh
 
 loc:
-	cloc --vcs=git --not-match-f='(handlebars|mousetrap|zepto|chai|mocha)\.js'
+	cloc --vcs=git --not-match-f='(handlebars|jquery|mousetrap|zepto|chai|mocha)\.js'

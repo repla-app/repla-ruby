@@ -9,6 +9,7 @@ echo 'Testing log message'
 echo 'MESSAGE '
 echo
 printf "\t"
+printf "\n"
 echo 'Done'
 printf "\n"
 

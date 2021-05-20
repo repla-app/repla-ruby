@@ -1,1 +1,1 @@
-# Ruby Support for Repla [![Build Status](https://travis-ci.org/repla-app/repla-ruby.svg?branch=master)](https://travis-ci.org/repla-app/repla-ruby)
+# Ruby Support for Repla ![Status](https://github.com/repla/repla-ruby/actions/workflows/ci.yml/badge.svg)

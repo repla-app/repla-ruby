@@ -17,6 +17,7 @@ jobs:
           nickname: bot-${{ github.run_id }}
           message: |-
             ${{ github.event.repository.name }} ${{ github.job }} started ${{ github.actor }} pushed ${{ github.event.ref }} ${{ github.event.compare }}
+      - uses: ruby/setup-ruby@v1
       - run: make ci
       - name: IRC notification
         uses: Gottox/irc-message-action@v1

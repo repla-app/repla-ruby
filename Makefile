@@ -1,13 +1,16 @@
-.PHONY: ci ac autocorrect lint deploy test loc
+.PHONY: ci ac autocorrect lint deploy test loc gem_install
 
-ci: lint
+ci: gem_install lint
 ac: autocorrect
 
 lint:
-	rubocop
+	bundle exec rubocop
 
 autocorrect:
-	rubocop -a
+	bundle exec rubocop -a
+
+gem_install:
+	bundle install --path vendor/bundle
 
 deploy:
 	[[ $(shell git rev-parse --abbrev-ref HEAD) == "master" ]] \

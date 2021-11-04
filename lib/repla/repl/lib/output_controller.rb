@@ -9,8 +9,9 @@ module Repla
 
       def parse_output(output)
         output = output.dup
-        output.gsub!(/\x1b[^m]*m/, '') # Remove escape sequences
-        output.chomp!
+        output.gsub!(/\x1b[^mhl]*[mhl]/, '') # Remove escape sequences
+        output.strip!
+        output.lstrip!
         @view.add_output(output) unless output.strip.empty? # Ignore empty lines
       end
     end
